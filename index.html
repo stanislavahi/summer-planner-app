@@ -1514,7 +1514,7 @@ const MATH_RANKS=[
   {min:0,  max:1,  emoji:'🌱',name:'Math Seedling',      msg:'Всеки шампион е започнал от нулата — ти вече си тръгнал!', grad:'#6366f1,#8b5cf6'},
   {min:1,  max:16, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
   {min:16, max:41, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
-  {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш задачите една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
+  {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш състезанията една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
   {min:81, max:121,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
   {min:121,max:151,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
   {min:151,max:161,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
@@ -1522,12 +1522,12 @@ const MATH_RANKS=[
 ];
 const MATH_BADGES=[
   {icon:'🎯',name:'Първа победа!',  req:'Реши 1 задача',      check:d=>d>=1},
-  {icon:'💪',name:'Загрявка',       req:'Реши 10 задачи',     check:d=>d>=10},
-  {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 задачи',    check:d=>d>=25},
-  {icon:'🔥',name:'На пламъци!',    req:'Реши 50 задачи',     check:d=>d>=50},
-  {icon:'💯',name:'Клуб 100',       req:'Реши 100 задачи',    check:d=>d>=100},
-  {icon:'🌟',name:'Почти там!',     req:'Реши 150 задачи',    check:d=>d>=150},
-  {icon:'🏆',name:'Недостижим',     req:'Реши 160 задачи',    check:d=>d>=160},
+  {icon:'💪',name:'Загрявка',       req:'Реши 10 състезания',     check:d=>d>=10},
+  {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 състезания',    check:d=>d>=25},
+  {icon:'🔥',name:'На пламъци!',    req:'Реши 50 състезания',     check:d=>d>=50},
+  {icon:'💯',name:'Клуб 100',       req:'Реши 100 състезания',    check:d=>d>=100},
+  {icon:'🌟',name:'Почти там!',     req:'Реши 150 състезания',    check:d=>d>=150},
+  {icon:'🏆',name:'Недостижим',     req:'Реши 160 състезания',    check:d=>d>=160},
   {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 161!',   check:d=>d>=161}
 ];
 function renderMathMotivation(){
@@ -1688,7 +1688,7 @@ function calRenderStats(){
       </div>
       <div class="cl-stat-card">
         <div class="cl-sc-top"><span class="cl-sc-icon">📐</span><span class="cl-sc-label">Математика</span></div>
-        <div class="cl-sc-nums">${s.mathDone}<em> / ${s.mathTotal} задачи</em></div>
+        <div class="cl-sc-nums">${s.mathDone}<em> / ${s.mathTotal} състезания</em></div>
         <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(s.mathDone/s.mathTotal*100)}%;background:linear-gradient(90deg,#34d399,#059669)"></div></div>
       </div>
       <div class="cl-stat-card">
@@ -1833,7 +1833,7 @@ function calRenderSummary(){
   el.innerHTML=`
     <div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:6px;padding-left:2px">${dateLabel}</div>
     <div class="cl-summary-bar">
-      <span class="cl-summary-text">${s.done} от ${s.total} задачи изпълнени</span>
+      <span class="cl-summary-text">${s.done} от ${s.total} състезания изпълнени</span>
       <div class="cl-mini-prog-wrap"><div class="cl-mini-prog" style="width:${pct}%"></div></div>
       <span class="cl-summary-pct">${pct}%</span>
     </div>`;
@@ -1958,7 +1958,7 @@ function calRenderTasks(){
         <span class="cl-card-icon">📐</span>
         <div class="cl-card-info">
           <div class="cl-card-title">Математика</div>
-          <div class="cl-card-sub">${doneCnt} / ${mathDay.items.length} задачи решени</div>
+          <div class="cl-card-sub">${doneCnt} / ${mathDay.items.length} състезания решени</div>
         </div>
         <span class="cl-card-status ${allDone?'':'pending'}">${allDone?'✓ Готово':'Чака'}</span>
       </div>
