@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer English Study Plan 2026 🌞</title>
+<style>
+  :root {
+    --blue: #3B82F6;
+    --blue-light: #EFF6FF;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --orange: #F59E0B;
+    --orange-light: #FFFBEB;
+    --purple: #8B5CF6;
+    --purple-light: #F5F3FF;
+    --red: #EF4444;
+    --gray: #6B7280;
+    --gray-light: #F9FAFB;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-light: #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #FFF7ED 0%, #EFF6FF 100%);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1D4ED8, #7C3AED);
+    color: white;
+    padding: 32px 24px 24px;
+    text-align: center;
+  }
+  .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+  .header p { font-size: 15px; opacity: 0.85; margin-bottom: 20px; }
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.2);
+    border-radius: 999px;
+    height: 14px;
+    max-width: 500px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #FCD34D;
+    border-radius: 999px;
+    transition: width 0.4s;
+  }
+  .progress-text { font-size: 13px; opacity: 0.9; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+
+  /* FILTERS */
+  .controls {
+    padding: 14px 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+  .btn-filter {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all 0.15s;
+  }
+  .btn-filter:hover { background: var(--gray-light); }
+  .btn-filter.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+  /* MONTH SECTION */
+  .month-section { padding: 0 16px 16px; max-width: 860px; margin: 0 auto; }
+  .month-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 24px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .month-title span {
+    background: var(--blue);
+    color: white;
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* SESSION CARD */
+  .session-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  .session-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-1px); }
+  .session-card.done { opacity: 0.6; }
+  .session-card.done .card-header { background: var(--green-light); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .card-checkbox {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    transition: all 0.2s;
+    background: white;
+  }
+  .session-card.done .card-checkbox {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .checkmark { color: white; font-size: 13px; display: none; }
+  .session-card.done .checkmark { display: block; }
+
+  .card-meta { flex: 1; }
+  .card-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .session-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .session-date {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .book-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-movers { background: #DBEAFE; color: #1D4ED8; }
+  .badge-booklet { background: #D1FAE5; color: #065F46; }
+  .badge-test { background: #FEE2E2; color: #991B1B; }
+  .badge-review { background: #EDE9FE; color: #5B21B6; }
+
+  .card-unit {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .card-topic {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .card-expand-icon {
+    color: var(--text-light);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    margin-top: 2px;
+    user-select: none;
+  }
+  .session-card.expanded .card-expand-icon { transform: rotate(180deg); }
+
+  /* CARD BODY */
+  .card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 14px 16px 14px 52px;
+    background: var(--gray-light);
+  }
+  .session-card.expanded .card-body { display: block; }
+  .activities-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+  .activity-item {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .activity-icon { flex-shrink: 0; font-size: 15px; }
+  .tip-box {
+    margin-top: 10px;
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12.5px;
+    color: #92400E;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  /* today highlight */
+  .session-card.today-card {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
+  }
+
+  /* FLOATING RESET */
+  .fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background 0.15s;
+    z-index: 100;
+  }
+  .fab:hover { background: #DC2626; }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 22px; }
+    .card-body { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🌞 Summer English Study Plan 2026</h1>
+  <p>Cambridge Fun for Movers 4th ed. · Home Fun Booklet 4 · June 15 – August 30</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <div class="progress-text" id="progressText">0 / 39 sessions completed</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div> Fun for Movers</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div> Home Fun Booklet</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div> Practice Test</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div> Review</div>
+</div>
+
+<div class="controls">
+  <button class="btn-filter active" onclick="filter('all')">All Sessions</button>
+  <button class="btn-filter" onclick="filter('pending')">To Do</button>
+  <button class="btn-filter" onclick="filter('done')">Completed</button>
+  <button class="btn-filter" onclick="filter('movers')">Fun for Movers</button>
+  <button class="btn-filter" onclick="filter('booklet')">Home Fun Booklet</button>
+</div>
+
+<div id="sessions-container"></div>
+
+<button class="fab" onclick="resetProgress()">↺ Reset Progress</button>
+
+<script>
+const SESSIONS = [
+  // ─── JUNE ────────────────────────────────────────────────────────
+  {
+    date:"June 15", type:"movers",
+    unit:"Unit 1: At School",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Study school vocabulary: subjects, stationery, furniture (pp. 4–5)"},
+      {icon:"🔊", text:"Listening: Listen and point / Listen and colour (p. 6)"},
+      {icon:"✏️", text:"Reading: Read the story and answer True/False questions (p. 7)"},
+    ],
+    tip:"Cover the word list and try to name each picture before checking."
+  },
+  {
+    date:"June 17", type:"movers",
+    unit:"Unit 1: At School",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: present simple questions and short answers (p. 8)"},
+      {icon:"✏️", text:"Writing: complete sentences about your school day (p. 9)"},
+      {icon:"🔊", text:"Listening: what subject is it? Circle the right picture (p. 10)"},
+    ],
+    tip:"Say each sentence out loud – speaking while writing helps remember grammar."
+  },
+  {
+    date:"June 19", type:"movers",
+    unit:"Unit 1: At School",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Speaking game: describe a classroom object for someone to guess"},
+      {icon:"📝", text:"Vocabulary review: word puzzle / crossword (p. 11)"},
+      {icon:"✅", text:"Self-check: tick the words you know on the word list (p. 12)"},
+    ],
+    tip:"Play the description game with a family member – it's more fun that way!"
+  },
+  {
+    date:"June 21", type:"booklet",
+    unit:"Home Fun Booklet – Section 1",
+    topic:"School Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Colour and label the classroom scene"},
+      {icon:"🔍", text:"Word search: find 10 school words"},
+      {icon:"✏️", text:"Draw and write: my favourite subject and why"},
+    ],
+    tip:"Take your time with the drawing – adding colour makes reviewing more fun later."
+  },
+  {
+    date:"June 23", type:"movers",
+    unit:"Unit 2: My Family",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Family vocabulary: relatives, ages, descriptions (pp. 14–15)"},
+      {icon:"🔊", text:"Listening: who is who? Match voices to family members (p. 16)"},
+      {icon:"✏️", text:"Reading: read an email about someone's family (p. 17)"},
+    ],
+    tip:"Draw your own family tree and label everyone using the new vocabulary."
+  },
+  {
+    date:"June 25", type:"movers",
+    unit:"Unit 2: My Family",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: have got / has got – questions and answers (p. 18)"},
+      {icon:"✏️", text:"Writing: write 5 sentences about your family (p. 19)"},
+      {icon:"🔊", text:"Listening: birthday party – who gives what present? (p. 20)"},
+    ],
+    tip:"Try to use 'have got' AND 'has got' in your sentences."
+  },
+  {
+    date:"June 27", type:"movers",
+    unit:"Unit 2: My Family",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Speaking: describe a person – others guess who from the family"},
+      {icon:"📝", text:"Gap-fill: complete the family description text (p. 21)"},
+      {icon:"✅", text:"Unit 2 word list – cover and test yourself (p. 22)"},
+    ],
+    tip:"Describe physical appearance AND personality: 'She has long hair and she is kind.'"
+  },
+  {
+    date:"June 29", type:"booklet",
+    unit:"Home Fun Booklet – Section 2",
+    topic:"Family Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Cut and arrange: make a magazine-style family collage page"},
+      {icon:"✏️", text:"Write a short paragraph: 'My favourite family member'"},
+      {icon:"🔍", text:"Puzzle: rearrange letters to make family words"},
+    ],
+    tip:"If you can't cut, just draw the pictures instead."
+  },
+  // ─── JULY ────────────────────────────────────────────────────────
+  {
+    date:"July 1", type:"movers",
+    unit:"Unit 3: My Home",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Rooms and furniture vocabulary (pp. 24–25)"},
+      {icon:"🔊", text:"Listening: where is the cat? Prepositions of place (p. 26)"},
+      {icon:"✏️", text:"Reading: read a house description and label the floor plan (p. 27)"},
+    ],
+    tip:"Walk around your home and say the name of each room and object in English."
+  },
+  {
+    date:"July 3", type:"movers",
+    unit:"Unit 3: My Home",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: there is / there are (p. 28)"},
+      {icon:"✏️", text:"Writing: describe your bedroom using prepositions (p. 29)"},
+      {icon:"🔊", text:"Listening: spot the 5 differences between two rooms (p. 30)"},
+    ],
+    tip:"Try to use 'on', 'under', 'next to', 'in front of', 'behind' in every sentence."
+  },
+  {
+    date:"July 5", type:"movers",
+    unit:"Unit 3: My Home",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Speaking: describe a room for someone to draw it"},
+      {icon:"📝", text:"Word map: draw a house and label all the rooms and furniture"},
+      {icon:"✅", text:"Unit 3 self-check (p. 31)"},
+    ],
+    tip:"Be precise with prepositions – say exactly WHERE each item is."
+  },
+  {
+    date:"July 7", type:"booklet",
+    unit:"Home Fun Booklet – Section 3",
+    topic:"Home Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Design your dream bedroom – draw and label everything"},
+      {icon:"✏️", text:"Write 6 sentences describing your dream room"},
+      {icon:"🔍", text:"Maze: help the mouse find its way to its home"},
+    ],
+    tip:"Use as many prepositions and furniture words as you can!"
+  },
+  {
+    date:"July 9", type:"movers",
+    unit:"Unit 4: Animals",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Wild and domestic animals vocabulary (pp. 34–35)"},
+      {icon:"🔊", text:"Listening: at the zoo – which animal is the person describing? (p. 36)"},
+      {icon:"✏️", text:"Reading: read animal fact cards and answer questions (p. 37)"},
+    ],
+    tip:"Group animals by where they live: jungle, farm, ocean, sky."
+  },
+  {
+    date:"July 11", type:"movers",
+    unit:"Unit 4: Animals",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: can/can't for ability (p. 38)"},
+      {icon:"✏️", text:"Writing: write a fact file about your favourite animal (p. 39)"},
+      {icon:"🔊", text:"Listening: spot the differences between two animal pictures (p. 40)"},
+    ],
+    tip:"Include: what it looks like, where it lives, what it eats, and what it can/can't do."
+  },
+  {
+    date:"July 13", type:"movers",
+    unit:"Unit 4: Animals",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"'Animal 20 questions' game – yes/no questions only"},
+      {icon:"📝", text:"Compare two animals using 'bigger than', 'faster than' etc. (p. 41)"},
+      {icon:"✅", text:"Unit 4 word list review (p. 42)"},
+    ],
+    tip:"Try to ask 'Is it a mammal?', 'Does it live in water?' – category questions are very efficient."
+  },
+  {
+    date:"July 15", type:"booklet",
+    unit:"Home Fun Booklet – Section 4",
+    topic:"Animals Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Colour the animal pictures following the instructions"},
+      {icon:"✏️", text:"Odd one out: circle the word that doesn't belong and explain why"},
+      {icon:"🔍", text:"True/false quiz: fun animal facts"},
+    ],
+    tip:"For odd one out, there may be more than one correct answer – explain your choice."
+  },
+  {
+    date:"July 17", type:"movers",
+    unit:"Unit 5: Food and Drink",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Food vocabulary: fruit, vegetables, meals, drinks (pp. 44–45)"},
+      {icon:"🔊", text:"Listening: at the café – what does each person order? (p. 46)"},
+      {icon:"✏️", text:"Reading: a recipe – read and sequence the steps (p. 47)"},
+    ],
+    tip:"Look at the pictures first, predict what the text is about, then read to check."
+  },
+  {
+    date:"July 19", type:"movers",
+    unit:"Unit 5: Food and Drink",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: countable/uncountable nouns, some/any (p. 48)"},
+      {icon:"✏️", text:"Writing: write your own simple recipe in English (p. 49)"},
+      {icon:"🔊", text:"Listening: shopping list – what's in the fridge? (p. 50)"},
+    ],
+    tip:"Real recipe = real English! Try writing the recipe for something you actually make."
+  },
+  {
+    date:"July 21", type:"movers",
+    unit:"Unit 5: Food and Drink",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Role play: ordering food at a restaurant"},
+      {icon:"📝", text:"Opinion sentences: 'I love…', 'I don't like…', 'My favourite… is…' (p. 51)"},
+      {icon:"✅", text:"Unit 5 self-check and word list (p. 52)"},
+    ],
+    tip:"During the role play, the 'waiter' should ask questions like 'Would you like…?'"
+  },
+  {
+    date:"July 23", type:"booklet",
+    unit:"Home Fun Booklet – Section 5",
+    topic:"Food Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Colour and categorise: fruit, vegetables, drinks, snacks"},
+      {icon:"✏️", text:"Design a healthy lunchbox – draw and label it"},
+      {icon:"🔍", text:"Word search: 12 food words hidden in the grid"},
+    ],
+    tip:"Check: does your lunchbox have something from each food group?"
+  },
+  {
+    date:"July 25", type:"movers",
+    unit:"Unit 6: Clothes & Shopping",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Clothes vocabulary: items, colours, materials (pp. 54–55)"},
+      {icon:"🔊", text:"Listening: what is each person wearing? Listen and tick (p. 56)"},
+      {icon:"✏️", text:"Reading: fashion blog post – answer comprehension questions (p. 57)"},
+    ],
+    tip:"Describe what you're wearing today in full English sentences."
+  },
+  {
+    date:"July 27", type:"movers",
+    unit:"Unit 6: Clothes & Shopping",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: present continuous for actions happening now (p. 58)"},
+      {icon:"✏️", text:"Writing: describe what people in a picture are wearing (p. 59)"},
+      {icon:"🔊", text:"Listening: shopping dialogue – what size and colour? (p. 60)"},
+    ],
+    tip:"'She is wearing a red dress' vs 'She wears red dresses' – notice the difference!"
+  },
+  {
+    date:"July 29", type:"movers",
+    unit:"Unit 6: Clothes & Shopping",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Role play: shopping in a clothes shop (asking for sizes, prices)"},
+      {icon:"📝", text:"Design an outfit and write a full description (p. 61)"},
+      {icon:"✅", text:"Unit 6 word list self-test (p. 62)"},
+    ],
+    tip:"Include price, colour, material, and size in your shopping role play."
+  },
+  {
+    date:"July 31", type:"booklet",
+    unit:"Home Fun Booklet – Section 6",
+    topic:"Clothes Fun Activities",
+    activities:[
+      {icon:"🎨", text:"Dress the character: colour and design a summer outfit"},
+      {icon:"✏️", text:"Write a short paragraph: 'What I wear in summer / winter'"},
+      {icon:"🔍", text:"Matching: connect the clothes to the correct season"},
+    ],
+    tip:"Use comparative adjectives: 'I wear lighter clothes in summer because…'"
+  },
+  // ─── AUGUST ──────────────────────────────────────────────────────
+  {
+    date:"August 2", type:"movers",
+    unit:"Unit 7: Sports & Free Time",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Sports and hobbies vocabulary (pp. 64–65)"},
+      {icon:"🔊", text:"Listening: after-school clubs – which club does each child join? (p. 66)"},
+      {icon:"✏️", text:"Reading: a sports club newsletter (p. 67)"},
+    ],
+    tip:"Group sports by: team/solo, indoor/outdoor, summer/winter."
+  },
+  {
+    date:"August 4", type:"movers",
+    unit:"Unit 7: Sports & Free Time",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: like/love/hate + -ing (p. 68)"},
+      {icon:"✏️", text:"Writing: your weekly free-time routine (p. 69)"},
+      {icon:"🔊", text:"Listening: sports day – who wins each race? (p. 70)"},
+    ],
+    tip:"'I love swimming' vs 'I love to swim' – both are correct at Movers level!"
+  },
+  {
+    date:"August 6", type:"movers",
+    unit:"Unit 7: Sports & Free Time",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Interview: ask 5 people what sports they play and like"},
+      {icon:"📝", text:"Bar chart: record results of your sports survey (p. 71)"},
+      {icon:"✅", text:"Unit 7 word list self-check (p. 72)"},
+    ],
+    tip:"Write up your survey results: 'Three people like football. Nobody likes…'"
+  },
+  {
+    date:"August 8", type:"booklet",
+    unit:"Home Fun Booklet – Section 7",
+    topic:"Sports & Free Time Activities",
+    activities:[
+      {icon:"🎨", text:"Sports wordsearch and spot-the-difference"},
+      {icon:"✏️", text:"Write a diary entry about your favourite sport day"},
+      {icon:"🔍", text:"Quiz: guess the sport from the clues"},
+    ],
+    tip:"Your diary entry should describe what happened, how you felt, and who was there."
+  },
+  {
+    date:"August 10", type:"movers",
+    unit:"Unit 8: Places & Travel",
+    topic:"Vocabulary & Reading",
+    activities:[
+      {icon:"📖", text:"Places in town vocabulary + transport words (pp. 74–75)"},
+      {icon:"🔊", text:"Listening: map directions – find the hidden treasure (p. 76)"},
+      {icon:"✏️", text:"Reading: postcard from a holiday – answer questions (p. 77)"},
+    ],
+    tip:"Draw a simple map of your town and label the key places in English."
+  },
+  {
+    date:"August 12", type:"movers",
+    unit:"Unit 8: Places & Travel",
+    topic:"Grammar & Writing",
+    activities:[
+      {icon:"📝", text:"Grammar: past simple regular verbs (p. 78)"},
+      {icon:"✏️", text:"Writing: write a postcard about a real or imaginary holiday (p. 79)"},
+      {icon:"🔊", text:"Listening: holiday photos – where did they go? (p. 80)"},
+    ],
+    tip:"Postcard structure: where you are → what you did → what you saw → how you feel → wish you were here!"
+  },
+  {
+    date:"August 14", type:"movers",
+    unit:"Unit 8: Places & Travel",
+    topic:"Speaking & Review",
+    activities:[
+      {icon:"🗣️", text:"Speaking: give directions from school to the park using the map"},
+      {icon:"📝", text:"Write 5 sentences about a journey you took (p. 81)"},
+      {icon:"✅", text:"Unit 8 word list self-test (p. 82)"},
+    ],
+    tip:"Use sequencing words: 'First we went to…, then…, after that…, finally…'"
+  },
+  {
+    date:"August 16", type:"booklet",
+    unit:"Home Fun Booklet – Section 8",
+    topic:"Places & Travel Activities",
+    activities:[
+      {icon:"🎨", text:"Draw and label your dream holiday destination"},
+      {icon:"✏️", text:"Write 3–4 sentences about what you can do there"},
+      {icon:"🔍", text:"Puzzle: unscramble the transport words"},
+    ],
+    tip:"Include weather, activities, food, and places to visit in your description."
+  },
+  {
+    date:"August 18", type:"test",
+    unit:"Practice Test – Part 1",
+    topic:"Listening & Reading",
+    activities:[
+      {icon:"🔊", text:"Complete Practice Test: Listening section (Parts 1–5)"},
+      {icon:"📖", text:"Reading & Writing: Part 1 – matching words to pictures"},
+      {icon:"📖", text:"Reading & Writing: Part 2 – matching sentences to people"},
+    ],
+    tip:"Read ALL the options before choosing. Eliminate wrong answers first."
+  },
+  {
+    date:"August 20", type:"test",
+    unit:"Practice Test – Part 2",
+    topic:"Reading & Writing (continued)",
+    activities:[
+      {icon:"📖", text:"Reading & Writing: Part 3 – fill in the gaps in a story"},
+      {icon:"✏️", text:"Reading & Writing: Part 4 – write the correct words in a text"},
+      {icon:"📖", text:"Reading & Writing: Part 5 – read a passage and answer questions"},
+    ],
+    tip:"For gap-fills, read the whole sentence before deciding – context is everything."
+  },
+  {
+    date:"August 22", type:"test",
+    unit:"Practice Test – Part 3",
+    topic:"Writing Extended & Speaking",
+    activities:[
+      {icon:"✏️", text:"Reading & Writing: Part 6 – look and write (label a picture)"},
+      {icon:"✏️", text:"Reading & Writing: Part 7 – read the story, then write about yourself"},
+      {icon:"🗣️", text:"Speaking practice: describe a picture using full sentences"},
+    ],
+    tip:"For Part 7, use the story as a model – same verb tenses, similar sentence structure."
+  },
+  {
+    date:"August 24", type:"review",
+    unit:"Review – Vocabulary Sprint",
+    topic:"All Units",
+    activities:[
+      {icon:"📝", text:"Go through all 8 unit word lists – tick words you know"},
+      {icon:"🃏", text:"Make flash cards for words you're not sure about"},
+      {icon:"🎯", text:"Play vocabulary bingo with a family member"},
+    ],
+    tip:"Aim to know at least 80% of each word list. Focus time on the remaining 20%."
+  },
+  {
+    date:"August 26", type:"review",
+    unit:"Review – Grammar Focus",
+    topic:"Key Structures",
+    activities:[
+      {icon:"📝", text:"Write one sentence for each grammar point covered: present simple, present continuous, have got, there is/are, can/can't, past simple"},
+      {icon:"✏️", text:"Correct the mistakes in 10 error sentences (make your own!)"},
+      {icon:"🗣️", text:"Tell a partner about your summer using all the grammar structures"},
+    ],
+    tip:"If you find a grammar point hard, go back to that unit and re-read the grammar box."
+  },
+  {
+    date:"August 28", type:"review",
+    unit:"Review – Skills Practice",
+    topic:"Listening, Reading, Writing",
+    activities:[
+      {icon:"🔊", text:"Redo your weakest listening exercise from the book"},
+      {icon:"📖", text:"Read a short English text (book, comic, or website) for 15 minutes"},
+      {icon:"✏️", text:"Free writing: 'My Summer 2026' – write at least 8 sentences"},
+    ],
+    tip:"The 'My Summer' text is your chance to use everything you've learned – no looking things up!"
+  },
+  {
+    date:"August 30", type:"review",
+    unit:"🎉 Final Day – Celebration & Reflection",
+    topic:"You Did It!",
+    activities:[
+      {icon:"📖", text:"Flip through the whole book – notice how much you can read!"},
+      {icon:"✏️", text:"Write 3 things you learned, 3 things you enjoyed, and 1 goal for September"},
+      {icon:"🌟", text:"Do something fun in English: watch an episode of a cartoon, read a comic, or play an English game"},
+    ],
+    tip:"You completed 39 study sessions over the summer. That is something to be proud of!"
+  },
+];
+
+// ── Build dates ───────────────────────────────────────────────────────────────
+function pad(n){return n<10?'0'+n:n}
+function dateKey(s){
+  const m = s.date.split(' ');
+  const months={January:'01',February:'02',March:'03',April:'04',May:'05',June:'06',
+    July:'07',August:'08',September:'09',October:'10',November:'11',December:'12'};
+  return `2026-${months[m[0]]}-${pad(parseInt(m[1]))}`;
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let state = JSON.parse(localStorage.getItem('summerPlan2026') || '{}');
+let currentFilter = 'all';
+
+function save(){localStorage.setItem('summerPlan2026', JSON.stringify(state));}
+
+function toggleDone(idx){
+  state[idx] = !state[idx];
+  save();
+  render();
+}
+
+function resetProgress(){
+  if(confirm('Reset all progress?')){state={};save();render();}
+}
+
+function filter(f){
+  currentFilter = f;
+  document.querySelectorAll('.btn-filter').forEach(b=>{
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(
+      f==='all'?'all':f==='pending'?'to do':f==='done'?'completed':f==='movers'?'movers':'booklet'
+    ));
+  });
+  render();
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function render(){
+  const today = new Date().toISOString().split('T')[0];
+  const done = SESSIONS.filter((_,i)=>state[i]).length;
+  document.getElementById('progressFill').style.width = (done/39*100)+'%';
+  document.getElementById('progressText').textContent = `${done} / 39 sessions completed`;
+
+  const container = document.getElementById('sessions-container');
+  container.innerHTML = '';
+
+  let visible = SESSIONS.map((s,i)=>({...s,idx:i,key:dateKey(s)}));
+
+  if(currentFilter==='pending') visible = visible.filter(s=>!state[s.idx]);
+  else if(currentFilter==='done') visible = visible.filter(s=>state[s.idx]);
+  else if(currentFilter==='movers') visible = visible.filter(s=>s.type==='movers');
+  else if(currentFilter==='booklet') visible = visible.filter(s=>s.type==='booklet'||s.type==='test'||s.type==='review');
+
+  if(!visible.length){
+    container.innerHTML='<div class="empty-state">No sessions to show 🎉</div>';
+    return;
+  }
+
+  // Group by month
+  const groups = {};
+  visible.forEach(s=>{
+    const month = s.date.split(' ')[0];
+    if(!groups[month]) groups[month]={label:month,sessions:[]};
+    groups[month].sessions.push(s);
+  });
+
+  const monthOrder = ['June','July','August'];
+  const monthEmoji = {June:'☀️',July:'🏖️',August:'🌅'};
+
+  monthOrder.forEach(month=>{
+    if(!groups[month]) return;
+    const g = groups[month];
+    const wrap = document.createElement('div');
+    wrap.className='month-section';
+
+    const title = document.createElement('div');
+    title.className='month-title';
+    title.innerHTML=`${monthEmoji[month]} ${month} <span>${g.sessions.length} sessions</span>`;
+    wrap.appendChild(title);
+
+    g.sessions.forEach(s=>{
+      const isDone = !!state[s.idx];
+      const isToday = s.key === today;
+      const card = document.createElement('div');
+      card.className='session-card'+(isDone?' done':'')+(isToday?' today-card':'');
+
+      const badgeClass = {movers:'badge-movers',booklet:'badge-booklet',test:'badge-test',review:'badge-review'}[s.type];
+      const badgeText = {movers:'Fun for Movers',booklet:'Home Fun Booklet',test:'Practice Test',review:'Review'}[s.type];
+
+      card.innerHTML=`
+        <div class="card-header">
+          <div class="card-checkbox" onclick="event.stopPropagation();toggleDone(${s.idx})">
+            <span class="checkmark">✓</span>
+          </div>
+          <div class="card-meta">
+            <div class="card-top-row">
+              <span class="session-num">Session ${s.idx+1}</span>
+              <span class="session-date">${s.date}</span>
+              <span class="book-badge ${badgeClass}">${badgeText}</span>
+              ${isToday?'<span class="book-badge" style="background:#FEF3C7;color:#92400E;">📅 Today</span>':''}
+            </div>
+            <div class="card-unit">${s.unit}</div>
+            <div class="card-topic">${s.topic}</div>
+          </div>
+          <div class="card-expand-icon">⌄</div>
+        </div>
+        <div class="card-body">
+          <div class="activities-title">Activities</div>
+          ${s.activities.map(a=>`<div class="activity-item"><span class="activity-icon">${a.icon}</span><span>${a.text}</span></div>`).join('')}
+          ${s.tip?`<div class="tip-box">💡 <span>${s.tip}</span></div>`:''}
+        </div>`;
+
+      card.querySelector('.card-header').addEventListener('click', function(e){
+        if(e.target.closest('.card-checkbox')) return;
+        card.classList.toggle('expanded');
+      });
+
+      wrap.appendChild(card);
+    });
+    container.appendChild(wrap);
+  });
+}
+
+render();
+</script>
+</body>
+</html>

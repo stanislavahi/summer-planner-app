@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лятно четене 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-card: #ffffff;
+    --text: #1a1a19;
+    --text-secondary: #73726c;
+    --text-tertiary: #a8a8a2;
+    --border: rgba(0,0,0,0.12);
+    --border-hover: rgba(0,0,0,0.25);
+    --green: #1D9E75;
+    --green-light: #E1F5EE;
+    --green-dark: #0F6E56;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a19;
+      --bg-secondary: #232321;
+      --bg-card: #232321;
+      --text: #f0efe8;
+      --text-secondary: #b4b2a9;
+      --text-tertiary: #6a6a64;
+      --border: rgba(255,255,255,0.12);
+      --border-hover: rgba(255,255,255,0.28);
+      --green-light: #04342C;
+      --green-dark: #9FE1CB;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .header { margin-bottom: 1.5rem; }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header h1 .ti { color: var(--green); font-size: 22px; }
+  .header p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    margin-left: 32px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 480px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  .stat {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+  }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 3px; }
+  .stat-value { font-size: 20px; font-weight: 500; color: var(--text); }
+  .stat-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .overall-progress { margin-bottom: 1.25rem; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .progress-bar-wrap {
+    background: var(--bg-secondary);
+    border-radius: 99px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--green);
+    transition: width 0.4s ease;
+  }
+
+  .daily-goal {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .daily-goal .ti { color: var(--green); font-size: 18px; flex-shrink: 0; }
+  .daily-goal strong { color: var(--text); font-weight: 500; }
+
+  .books-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .book-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+  }
+  .book-card.done {
+    border-color: var(--green);
+    background: var(--green-light);
+  }
+  .book-card.done .book-title { color: var(--green-dark); }
+
+  .book-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .check-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-hover);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    color: transparent;
+    font-size: 14px;
+  }
+  .check-btn:hover { border-color: var(--green); }
+  .book-card.done .check-btn {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .book-info { flex: 1; min-width: 0; }
+  .book-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .book-author {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .book-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .mini-bar-wrap {
+    width: 56px;
+    background: var(--bg-secondary);
+    border-radius: 99px;
+    height: 4px;
+    overflow: hidden;
+  }
+  .book-card.done .mini-bar-wrap { background: rgba(29,158,117,0.2); }
+  .mini-bar {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--green);
+  }
+  .pages-badge {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    min-width: 72px;
+    text-align: right;
+  }
+  .expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .expand-btn:hover { color: var(--text); background: var(--bg-secondary); }
+
+  .page-input-row {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-input-row label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .page-input-row input[type=range] {
+    flex: 1;
+    accent-color: var(--green);
+  }
+  .page-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    min-width: 68px;
+    text-align: right;
+  }
+
+  /* ── Writing section ── */
+  .section-divider {
+    margin: 2rem 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-divider h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .section-divider h2 .ti { color: var(--blue); font-size: 18px; }
+  .section-divider .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  :root {
+    --blue: #2F80ED;
+    --blue-light: #EBF3FD;
+    --blue-dark: #1A5EAD;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --blue: #5BA3F5;
+      --blue-light: #0D2540;
+      --blue-dark: #93C5FD;
+    }
+  }
+
+  .write-today {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 1.25rem;
+  }
+  .write-today-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .write-today-label .today-date {
+    font-weight: 500;
+    color: var(--text);
+  }
+  .type-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .type-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border-hover);
+    background: transparent;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .type-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .type-btn.selected {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+  }
+  .mark-done-btn {
+    width: 100%;
+    padding: 9px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--blue);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .mark-done-btn:disabled { opacity: 0.4; cursor: default; }
+  .mark-done-btn:not(:disabled):hover { opacity: 0.85; }
+  .already-done-bar {
+    background: var(--blue-light);
+    border: 1px solid var(--blue);
+    border-radius: var(--radius-md);
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--blue-dark);
+  }
+  .undo-btn {
+    background: none;
+    border: none;
+    font-size: 11px;
+    color: var(--blue);
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+
+  /* writing stats with progress */
+  .writing-overall {
+    margin-bottom: 1.25rem;
+  }
+  .writing-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 480px) {
+    .writing-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* month-by-month calendar */
+  .month-block {
+    margin-bottom: 1.25rem;
+  }
+  .month-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .month-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-transform: capitalize;
+  }
+  .month-progress-text {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .month-bar-wrap {
+    background: var(--bg-secondary);
+    border-radius: 99px;
+    height: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .month-bar {
+    height: 100%;
+    border-radius: 99px;
+    background: var(--blue);
+    transition: width 0.4s ease;
+  }
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-day-label {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-align: center;
+    padding-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    position: relative;
+    cursor: default;
+  }
+  .cal-cell.future { opacity: 0.35; }
+  .cal-cell.today-cell {
+    border: 1.5px solid var(--blue);
+    color: var(--text);
+    font-weight: 600;
+  }
+  .cal-cell.done-cell { color: white; }
+  .cal-cell.done-type-essay    { background: #2F80ED; }
+  .cal-cell.done-type-prepis   { background: #1D9E75; }
+  .cal-cell.done-type-diktovka { background: #9B59B6; }
+  .cal-cell[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.75);
+    color: white;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Rank card ── */
+  .rank-card {
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: linear-gradient(135deg, var(--rank-from), var(--rank-to));
+    --rank-from: #e8f5e9; --rank-to: #f1f8e9;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rank-card { --rank-from: #1a2e1a; --rank-to: #1e2d10; }
+  }
+  .rank-card.lvl1  { --rank-from: #e3f2fd; --rank-to: #e8eaf6; }
+  .rank-card.lvl2  { --rank-from: #fce4ec; --rank-to: #fff3e0; }
+  .rank-card.lvl3  { --rank-from: #fff8e1; --rank-to: #fff3e0; }
+  .rank-card.lvl4  { --rank-from: #e8f5e9; --rank-to: #e0f7fa; }
+  .rank-card.lvl5  { --rank-from: #ede7f6; --rank-to: #e8eaf6; }
+  .rank-card.lvl6  { --rank-from: #fff3e0; --rank-to: #fbe9e7; }
+  .rank-card.lvl7  { --rank-from: #fce4ec; --rank-to: #ff8a65; }
+  .rank-card.lvl8  { --rank-from: #f9a825; --rank-to: #ffca28; }
+  @media (prefers-color-scheme: dark) {
+    .rank-card.lvl1  { --rank-from: #0d1b2a; --rank-to: #131929; }
+    .rank-card.lvl2  { --rank-from: #2a1015; --rank-to: #2a1e0a; }
+    .rank-card.lvl3  { --rank-from: #2a2200; --rank-to: #2a1e00; }
+    .rank-card.lvl4  { --rank-from: #0a2a1a; --rank-to: #002a2a; }
+    .rank-card.lvl5  { --rank-from: #1a0a2a; --rank-to: #0d1329; }
+    .rank-card.lvl6  { --rank-from: #2a1800; --rank-to: #2a1000; }
+    .rank-card.lvl7  { --rank-from: #2a0010; --rank-to: #2a1505; }
+    .rank-card.lvl8  { --rank-from: #2a1f00; --rank-to: #2a2200; }
+  }
+  .rank-emoji { font-size: 40px; line-height: 1; flex-shrink: 0; }
+  .rank-info  { flex: 1; min-width: 0; }
+  .rank-name  { font-size: 17px; font-weight: 600; color: var(--text); }
+  .rank-msg   { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .rank-next  { margin-top: 8px; }
+  .rank-next-label {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px;
+  }
+  .rank-next-bar-wrap {
+    background: rgba(0,0,0,0.1);
+    border-radius: 99px; height: 5px; overflow: hidden;
+  }
+  @media (prefers-color-scheme: dark) {
+    .rank-next-bar-wrap { background: rgba(255,255,255,0.1); }
+  }
+  .rank-next-bar {
+    height: 100%; border-radius: 99px;
+    background: var(--text-secondary);
+    transition: width 0.5s ease;
+  }
+
+  /* ── Achievements (badges) ── */
+  .achievements-title {
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    margin-bottom: 10px; margin-top: 1.5rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 400px) {
+    .badges-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .badge {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 10px 6px 8px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .badge.unlocked {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .badge.unlocked:hover { transform: translateY(-2px); }
+  .badge.locked { opacity: 0.28; filter: grayscale(0.6); }
+  .badge-icon  { font-size: 24px; line-height: 1; display: block; margin-bottom: 5px; }
+  .badge-name  { font-size: 10px; color: var(--text-secondary); line-height: 1.3; font-weight: 500; }
+  .badge.unlocked .badge-name { color: var(--text); }
+  .badge-req   { font-size: 9px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1><i class="ti ti-books" aria-hidden="true"></i>Лятно четене 2026</h1>
+    <p>1 юни – 15 септември &nbsp;·&nbsp; 107 дни &nbsp;·&nbsp; след 2. клас</p>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="overall-progress">
+    <div class="progress-label">
+      <span>Общ напредък</span>
+      <span id="pct-label">0%</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="overall-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div id="rank-card"></div>
+
+  <div class="daily-goal">
+    <i class="ti ti-target" aria-hidden="true"></i>
+    Дневна цел: <strong>30 страници</strong>
+  </div>
+
+  <div class="books-list" id="books-list"></div>
+  <div id="read-achievements"></div>
+
+  <!-- ── Writing section ── -->
+  <div class="section-divider">
+    <h2><i class="ti ti-pencil" aria-hidden="true"></i>Писане всеки ден</h2>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="writing-overall" id="writing-overall"></div>
+
+  <div class="writing-stats" id="writing-stats"></div>
+  <div id="write-achievements"></div>
+
+  <div class="write-today" id="write-today-box"></div>
+
+  <div id="writing-calendar"></div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#2F80ED"></div>Съчинение</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Препис</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9B59B6"></div>Диктовка</div>
+  </div>
+
+  <div class="footer">Прогресът се запазва автоматично в браузъра.</div>
+
+</div>
+
+<script>
+const books = [
+  { title: "Приключенията на Лукчо",                              author: "Дж. Родари",     pages: 224 },
+  { title: "Ние, врабчетата",                                      author: "Й. Радичков",    pages: 136 },
+  { title: "Страната на сънищата: Любими Попътечо",                author: "Ю. Спиридонова", pages: 264 },
+  { title: "Приключенията на Пинокио",                             author: "К. Колоди",      pages: 208 },
+  { title: "Приключенията на Незнайко",                            author: "Н. Носов",       pages: 144 },
+  { title: "Небивалици",                                           author: "Д. Бисет",       pages: 216 },
+  { title: "Книга за джунглата",                                   author: "Р. Киплинг",     pages: 328 },
+  { title: "Антон и Точица / Хвърчащата класна стая / Двойната Лотхен", author: "Е. Кестнер", pages: 408 },
+  { title: "Това се случи на 35 май",                              author: "Е. Кестнер",     pages: 144 },
+  { title: "Малкият мъж",                                          author: "Е. Кестнер",     pages: 208 },
+  { title: "Братята с лъвски сърца",                               author: "А. Линдгрен",    pages: 240 },
+  { title: "Историята на д-р Дулитъл",                             author: "Хю Лофтинг",     pages: 144 },
+  { title: "Приказки от Оная гора",                                author: "М. Дългъчева",   pages: 64  },
+];
+
+const TOTAL_PAGES = 2728;
+const STORAGE_KEY = 'summer_reading_2026';
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+}
+function save(s) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {}
+}
+
+let state = load();
+books.forEach((_, i) => {
+  if (!state[i]) state[i] = { read: 0, done: false, expanded: false };
+});
+
+function getReadPages() {
+  return books.reduce((sum, b, i) => sum + (state[i].done ? b.pages : (state[i].read || 0)), 0);
+}
+
+function updateStats() {
+  const readPages = getReadPages();
+  const doneBooks = books.filter((_, i) => state[i].done).length;
+  const pct = Math.round(readPages / TOTAL_PAGES * 100);
+  const remaining = TOTAL_PAGES - readPages;
+  const daysLeft = remaining > 0 ? Math.ceil(remaining / 30) : 0;
+
+  document.getElementById('overall-bar').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat">
+      <div class="stat-label">Прочетено</div>
+      <div class="stat-value">${readPages.toLocaleString('bg')}</div>
+      <div class="stat-sub">от ${TOTAL_PAGES.toLocaleString('bg')} стр.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Книги</div>
+      <div class="stat-value">${doneBooks}</div>
+      <div class="stat-sub">от ${books.length}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Остават</div>
+      <div class="stat-value">${remaining.toLocaleString('bg')}</div>
+      <div class="stat-sub">стр.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">~Дни</div>
+      <div class="stat-value">${daysLeft}</div>
+      <div class="stat-sub">при 30 стр./ден</div>
+    </div>
+  `;
+}
+
+function renderBooks() {
+  const list = document.getElementById('books-list');
+  list.innerHTML = '';
+  books.forEach((b, i) => {
+    const s = state[i];
+    const readPg = s.done ? b.pages : (s.read || 0);
+    const pct = Math.round(readPg / b.pages * 100);
+
+    const card = document.createElement('div');
+    card.className = 'book-card' + (s.done ? ' done' : '');
+
+    card.innerHTML = `
+      <div class="book-row">
+        <button class="check-btn" data-i="${i}" aria-label="${s.done ? 'Отмени' : 'Маркирай като прочетена'}">
+          ${s.done ? '<i class="ti ti-check" aria-hidden="true"></i>' : ''}
+        </button>
+        <div class="book-info">
+          <div class="book-title" title="„${b.title}"">„${b.title}"</div>
+          <div class="book-author">${b.author}</div>
+        </div>
+        <div class="book-meta">
+          <div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div>
+          <span class="pages-badge" id="badge-${i}">${readPg} / ${b.pages} стр.</span>
+          ${!s.done ? `<button class="expand-btn" data-expand="${i}" aria-label="Въведи прочетени страници"><i class="ti ti-pencil" aria-hidden="true"></i></button>` : ''}
+        </div>
+      </div>
+      ${!s.done ? `
+      <div class="page-input-row" id="expand-${i}" style="display:${s.expanded ? 'flex' : 'none'}">
+        <label for="range-${i}">Прочетени стр.:</label>
+        <input type="range" id="range-${i}" min="0" max="${b.pages}" value="${readPg}" step="1" data-range="${i}">
+        <span class="page-count" id="pc-${i}">${readPg} / ${b.pages}</span>
+      </div>` : ''}
+    `;
+    list.appendChild(card);
+  });
+
+  list.addEventListener('click', function(e) {
+    const checkBtn = e.target.closest('.check-btn');
+    const expandBtn = e.target.closest('.expand-btn');
+    if (checkBtn) toggleDone(+checkBtn.dataset.i);
+    if (expandBtn) toggleExpand(+expandBtn.dataset.expand);
+  });
+
+  list.addEventListener('input', function(e) {
+    if (e.target.dataset.range !== undefined) {
+      updatePages(+e.target.dataset.range, +e.target.value);
+    }
+  });
+}
+
+function toggleDone(i) {
+  state[i].done = !state[i].done;
+  if (state[i].done) { state[i].read = books[i].pages; state[i].expanded = false; }
+  else { state[i].read = 0; }
+  save(state);
+  render();
+}
+
+function toggleExpand(i) {
+  state[i].expanded = !state[i].expanded;
+  const row = document.getElementById('expand-' + i);
+  if (row) row.style.display = state[i].expanded ? 'flex' : 'none';
+}
+
+function updatePages(i, val) {
+  state[i].read = val;
+  const pc = document.getElementById('pc-' + i);
+  if (pc) pc.textContent = val + ' / ' + books[i].pages;
+  const badge = document.getElementById('badge-' + i);
+  if (badge) badge.textContent = val + ' / ' + books[i].pages + ' стр.';
+  const card = document.getElementById('books-list').children[i];
+  if (card) {
+    const miniBar = card.querySelector('.mini-bar');
+    if (miniBar) miniBar.style.width = Math.round(val / books[i].pages * 100) + '%';
+  }
+  save(state);
+  updateStats();
+}
+
+// ── Rank & motivating stats ─────────────────────────────────────
+const RANKS = [
+  { min: 0,   max: 13,  lvl:'lvl1', emoji:'📖', name:'Начинаещ читател',    msg:'Добро начало! Всяка страница те прави по-умен.',        next:'до Изследовател' },
+  { min: 13,  max: 26,  lvl:'lvl2', emoji:'🌟', name:'Книжен изследовател', msg:'Вече изследваш нови книжни светове!',                   next:'до Авантюрист' },
+  { min: 26,  max: 39,  lvl:'lvl3', emoji:'⚡', name:'Книжен авантюрист',   msg:'Страхотно! Всяка история те носи напред.',              next:'до Откривател' },
+  { min: 39,  max: 52,  lvl:'lvl4', emoji:'🔭', name:'Книжен откривател',   msg:'Половината е пред теб — дай газ!',                      next:'до Герой' },
+  { min: 52,  max: 65,  lvl:'lvl5', emoji:'🦸', name:'Книжен герой',        msg:'Вече си герой! Продължавай напред!',                    next:'до Воин' },
+  { min: 65,  max: 78,  lvl:'lvl6', emoji:'⚔️', name:'Книжен воин',         msg:'Невероятно! Само още малко до върха!',                  next:'до Шампион' },
+  { min: 78,  max: 100, lvl:'lvl7', emoji:'🏆', name:'Книжен шампион',      msg:'Последен рунд — дай всичко от себе си!',                next:'до Крал на книгите' },
+  { min: 100, max: 101, lvl:'lvl8', emoji:'👑', name:'Крал на книгите',     msg:'Ти направи невъзможното! Браво, шампионе!',             next:'' },
+];
+
+function getRank(pct) {
+  return RANKS.find(r => pct >= r.min && pct < r.max) || RANKS[RANKS.length - 1];
+}
+
+function renderRankCard() {
+  const readPages = getReadPages();
+  const pct = Math.round(readPages / TOTAL_PAGES * 100);
+  const rank = getRank(pct);
+  const nextRank = RANKS[RANKS.indexOf(rank) + 1];
+  const withinPct = rank.max > rank.min
+    ? Math.round((pct - rank.min) / (rank.max - rank.min) * 100)
+    : 100;
+
+  document.getElementById('rank-card').innerHTML = `
+    <div class="rank-card ${rank.lvl}">
+      <div class="rank-emoji">${rank.emoji}</div>
+      <div class="rank-info">
+        <div class="rank-name">${rank.name}</div>
+        <div class="rank-msg">${rank.msg}</div>
+        ${nextRank ? `
+        <div class="rank-next">
+          <div class="rank-next-label">
+            <span>${rank.next}</span>
+            <span>${pct}% / ${rank.max}%</span>
+          </div>
+          <div class="rank-next-bar-wrap">
+            <div class="rank-next-bar" style="width:${Math.min(withinPct,100)}%"></div>
+          </div>
+        </div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+
+const READ_BADGES = [
+  { icon:'✏️', name:'Първа крачка',  req:'Прочети 1 стр.',    check: p => p >= 1 },
+  { icon:'📗', name:'Първа книга',   req:'Завърши 1 книга',   check: (p,books,state) => books.filter((_,i)=>state[i].done).length >= 1 },
+  { icon:'📚', name:'Три книги',     req:'Завърши 3 книги',   check: (p,books,state) => books.filter((_,i)=>state[i].done).length >= 3 },
+  { icon:'⚡', name:'500 страници',  req:'Прочети 500 стр.',  check: p => p >= 500 },
+  { icon:'🚀', name:'1000 страници', req:'Прочети 1000 стр.', check: p => p >= 1000 },
+  { icon:'🌟', name:'Половината',    req:'50% прочетено',     check: p => p >= TOTAL_PAGES * 0.5 },
+  { icon:'🏆', name:'2000 страници', req:'Прочети 2000 стр.', check: p => p >= 2000 },
+  { icon:'👑', name:'Всички книги',  req:'Завърши всички',    check: (p,books,state) => books.every((_,i)=>state[i].done) },
+];
+
+function renderReadAchievements() {
+  const readPages = getReadPages();
+  const html = `
+    <div class="achievements-title">🏅 Постижения — четене</div>
+    <div class="badges-grid">
+      ${READ_BADGES.map(b => {
+        const unlocked = b.check(readPages, books, state);
+        return `<div class="badge ${unlocked ? 'unlocked' : 'locked'}" title="${b.req}">
+          <span class="badge-icon">${b.icon}</span>
+          <div class="badge-name">${b.name}</div>
+          <div class="badge-req">${unlocked ? '✓ изпълнено' : b.req}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+  document.getElementById('read-achievements').innerHTML = html;
+}
+
+function render() {
+  renderBooks();
+  updateStats();
+  renderRankCard();
+  renderReadAchievements();
+}
+
+render();
+
+// ── Writing tracker ──────────────────────────────────────────────
+const WRITE_KEY   = 'summer_writing_2026';
+const WRITE_START = new Date('2026-05-30');
+const WRITE_END   = new Date('2026-08-30');
+const TYPES = {
+  essay:    { label: 'Съчинение', cls: 'done-type-essay' },
+  prepis:   { label: 'Препис',    cls: 'done-type-prepis' },
+  diktovka: { label: 'Диктовка', cls: 'done-type-diktovka' },
+};
+const BG_MONTHS_FULL = ['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+const BG_MONTHS_SHORT = ['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
+
+function loadWriting() {
+  try { return JSON.parse(localStorage.getItem(WRITE_KEY)) || {}; } catch { return {}; }
+}
+function saveWriting(s) {
+  try { localStorage.setItem(WRITE_KEY, JSON.stringify(s)); } catch {}
+}
+
+function toKey(d) {
+  // local date key to avoid timezone shift
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function todayKey() { return toKey(new Date()); }
+
+let wState = loadWriting();
+let selectedType = null;
+
+// All days in range
+function allDays() {
+  const days = [];
+  const cur = new Date(WRITE_START);
+  while (cur <= WRITE_END) {
+    days.push(new Date(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+  return days;
+}
+
+// Group days by month → [{month, year, days:[]}]
+function daysByMonth() {
+  const groups = [];
+  let cur = null;
+  allDays().forEach(d => {
+    const key = d.getFullYear() * 100 + d.getMonth();
+    if (!cur || cur.key !== key) {
+      cur = { key, month: d.getMonth(), year: d.getFullYear(), days: [] };
+      groups.push(cur);
+    }
+    cur.days.push(new Date(d));
+  });
+  return groups;
+}
+
+function calcStreak() {
+  let streak = 0;
+  const d = new Date();
+  if (!wState[toKey(d)]) d.setDate(d.getDate() - 1);
+  while (wState[toKey(d)]) {
+    streak++;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+
+// Count days done that are up to and including today
+function doneUpToToday() {
+  const today = todayKey();
+  return Object.keys(wState).filter(k => k <= today).length;
+}
+
+// Count total days up to and including today (within range)
+function totalUpToToday() {
+  const today = todayKey();
+  const startKey = toKey(WRITE_START);
+  return allDays().filter(d => {
+    const k = toKey(d);
+    return k >= startKey && k <= today;
+  }).length;
+}
+
+function renderWritingOverall() {
+  const done = doneUpToToday();
+  const total = totalUpToToday();
+  const allTotal = allDays().length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+  document.getElementById('writing-overall').innerHTML = `
+    <div class="progress-label">
+      <span>Общ напредък (писане)</span>
+      <span>${done} / ${total} дни изпълнени &nbsp;·&nbsp; ${pct}%</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" style="width:${pct}%;background:var(--blue)"></div>
+    </div>
+    <div style="font-size:11px;color:var(--text-tertiary);margin-top:4px;text-align:right">${allTotal} дни общо (31 май – 30 авг)</div>
+  `;
+}
+
+function renderWritingStats() {
+  const streak = calcStreak();
+  const byType = { essay: 0, prepis: 0, diktovka: 0 };
+  const today = todayKey();
+  Object.entries(wState).forEach(([k,t]) => { if (k <= today && byType[t] !== undefined) byType[t]++; });
+
+  document.getElementById('writing-stats').innerHTML = `
+    <div class="stat">
+      <div class="stat-label">Поредица</div>
+      <div class="stat-value" style="color:var(--blue)">${streak}</div>
+      <div class="stat-sub">последователни дни</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Съчинения</div>
+      <div class="stat-value" style="color:#2F80ED">${byType.essay}</div>
+      <div class="stat-sub">пъти</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Преписи</div>
+      <div class="stat-value" style="color:#1D9E75">${byType.prepis}</div>
+      <div class="stat-sub">пъти</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Диктовки</div>
+      <div class="stat-value" style="color:#9B59B6">${byType.diktovka}</div>
+      <div class="stat-sub">пъти</div>
+    </div>
+  `;
+}
+
+function renderWritingCalendar() {
+  const cal = document.getElementById('writing-calendar');
+  cal.innerHTML = '';
+  const today = todayKey();
+  const DOW_LABELS = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+
+  daysByMonth().forEach(({ month, year, days }) => {
+    const doneCnt = days.filter(d => wState[toKey(d)]).length;
+    const pastDays = days.filter(d => toKey(d) <= today).length;
+    const pct = pastDays > 0 ? Math.round(doneCnt / pastDays * 100) : 0;
+
+    const block = document.createElement('div');
+    block.className = 'month-block';
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'month-header';
+    hdr.innerHTML = `
+      <span class="month-name">${BG_MONTHS_FULL[month]} ${year}</span>
+      <span class="month-progress-text">${doneCnt} / ${pastDays} дни &nbsp;·&nbsp; ${pct}%</span>
+    `;
+    block.appendChild(hdr);
+
+    // Mini progress bar
+    const barWrap = document.createElement('div');
+    barWrap.className = 'month-bar-wrap';
+    barWrap.innerHTML = `<div class="month-bar" style="width:${pct}%"></div>`;
+    block.appendChild(barWrap);
+
+    // Calendar grid
+    const grid = document.createElement('div');
+    grid.className = 'calendar-grid';
+
+    // DOW headers
+    DOW_LABELS.forEach(l => {
+      const lbl = document.createElement('div');
+      lbl.className = 'cal-day-label';
+      lbl.textContent = l;
+      grid.appendChild(lbl);
+    });
+
+    // Padding (Mon=0)
+    const firstDow = (days[0].getDay() + 6) % 7;
+    for (let i = 0; i < firstDow; i++) {
+      grid.appendChild(document.createElement('div'));
+    }
+
+    // Cells
+    days.forEach(d => {
+      const key = toKey(d);
+      const isToday = key === today;
+      const isFuture = key > today;
+      const done = wState[key];
+
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      if (isFuture) cell.classList.add('future');
+      if (isToday) cell.classList.add('today-cell');
+      if (done) {
+        cell.classList.add('done-cell', TYPES[done].cls);
+        cell.setAttribute('title', `${d.getDate()} ${BG_MONTHS_SHORT[d.getMonth()]} – ${TYPES[done].label}`);
+      }
+      cell.textContent = d.getDate();
+      grid.appendChild(cell);
+    });
+
+    block.appendChild(grid);
+    cal.appendChild(block);
+  });
+}
+
+function renderWriteToday() {
+  const box = document.getElementById('write-today-box');
+  const key = todayKey();
+  const done = wState[key];
+  const now = new Date();
+  const dateStr = `${now.getDate()} ${BG_MONTHS_SHORT[now.getMonth()]}`;
+
+  if (done) {
+    box.innerHTML = `
+      <div class="write-today-label"><span class="today-date">Днес, ${dateStr}</span></div>
+      <div class="already-done-bar">
+        <span>✓ ${TYPES[done].label} — изпълнено!</span>
+        <button class="undo-btn" id="undo-write-btn">отмени</button>
+      </div>
+    `;
+    document.getElementById('undo-write-btn').addEventListener('click', () => {
+      delete wState[key];
+      saveWriting(wState);
+      renderWriting();
+    });
+  } else {
+    box.innerHTML = `
+      <div class="write-today-label">Задача за <span class="today-date">${dateStr}</span> — избери вид:</div>
+      <div class="type-btns">
+        ${Object.entries(TYPES).map(([k,v]) =>
+          `<button class="type-btn${selectedType===k?' selected':''}" data-type="${k}">${v.label}</button>`
+        ).join('')}
+      </div>
+      <button class="mark-done-btn" id="mark-write-btn" ${selectedType ? '' : 'disabled'}>Маркирай като изпълнено</button>
+    `;
+    box.querySelectorAll('.type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedType = btn.dataset.type;
+        renderWriteToday();
+      });
+    });
+    document.getElementById('mark-write-btn').addEventListener('click', () => {
+      if (!selectedType) return;
+      wState[key] = selectedType;
+      saveWriting(wState);
+      selectedType = null;
+      renderWriting();
+    });
+  }
+}
+
+const WRITE_BADGES = [
+  { icon:'✏️', name:'Първи ден',      req:'Направи 1 ден',        check:(ws,streak) => Object.keys(ws).length >= 1 },
+  { icon:'🔥', name:'3 поредни',      req:'3 поредни дни',        check:(ws,streak) => streak >= 3 },
+  { icon:'⚡', name:'Цяла седмица',   req:'7 поредни дни',        check:(ws,streak) => streak >= 7 },
+  { icon:'🌊', name:'Две седмици',    req:'14 поредни дни',       check:(ws,streak) => streak >= 14 },
+  { icon:'📝', name:'10 преписа',     req:'Препис 10 пъти',       check:(ws) => Object.values(ws).filter(t=>t==='prepis').length >= 10 },
+  { icon:'🎤', name:'10 диктовки',    req:'Диктовка 10 пъти',     check:(ws) => Object.values(ws).filter(t=>t==='diktovka').length >= 10 },
+  { icon:'✍️', name:'10 съчинения',   req:'Съчинение 10 пъти',    check:(ws) => Object.values(ws).filter(t=>t==='essay').length >= 10 },
+  { icon:'🏆', name:'30 дни',         req:'Изпълни 30 дни общо',  check:(ws) => Object.keys(ws).length >= 30 },
+];
+
+function renderWriteAchievements() {
+  const streak = calcStreak();
+  const today = todayKey();
+  const ws = {};
+  Object.entries(wState).forEach(([k,v]) => { if (k <= today) ws[k] = v; });
+
+  const html = `
+    <div class="achievements-title">🏅 Постижения — писане</div>
+    <div class="badges-grid">
+      ${WRITE_BADGES.map(b => {
+        const unlocked = b.check(ws, streak);
+        return `<div class="badge ${unlocked ? 'unlocked' : 'locked'}" title="${b.req}">
+          <span class="badge-icon">${b.icon}</span>
+          <div class="badge-name">${b.name}</div>
+          <div class="badge-req">${unlocked ? '✓ изпълнено' : b.req}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+  document.getElementById('write-achievements').innerHTML = html;
+}
+
+function renderWriting() {
+  renderWritingOverall();
+  renderWritingStats();
+  renderWriteAchievements();
+  renderWriteToday();
+  renderWritingCalendar();
+}
+
+renderWriting();
+</script>
+</body>
+</html>

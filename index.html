@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌞 Summer Planner 2026</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+/* ── RESET & SHARED ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;background:#f5f5f3}
+
+/* ── TAB NAV ── */
+.tab-nav{position:sticky;top:0;z-index:200;display:flex;background:#fff;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tab-btn{flex:1;padding:10px 6px 8px;border:none;background:transparent;cursor:pointer;font-size:11px;font-weight:600;color:#718096;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .15s,background .15s;border-bottom:3px solid transparent;line-height:1.2}
+.tab-btn:hover{color:#2d3748;background:#f7fafc}
+.tab-btn.active{color:#1a56db;border-bottom-color:#1a56db}
+.tab-btn .tab-icon{font-size:20px}
+.tab-section{display:none}
+.tab-section.active{display:block}
+</style>
+<style>
+/* ══ ENGLISH SECTION ══ */
+#tab-english{--blue:#3B82F6;--blue-light:#EFF6FF;--green:#10B981;--green-light:#ECFDF5;--orange:#F59E0B;--purple:#8B5CF6;--red:#EF4444;--gray-light:#F9FAFB;--border:#E5E7EB;--text:#111827;--text-light:#6B7280;background:linear-gradient(135deg,#FFF7ED 0%,#EFF6FF 100%);min-height:calc(100vh - 52px);color:var(--text)}
+#tab-english .eng-header{background:linear-gradient(135deg,#1D4ED8,#7C3AED);color:white;padding:32px 24px 24px;text-align:center}
+#tab-english .eng-header h1{font-size:28px;font-weight:800;margin-bottom:6px}
+#tab-english .eng-header p{font-size:15px;opacity:.85;margin-bottom:20px}
+#tab-english .progress-bar-wrap{background:rgba(255,255,255,.2);border-radius:999px;height:14px;max-width:500px;margin:0 auto 8px;overflow:hidden}
+#tab-english .progress-bar-fill{height:100%;background:#FCD34D;border-radius:999px;transition:width .4s}
+#tab-english .progress-text{font-size:13px;opacity:.9}
+#tab-english .eng-legend{display:flex;justify-content:center;gap:20px;padding:16px 24px;flex-wrap:wrap;background:white;border-bottom:1px solid var(--border)}
+#tab-english .legend-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-light)}
+#tab-english .legend-dot{width:12px;height:12px;border-radius:50%}
+#tab-english .eng-controls{padding:14px 24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;background:white;border-bottom:1px solid var(--border)}
+#tab-english .btn-filter{padding:6px 14px;border-radius:999px;border:1px solid var(--border);background:white;font-size:13px;cursor:pointer;color:var(--text-light);transition:all .15s}
+#tab-english .btn-filter:hover{background:var(--gray-light)}
+#tab-english .btn-filter.active{background:var(--blue);color:white;border-color:var(--blue)}
+#tab-english .month-section{padding:0 16px 16px;max-width:860px;margin:0 auto}
+#tab-english .month-title{font-size:17px;font-weight:700;color:var(--text);padding:24px 0 10px;display:flex;align-items:center;gap:8px}
+#tab-english .month-title span{background:var(--blue);color:white;border-radius:999px;padding:2px 10px;font-size:13px;font-weight:600}
+#tab-english .session-card{background:white;border:1.5px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s,transform .15s;cursor:pointer}
+#tab-english .session-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px)}
+#tab-english .session-card.done{opacity:.6}
+#tab-english .session-card.done .card-header{background:var(--green-light)}
+#tab-english .card-header{display:flex;align-items:flex-start;padding:14px 16px;gap:12px}
+#tab-english .card-checkbox{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .2s;background:white}
+#tab-english .session-card.done .card-checkbox{background:var(--green);border-color:var(--green)}
+#tab-english .checkmark{color:white;font-size:13px;display:none}
+#tab-english .session-card.done .checkmark{display:block}
+#tab-english .card-meta{flex:1}
+#tab-english .card-top-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+#tab-english .session-num{font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px}
+#tab-english .session-date{font-size:14px;font-weight:700;color:var(--text)}
+#tab-english .book-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.3px}
+#tab-english .badge-movers{background:#DBEAFE;color:#1D4ED8}
+#tab-english .badge-booklet{background:#D1FAE5;color:#065F46}
+#tab-english .badge-test{background:#FEE2E2;color:#991B1B}
+#tab-english .badge-review{background:#EDE9FE;color:#5B21B6}
+#tab-english .card-unit{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+#tab-english .card-topic{font-size:13px;color:var(--text-light)}
+#tab-english .card-expand-icon{color:var(--text-light);font-size:18px;flex-shrink:0;transition:transform .2s;margin-top:2px;user-select:none}
+#tab-english .session-card.expanded .card-expand-icon{transform:rotate(180deg)}
+#tab-english .card-body{display:none;border-top:1px solid var(--border);padding:14px 16px 14px 52px;background:var(--gray-light)}
+#tab-english .session-card.expanded .card-body{display:block}
+#tab-english .activities-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);margin-bottom:8px}
+#tab-english .activity-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:13.5px;color:var(--text);line-height:1.5}
+#tab-english .activity-icon{flex-shrink:0;font-size:15px}
+#tab-english .tip-box{margin-top:10px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#92400E;display:flex;gap:6px;align-items:flex-start}
+#tab-english .session-card.today-card{border-color:var(--orange);box-shadow:0 0 0 3px rgba(245,158,11,.2)}
+#tab-english .eng-reset-btn{display:block;margin:16px auto 24px;padding:10px 20px;background:var(--red);color:white;border:none;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer}
+#tab-english .eng-reset-btn:hover{background:#DC2626}
+#tab-english .empty-state{text-align:center;padding:48px 24px;color:var(--text-light);font-size:15px}
+@media(max-width:600px){#tab-english .eng-header h1{font-size:22px}#tab-english .card-body{padding-left:16px}}
+</style>
+<style>
+/* ══ BOOKS SECTION ══ */
+#tab-books{--bg:#fff;--bg-sec:#f5f5f3;--bg-card:#fff;--text:#1a1a19;--text-sec:#73726c;--text-ter:#a8a8a2;--bdr:rgba(0,0,0,.12);--bdr-hov:rgba(0,0,0,.25);--green:#1D9E75;--green-l:#E1F5EE;--green-d:#0F6E56;--r-md:8px;--r-lg:12px;--blue:#2F80ED;--blue-l:#EBF3FD;--blue-d:#1A5EAD;background:var(--bg);color:var(--text);min-height:calc(100vh - 52px);padding:2rem 1rem}
+@media(prefers-color-scheme:dark){#tab-books{--bg:#1a1a19;--bg-sec:#232321;--bg-card:#232321;--text:#f0efe8;--text-sec:#b4b2a9;--text-ter:#6a6a64;--bdr:rgba(255,255,255,.12);--bdr-hov:rgba(255,255,255,.28);--green-l:#04342C;--green-d:#9FE1CB;--blue:#5BA3F5;--blue-l:#0D2540;--blue-d:#93C5FD}}
+#tab-books .container{max-width:680px;margin:0 auto}
+#tab-books .bk-header{margin-bottom:1.5rem}
+#tab-books .bk-header h1{font-size:22px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:10px}
+#tab-books .bk-header h1 .ti{color:var(--green);font-size:22px}
+#tab-books .bk-header p{font-size:13px;color:var(--text-sec);margin-top:5px;margin-left:32px}
+#tab-books .bk-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+@media(max-width:480px){#tab-books .bk-stats{grid-template-columns:repeat(2,1fr)}}
+#tab-books .bk-stat{background:var(--bg-sec);border-radius:var(--r-md);padding:12px 14px}
+#tab-books .bk-stat .stat-label{font-size:12px;color:var(--text-sec);margin-bottom:3px}
+#tab-books .bk-stat .stat-value{font-size:20px;font-weight:500;color:var(--text)}
+#tab-books .bk-stat .stat-sub{font-size:11px;color:var(--text-ter);margin-top:2px}
+#tab-books .overall-progress{margin-bottom:1.25rem}
+#tab-books .progress-label{display:flex;justify-content:space-between;font-size:13px;color:var(--text-sec);margin-bottom:6px}
+#tab-books .progress-bar-wrap{background:var(--bg-sec);border-radius:99px;height:10px;overflow:hidden}
+#tab-books .progress-bar{height:100%;border-radius:99px;background:var(--green);transition:width .4s ease}
+#tab-books .daily-goal{background:var(--bg-sec);border-radius:var(--r-md);padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;font-size:13px;color:var(--text-sec)}
+#tab-books .daily-goal .ti{color:var(--green);font-size:18px;flex-shrink:0}
+#tab-books .daily-goal strong{color:var(--text);font-weight:500}
+#tab-books .books-list{display:flex;flex-direction:column;gap:8px}
+#tab-books .book-card{background:var(--bg-card);border:.5px solid var(--bdr);border-radius:var(--r-lg);padding:12px 14px;transition:border-color .2s}
+#tab-books .book-card.done{border-color:var(--green);background:var(--green-l)}
+#tab-books .book-card.done .book-title{color:var(--green-d)}
+#tab-books .book-row{display:flex;align-items:center;gap:10px}
+#tab-books .check-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bdr-hov);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;color:transparent;font-size:14px}
+#tab-books .check-btn:hover{border-color:var(--green)}
+#tab-books .book-card.done .check-btn{background:var(--green);border-color:var(--green);color:white}
+#tab-books .book-info{flex:1;min-width:0}
+#tab-books .book-title{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tab-books .book-author{font-size:12px;color:var(--text-sec);margin-top:2px}
+#tab-books .book-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+#tab-books .mini-bar-wrap{width:56px;background:var(--bg-sec);border-radius:99px;height:4px;overflow:hidden}
+#tab-books .book-card.done .mini-bar-wrap{background:rgba(29,158,117,.2)}
+#tab-books .mini-bar{height:100%;border-radius:99px;background:var(--green)}
+#tab-books .pages-badge{font-size:12px;color:var(--text-sec);white-space:nowrap;min-width:72px;text-align:right}
+#tab-books .expand-btn{background:none;border:none;cursor:pointer;color:var(--text-ter);padding:2px 4px;display:flex;align-items:center;font-size:16px;border-radius:4px;transition:color .15s,background .15s}
+#tab-books .expand-btn:hover{color:var(--text);background:var(--bg-sec)}
+#tab-books .page-input-row{margin-top:10px;padding-top:10px;border-top:.5px solid var(--bdr);display:flex;align-items:center;gap:10px}
+#tab-books .page-input-row label{font-size:12px;color:var(--text-sec);white-space:nowrap}
+#tab-books .page-input-row input[type=range]{flex:1;accent-color:var(--green)}
+#tab-books .page-count{font-size:12px;font-weight:500;color:var(--text);min-width:68px;text-align:right}
+#tab-books .rank-card{border-radius:var(--r-lg);padding:14px 16px;margin-bottom:1.25rem;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--rk-from),var(--rk-to));--rk-from:#e8f5e9;--rk-to:#f1f8e9}
+#tab-books .rank-card.lvl1{--rk-from:#e3f2fd;--rk-to:#e8eaf6}
+#tab-books .rank-card.lvl2{--rk-from:#fce4ec;--rk-to:#fff3e0}
+#tab-books .rank-card.lvl3{--rk-from:#fff8e1;--rk-to:#fff3e0}
+#tab-books .rank-card.lvl4{--rk-from:#e8f5e9;--rk-to:#e0f7fa}
+#tab-books .rank-card.lvl5{--rk-from:#ede7f6;--rk-to:#e8eaf6}
+#tab-books .rank-card.lvl6{--rk-from:#fff3e0;--rk-to:#fbe9e7}
+#tab-books .rank-card.lvl7{--rk-from:#fce4ec;--rk-to:#ff8a65}
+#tab-books .rank-card.lvl8{--rk-from:#f9a825;--rk-to:#ffca28}
+#tab-books .rank-emoji{font-size:40px;line-height:1;flex-shrink:0}
+#tab-books .rank-info{flex:1;min-width:0}
+#tab-books .rank-name{font-size:17px;font-weight:600;color:var(--text)}
+#tab-books .rank-msg{font-size:12px;color:var(--text-sec);margin-top:2px}
+#tab-books .rank-next{margin-top:8px}
+#tab-books .rank-next-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-ter);margin-bottom:4px}
+#tab-books .rank-next-bar-wrap{background:rgba(0,0,0,.1);border-radius:99px;height:5px;overflow:hidden}
+#tab-books .rank-next-bar{height:100%;border-radius:99px;background:var(--text-sec);transition:width .5s ease}
+#tab-books .ach-title{font-size:13px;font-weight:500;color:var(--text-sec);margin-bottom:10px;margin-top:1.5rem;display:flex;align-items:center;gap:6px}
+#tab-books .badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem}
+@media(max-width:400px){#tab-books .badges-grid{grid-template-columns:repeat(3,1fr)}}
+#tab-books .bdg{background:var(--bg-sec);border-radius:var(--r-md);padding:10px 6px 8px;text-align:center;transition:transform .2s}
+#tab-books .bdg.unlocked{background:var(--bg-card);border:1px solid var(--bdr);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+#tab-books .bdg.unlocked:hover{transform:translateY(-2px)}
+#tab-books .bdg.locked{opacity:.28;filter:grayscale(.6)}
+#tab-books .bdg .bi{font-size:24px;line-height:1;display:block;margin-bottom:5px}
+#tab-books .bdg .bn{font-size:10px;color:var(--text-sec);line-height:1.3;font-weight:500}
+#tab-books .bdg.unlocked .bn{color:var(--text)}
+#tab-books .bdg .br{font-size:9px;color:var(--text-ter);margin-top:2px}
+#tab-books .bk-footer{margin-top:2rem;text-align:center;font-size:12px;color:var(--text-ter)}
+</style>
+<style>
+/* ══ WRITING SECTION ══ */
+#tab-writing{--bg:#fff;--bg-sec:#f5f5f3;--bg-card:#fff;--text:#1a1a19;--text-sec:#73726c;--text-ter:#a8a8a2;--bdr:rgba(0,0,0,.12);--bdr-hov:rgba(0,0,0,.25);--green:#1D9E75;--blue:#2F80ED;--blue-l:#EBF3FD;--blue-d:#1A5EAD;--r-md:8px;--r-lg:12px;background:var(--bg);color:var(--text);min-height:calc(100vh - 52px);padding:2rem 1rem}
+@media(prefers-color-scheme:dark){#tab-writing{--bg:#1a1a19;--bg-sec:#232321;--bg-card:#232321;--text:#f0efe8;--text-sec:#b4b2a9;--text-ter:#6a6a64;--bdr:rgba(255,255,255,.12);--bdr-hov:rgba(255,255,255,.28);--blue:#5BA3F5;--blue-l:#0D2540;--blue-d:#93C5FD}}
+#tab-writing .container{max-width:680px;margin:0 auto}
+#tab-writing .wr-header{margin-bottom:1.5rem}
+#tab-writing .wr-header h1{font-size:22px;font-weight:500;color:var(--text);display:flex;align-items:center;gap:10px}
+#tab-writing .wr-header h1 .ti{color:var(--blue);font-size:22px}
+#tab-writing .wr-header p{font-size:13px;color:var(--text-sec);margin-top:5px;margin-left:32px}
+#tab-writing .wr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+@media(max-width:480px){#tab-writing .wr-stats{grid-template-columns:repeat(2,1fr)}}
+#tab-writing .wr-stat{background:var(--bg-sec);border-radius:var(--r-md);padding:12px 14px}
+#tab-writing .wr-stat .stat-label{font-size:12px;color:var(--text-sec);margin-bottom:3px}
+#tab-writing .wr-stat .stat-value{font-size:20px;font-weight:500;color:var(--text)}
+#tab-writing .wr-stat .stat-sub{font-size:11px;color:var(--text-ter);margin-top:2px}
+#tab-writing .progress-label{display:flex;justify-content:space-between;font-size:13px;color:var(--text-sec);margin-bottom:6px}
+#tab-writing .progress-bar-wrap{background:var(--bg-sec);border-radius:99px;height:10px;overflow:hidden}
+#tab-writing .progress-bar{height:100%;border-radius:99px;background:var(--blue);transition:width .4s ease}
+#tab-writing .wr-overall{margin-bottom:1.25rem}
+#tab-writing .write-today{background:var(--bg-sec);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:1.25rem}
+#tab-writing .write-today-label{font-size:12px;color:var(--text-sec);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+#tab-writing .write-today-label .today-date{font-weight:500;color:var(--text)}
+#tab-writing .type-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#tab-writing .type-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--bdr-hov);background:transparent;font-size:13px;color:var(--text-sec);cursor:pointer;transition:all .2s}
+#tab-writing .type-btn:hover{border-color:var(--blue);color:var(--blue)}
+#tab-writing .type-btn.selected{background:var(--blue);border-color:var(--blue);color:white}
+#tab-writing .mark-done-btn{width:100%;padding:9px;border-radius:var(--r-md);border:none;background:var(--blue);color:white;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .2s}
+#tab-writing .mark-done-btn:disabled{opacity:.4;cursor:default}
+#tab-writing .mark-done-btn:not(:disabled):hover{opacity:.85}
+#tab-writing .already-done-bar{background:var(--blue-l);border:1px solid var(--blue);border-radius:var(--r-md);padding:9px 14px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--blue-d)}
+#tab-writing .undo-btn{background:none;border:none;font-size:11px;color:var(--blue);cursor:pointer;text-decoration:underline;padding:0}
+#tab-writing .month-block{margin-bottom:1.25rem}
+#tab-writing .month-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+#tab-writing .month-name{font-size:13px;font-weight:500;color:var(--text);text-transform:capitalize}
+#tab-writing .month-progress-text{font-size:12px;color:var(--text-sec)}
+#tab-writing .month-bar-wrap{background:var(--bg-sec);border-radius:99px;height:4px;overflow:hidden;margin-bottom:8px}
+#tab-writing .month-bar{height:100%;border-radius:99px;background:var(--blue);transition:width .4s ease}
+#tab-writing .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+#tab-writing .cal-day-label{font-size:10px;color:var(--text-ter);text-align:center;padding-bottom:4px;text-transform:uppercase}
+#tab-writing .cal-cell{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;background:var(--bg-sec);color:var(--text-ter);position:relative;cursor:default}
+#tab-writing .cal-cell.future{opacity:.35}
+#tab-writing .cal-cell.today-cell{border:1.5px solid var(--blue);color:var(--text);font-weight:600}
+#tab-writing .cal-cell.done-cell{color:white}
+#tab-writing .cal-cell.done-type-essay{background:#2F80ED}
+#tab-writing .cal-cell.done-type-prepis{background:#1D9E75}
+#tab-writing .cal-cell.done-type-diktovka{background:#9B59B6}
+#tab-writing .cal-cell[title]:hover::after{content:attr(title);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);color:white;font-size:10px;padding:3px 6px;border-radius:4px;white-space:nowrap;pointer-events:none;z-index:10}
+#tab-writing .wr-legend{display:flex;gap:14px;margin-top:4px;flex-wrap:wrap;margin-bottom:1rem}
+#tab-writing .wr-legend .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sec)}
+#tab-writing .wr-legend .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+#tab-writing .ach-title{font-size:13px;font-weight:500;color:var(--text-sec);margin-bottom:10px;margin-top:1.5rem;display:flex;align-items:center;gap:6px}
+#tab-writing .badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem}
+@media(max-width:400px){#tab-writing .badges-grid{grid-template-columns:repeat(3,1fr)}}
+#tab-writing .bdg{background:var(--bg-sec);border-radius:var(--r-md);padding:10px 6px 8px;text-align:center;transition:transform .2s}
+#tab-writing .bdg.unlocked{background:var(--bg-card);border:1px solid var(--bdr);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+#tab-writing .bdg.unlocked:hover{transform:translateY(-2px)}
+#tab-writing .bdg.locked{opacity:.28;filter:grayscale(.6)}
+#tab-writing .bdg .bi{font-size:24px;line-height:1;display:block;margin-bottom:5px}
+#tab-writing .bdg .bn{font-size:10px;color:var(--text-sec);line-height:1.3;font-weight:500}
+#tab-writing .bdg.unlocked .bn{color:var(--text)}
+#tab-writing .bdg .br{font-size:9px;color:var(--text-ter);margin-top:2px}
+#tab-writing .wr-footer{margin-top:2rem;text-align:center;font-size:12px;color:var(--text-ter)}
+</style>
+<style>
+/* ══ MATH SECTION ══ */
+#tab-math{background:#f0f4f8;color:#1a202c;min-height:calc(100vh - 52px)}
+#tab-math header{background:linear-gradient(135deg,#1a56db 0%,#0e3fa3 100%);color:white;padding:28px 32px 24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+#tab-math header h1{font-size:1.7rem;font-weight:700;margin-bottom:6px}
+#tab-math header p{opacity:.85;font-size:.95rem}
+#tab-math .math-stats{display:flex;gap:16px;padding:20px 32px;flex-wrap:wrap;background:white;border-bottom:1px solid #e2e8f0}
+#tab-math .math-stat{background:#f7f9fc;border-radius:10px;padding:12px 20px;text-align:center;border:1px solid #e2e8f0;min-width:120px}
+#tab-math .math-stat .num{font-size:1.8rem;font-weight:800;color:#1a56db;line-height:1}
+#tab-math .math-stat .lbl{font-size:.75rem;color:#718096;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+#tab-math .math-controls{padding:16px 32px;background:white;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#tab-math .math-controls label{font-size:.85rem;color:#4a5568;font-weight:500}
+#tab-math .math-controls select,#tab-math .math-controls input[type=text]{border:1px solid #cbd5e0;border-radius:6px;padding:6px 10px;font-size:.85rem;color:#2d3748;background:white}
+#tab-math .math-progress-wrap{padding:16px 32px;background:white;border-bottom:2px solid #e2e8f0}
+#tab-math .math-pb-bg{background:#e2e8f0;border-radius:999px;height:14px;overflow:hidden}
+#tab-math .math-pb-fill{background:linear-gradient(90deg,#1a56db,#38b2ac);height:100%;border-radius:999px;transition:width .3s}
+#tab-math .math-pb-lbl{font-size:.8rem;color:#4a5568;margin-top:6px}
+#tab-math .math-calendar{padding:24px 32px}
+#tab-math .month-block{margin-bottom:32px}
+#tab-math .month-title{font-size:1.15rem;font-weight:700;color:#1a56db;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #bee3f8;display:flex;align-items:center;gap:8px}
+#tab-math .month-title span{font-size:.8rem;color:#718096;font-weight:400}
+#tab-math .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+#tab-math .day-card{background:white;border-radius:10px;padding:12px 14px;border:1px solid #e2e8f0;transition:box-shadow .15s,transform .1s;cursor:pointer;position:relative}
+#tab-math .day-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);transform:translateY(-1px)}
+#tab-math .day-card.done{background:#f0fff4;border-color:#9ae6b4}
+#tab-math .day-card.done .day-num{color:#276749}
+#tab-math .day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#tab-math .day-num{font-weight:700;font-size:.95rem;color:#1a56db}
+#tab-math .day-name{font-size:.72rem;color:#a0aec0}
+#tab-math .day-badge{font-size:.68rem;font-weight:700;border-radius:999px;padding:2px 8px}
+#tab-math .badge-3{background:#fed7e2;color:#97266d}
+#tab-math .badge-2{background:#e9d8fd;color:#553c9a}
+#tab-math .badge-1{background:#e0f2fe;color:#0369a1}
+#tab-math .comp-list{list-style:none}
+#tab-math .comp-item{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.8rem;border-bottom:1px solid #f7f8fa}
+#tab-math .comp-item:last-child{border-bottom:none}
+#tab-math .comp-item input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:#1a56db}
+#tab-math .comp-tag{font-size:.68rem;font-weight:700;border-radius:4px;padding:1px 5px;white-space:nowrap;min-width:36px;text-align:center}
+#tab-math .comp-name{color:#4a5568}
+#tab-math .comp-name.checked{text-decoration:line-through;color:#a0aec0}
+#tab-math .type-ЧХХ{background:#ebf8ff;color:#2b6cb0}
+#tab-math .type-ЕК{background:#e6fffa;color:#234e52}
+#tab-math .type-ХП{background:#fef3c7;color:#744210}
+#tab-math .type-САЛ{background:#fce7f3;color:#831843}
+#tab-math .type-КМС{background:#ecfdf5;color:#065f46}
+#tab-math .type-МБГ{background:#ede9fe;color:#4c1d95}
+#tab-math .type-СМТ{background:#fff7ed;color:#7c2d12}
+#tab-math .type-ВМС{background:#f0fdf4;color:#14532d}
+#tab-math .type-МБГ-Фин2{background:#fef9c3;color:#713f12}
+#tab-math .math-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 32px 20px}
+#tab-math .legend-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:#4a5568}
+#tab-math .legend-dot{width:12px;height:12px;border-radius:3px}
+#tab-math footer{text-align:center;padding:20px;color:#a0aec0;font-size:.8rem}
+@media(max-width:600px){
+  #tab-math header,#tab-math .math-stats,#tab-math .math-controls,#tab-math .math-calendar,#tab-math .math-legend{padding-left:16px;padding-right:16px}
+  #tab-math .day-grid{grid-template-columns:1fr}
+  #tab-math .math-stats{gap:10px}
+  #tab-math .math-stat{min-width:90px}
+}
+/* ══ MOTIVATION ELEMENTS (shared) ══ */
+@keyframes motpop{0%{transform:scale(.85);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+.mot-rank-card{border-radius:16px;padding:16px 20px;margin:14px 20px 6px;display:flex;align-items:center;gap:16px;box-shadow:0 4px 18px rgba(0,0,0,.13)}
+.mot-emoji{font-size:52px;line-height:1;flex-shrink:0;animation:motpop .45s ease}
+.mot-info{flex:1;min-width:0}
+.mot-name{font-size:18px;font-weight:800;color:white;text-shadow:0 1px 3px rgba(0,0,0,.2)}
+.mot-msg{font-size:12.5px;color:rgba(255,255,255,.88);margin-top:3px;line-height:1.4}
+.mot-bar-row{margin-top:9px;display:flex;align-items:center;gap:8px}
+.mot-bar-wrap{flex:1;background:rgba(0,0,0,.18);border-radius:99px;height:9px;overflow:hidden}
+.mot-bar{height:100%;border-radius:99px;background:rgba(255,255,255,.75);transition:width .5s ease}
+.mot-bar-label{font-size:11px;color:rgba(255,255,255,.75);white-space:nowrap}
+.mot-xp{text-align:center;flex-shrink:0}
+.mot-xp .xp-num{font-size:22px;font-weight:900;color:white;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,.2)}
+.mot-xp .xp-lbl{font-size:10px;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px}
+.mot-badges-wrap{padding:8px 20px 16px;max-width:860px;margin:0 auto}
+.mot-badges-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;margin-bottom:8px}
+.mot-badges{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mot-bdg{background:white;border:1px solid #e5e7eb;border-radius:12px;padding:10px 6px 8px;text-align:center;transition:transform .2s,box-shadow .2s}
+.mot-bdg.locked{opacity:.28;filter:grayscale(.7)}
+.mot-bdg.unlocked{box-shadow:0 2px 8px rgba(0,0,0,.09)}
+.mot-bdg.unlocked:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.14)}
+.mot-bdg .mbi{font-size:22px;line-height:1;display:block;margin-bottom:4px}
+.mot-bdg .mbn{font-size:10px;font-weight:600;color:#374151;line-height:1.3}
+.mot-bdg.locked .mbn{color:#9ca3af}
+.mot-bdg .mbr{font-size:9px;color:#6b7280;margin-top:2px}
+.mot-bdg.unlocked .mbr{color:#059669;font-weight:600}
+@media(max-width:520px){.mot-badges{grid-template-columns:repeat(3,1fr)}}
+#tab-math .mot-rank-card{margin:14px 32px 6px}
+#tab-math .mot-badges-wrap{padding:8px 32px 16px}
+@media(max-width:600px){#tab-math .mot-rank-card{margin:14px 16px 6px}#tab-math .mot-badges-wrap{padding:8px 16px 16px}}
+</style>
+<style>
+/* ══ CALENDAR TAB ══ */
+#tab-calendar{background:#f1f5f9;min-height:calc(100vh - 52px);padding-bottom:40px}
+/* ── stats hero ── */
+#tab-calendar .cl-stats-hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#6d28d9 100%);color:white;padding:20px 16px 24px;position:relative;overflow:hidden}
+#tab-calendar .cl-stats-hero::after{content:'⭐✨🌟';position:absolute;right:-10px;top:-10px;font-size:60px;opacity:.08;transform:rotate(15deg);line-height:1}
+#tab-calendar .cl-hero-title{font-size:21px;font-weight:800;text-align:center;margin-bottom:2px}
+#tab-calendar .cl-hero-sub{font-size:12px;opacity:.7;text-align:center;margin-bottom:14px}
+#tab-calendar .cl-hero-msg-wrap{text-align:center;margin-bottom:16px}
+#tab-calendar .cl-hero-msg{display:inline-block;font-size:13px;font-weight:700;background:rgba(255,255,255,.18);border-radius:99px;padding:6px 16px;border:1px solid rgba(255,255,255,.25)}
+/* overall ring */
+#tab-calendar .cl-ring-row{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px}
+#tab-calendar .cl-ring-wrap{position:relative;width:88px;height:88px;flex-shrink:0}
+#tab-calendar .cl-ring-svg{width:88px;height:88px;transform:rotate(-90deg)}
+#tab-calendar .cl-ring-track{fill:none;stroke:rgba(255,255,255,.15);stroke-width:9}
+#tab-calendar .cl-ring-fill{fill:none;stroke:url(#calRingGrad);stroke-width:9;stroke-linecap:round;transition:stroke-dasharray .6s ease}
+#tab-calendar .cl-ring-pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;font-weight:800;line-height:1}
+#tab-calendar .cl-ring-pct small{font-size:10px;font-weight:600;opacity:.7;margin-top:1px}
+#tab-calendar .cl-ring-info{flex:1}
+#tab-calendar .cl-ring-info p{font-size:12px;opacity:.8;margin-bottom:2px}
+#tab-calendar .cl-ring-info strong{font-size:16px;font-weight:800}
+/* stat cards grid */
+#tab-calendar .cl-stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:500px;margin:0 auto}
+#tab-calendar .cl-stat-card{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 12px}
+#tab-calendar .cl-sc-top{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+#tab-calendar .cl-sc-icon{font-size:20px;line-height:1}
+#tab-calendar .cl-sc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;opacity:.75}
+#tab-calendar .cl-sc-nums{font-size:18px;font-weight:800;line-height:1;margin-bottom:5px}
+#tab-calendar .cl-sc-nums em{font-size:11px;font-weight:400;font-style:normal;opacity:.65}
+#tab-calendar .cl-sc-bar{background:rgba(255,255,255,.2);border-radius:99px;height:5px;overflow:hidden}
+#tab-calendar .cl-sc-fill{height:100%;border-radius:99px;transition:width .5s}
+/* ── date picker ── */
+#tab-calendar .cl-picker-wrap{display:flex;align-items:center;gap:8px;padding:14px 16px 4px;max-width:600px;margin:0 auto}
+#tab-calendar .cl-nav-btn{width:36px;height:36px;border-radius:50%;border:none;background:white;box-shadow:0 1px 4px rgba(0,0,0,.12);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#374151;transition:background .15s;flex-shrink:0}
+#tab-calendar .cl-nav-btn:hover{background:#f3f4f6}
+/* calendar popup picker */
+#tab-calendar .cl-cal-picker{flex:1;position:relative}
+#tab-calendar .cl-cal-trigger{width:100%;padding:9px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:14px;font-weight:600;color:#111827;background:white;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,.08);text-align:left}
+#tab-calendar .cl-cal-trigger:hover{border-color:#1e3a8a}
+#tab-calendar .cl-cal-trigger .trig-arrow{font-size:11px;color:#9ca3af;margin-left:8px;transition:transform .2s}
+#tab-calendar .cl-cal-trigger.open .trig-arrow{transform:rotate(180deg)}
+#tab-calendar .cl-cal-popup{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border:1.5px solid #e5e7eb;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:500;overflow:hidden;min-width:280px}
+#tab-calendar .cl-pop-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #f3f4f6}
+#tab-calendar .cl-pop-month-label{font-size:14px;font-weight:700;color:#111827}
+#tab-calendar .cl-pop-nav{width:30px;height:30px;border:none;background:#f3f4f6;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:#374151;transition:background .15s}
+#tab-calendar .cl-pop-nav:hover{background:#e5e7eb}
+#tab-calendar .cl-pop-nav:disabled{opacity:.3;cursor:default}
+#tab-calendar .cl-pop-grid{padding:8px 10px 10px;display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+#tab-calendar .cl-pop-dow{font-size:9px;font-weight:700;text-align:center;color:#9ca3af;padding:4px 0;text-transform:uppercase}
+#tab-calendar .cl-pop-day{aspect-ratio:1;border-radius:8px;border:none;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:all .12s;background:transparent;color:#374151}
+#tab-calendar .cl-pop-day:hover:not(:disabled){background:#eff6ff;color:#1e3a8a}
+#tab-calendar .cl-pop-day.pd-today{background:#fef3c7;color:#92400e;font-weight:700}
+#tab-calendar .cl-pop-day.pd-selected{background:#1e3a8a!important;color:white!important;font-weight:700}
+#tab-calendar .cl-pop-day.pd-done::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#10b981}
+#tab-calendar .cl-pop-day.pd-selected::after{background:rgba(255,255,255,.6)}
+#tab-calendar .cl-pop-day:disabled{color:#d1d5db;cursor:default}
+#tab-calendar .cl-pop-day.pd-empty{pointer-events:none}
+#tab-calendar .cl-today-btn{padding:8px 14px;border-radius:20px;border:1.5px solid #1e3a8a;background:white;color:#1e3a8a;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+#tab-calendar .cl-today-btn:hover{background:#1e3a8a;color:white}
+/* day summary */
+#tab-calendar .cl-summary{max-width:600px;margin:10px auto 0;padding:0 16px}
+#tab-calendar .cl-summary-bar{background:white;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#tab-calendar .cl-summary-text{flex:1;font-size:13px;color:#374151}
+#tab-calendar .cl-summary-pct{font-size:20px;font-weight:700;color:#1e3a8a}
+#tab-calendar .cl-mini-prog-wrap{flex:1;background:#f3f4f6;border-radius:99px;height:8px;overflow:hidden}
+#tab-calendar .cl-mini-prog{height:100%;border-radius:99px;background:linear-gradient(90deg,#1e3a8a,#3b82f6);transition:width .3s}
+/* task cards */
+#tab-calendar .cl-tasks{max-width:600px;margin:12px auto 0;padding:0 16px;display:flex;flex-direction:column;gap:10px}
+#tab-calendar .cl-card{background:white;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1.5px solid #e5e7eb;transition:border-color .2s}
+#tab-calendar .cl-card.cl-done{border-color:#a7f3d0}
+#tab-calendar .cl-card-head{display:flex;align-items:center;gap:10px;padding:14px 16px}
+#tab-calendar .cl-card-icon{font-size:24px;flex-shrink:0}
+#tab-calendar .cl-card-info{flex:1}
+#tab-calendar .cl-card-title{font-size:14px;font-weight:700;color:#111827}
+#tab-calendar .cl-card-sub{font-size:12px;color:#6b7280;margin-top:1px}
+#tab-calendar .cl-card-status{font-size:13px;font-weight:600;color:#10b981;flex-shrink:0}
+#tab-calendar .cl-card-status.pending{color:#9ca3af}
+#tab-calendar .cl-card-body{border-top:1px solid #f3f4f6;padding:12px 16px}
+/* English card */
+#tab-calendar .cl-eng-check{display:flex;align-items:center;gap:10px;cursor:pointer}
+#tab-calendar .cl-check-circle{width:28px;height:28px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;background:white}
+#tab-calendar .cl-check-circle.checked{background:#10b981;border-color:#10b981;color:white}
+#tab-calendar .cl-check-label{font-size:13.5px;color:#374151;line-height:1.4}
+#tab-calendar .cl-eng-activities{margin-top:10px;padding-top:10px;border-top:1px solid #f3f4f6}
+#tab-calendar .cl-eng-act{display:flex;gap:8px;margin-bottom:6px;font-size:13px;color:#4b5563;line-height:1.4}
+#tab-calendar .cl-eng-tip{margin-top:8px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px;font-size:12px;color:#92400e}
+/* writing card */
+#tab-calendar .cl-wr-type-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+#tab-calendar .cl-wr-type-btn{padding:6px 14px;border-radius:20px;border:1.5px solid #d1d5db;background:white;font-size:13px;color:#6b7280;cursor:pointer;transition:all .15s}
+#tab-calendar .cl-wr-type-btn:hover{border-color:#3b82f6;color:#3b82f6}
+#tab-calendar .cl-wr-type-btn.sel-essay{background:#2f80ed;border-color:#2f80ed;color:white}
+#tab-calendar .cl-wr-type-btn.sel-prepis{background:#1d9e75;border-color:#1d9e75;color:white}
+#tab-calendar .cl-wr-type-btn.sel-diktovka{background:#9b59b6;border-color:#9b59b6;color:white}
+#tab-calendar .cl-mark-btn{width:100%;padding:9px;border-radius:8px;border:none;background:#1e3a8a;color:white;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s}
+#tab-calendar .cl-mark-btn:disabled{opacity:.35;cursor:default}
+#tab-calendar .cl-mark-btn:not(:disabled):hover{opacity:.85}
+#tab-calendar .cl-done-bar{background:#d1fae5;border:1px solid #6ee7b7;border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#065f46;font-weight:500}
+#tab-calendar .cl-undo-btn{background:none;border:none;font-size:11px;color:#0891b2;cursor:pointer;text-decoration:underline}
+/* math card */
+#tab-calendar .cl-math-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f3f4f6}
+#tab-calendar .cl-math-item:last-child{border-bottom:none}
+#tab-calendar .cl-math-cb{width:20px;height:20px;cursor:pointer;accent-color:#1e3a8a;flex-shrink:0}
+#tab-calendar .cl-math-label{font-size:13px;color:#374151}
+#tab-calendar .cl-math-tag{font-size:11px;font-weight:700;border-radius:4px;padding:2px 7px;margin-left:auto;white-space:nowrap}
+/* books card */
+#tab-calendar .cl-books-slider-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+#tab-calendar .cl-books-slider-row label{font-size:12px;color:#6b7280;white-space:nowrap}
+#tab-calendar .cl-books-slider-row input[type=range]{flex:1;accent-color:#1d9e75}
+#tab-calendar .cl-books-pages{font-size:12px;font-weight:600;color:#374151;min-width:70px;text-align:right}
+#tab-calendar .cl-book-item{padding:6px 0;border-bottom:1px solid #f3f4f6}
+#tab-calendar .cl-book-item:last-child{border-bottom:none}
+#tab-calendar .cl-book-name{font-size:13px;font-weight:500;color:#111827}
+#tab-calendar .cl-book-prog{font-size:11px;color:#6b7280;margin-bottom:4px}
+/* no tasks */
+#tab-calendar .cl-no-tasks{text-align:center;padding:32px 16px;color:#9ca3af;font-size:14px}
+/* ── AUTH GATE ── */
+#auth-gate{position:fixed;inset:0;z-index:99999;background:linear-gradient(160deg,#fef9f0,#f0f4ff);display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body.authed #auth-gate{display:none}
+.ag-card{background:#fff;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.12);padding:36px 30px;max-width:340px;width:90%;text-align:center}
+.ag-emoji{font-size:46px;margin-bottom:8px}
+.ag-title{font-size:20px;font-weight:800;color:#1f2937;margin-bottom:6px}
+.ag-sub{font-size:13px;color:#6b7280;margin-bottom:22px;line-height:1.5}
+.ag-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px 16px;border:1px solid #dadce0;border-radius:10px;background:#fff;color:#3c4043;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s,box-shadow .15s}
+.ag-btn:hover{background:#f7f8fa;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.ag-btn img{width:20px;height:20px}
+.ag-spin{width:34px;height:34px;border:4px solid #e5e7eb;border-top-color:#6366f1;border-radius:50%;animation:agspin 1s linear infinite;margin:6px auto}
+@keyframes agspin{to{transform:rotate(360deg)}}
+.ag-err{color:#dc2626;font-size:12px;margin-top:12px;min-height:14px}
+/* ── USER BAR ── */
+#user-bar{position:fixed;top:8px;right:8px;z-index:300;display:none;align-items:center;gap:8px;background:rgba(255,255,255,.95);border:1px solid #e2e8f0;border-radius:999px;padding:4px 6px 4px 10px;box-shadow:0 2px 8px rgba(0,0,0,.1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;backdrop-filter:blur(6px)}
+body.authed #user-bar{display:flex}
+#user-bar .ub-name{font-size:12px;font-weight:600;color:#374151;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#user-bar img{width:26px;height:26px;border-radius:50%}
+#user-bar button{border:none;background:#f1f5f9;color:#475569;font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer}
+#user-bar button:hover{background:#e2e8f0}
+</style>
+<script>
+/* Early localStorage sync patch — installed before app scripts run */
+(function(){
+  var SYNC_KEYS=['summerPlan2026','summer_reading_2026','summer_writing_2026','math_prog_2026'];
+  window.__SYNC_KEYS=SYNC_KEYS;
+  var origSet=localStorage.setItem.bind(localStorage);
+  window.__origSet=origSet;          // write without re-triggering cloud save
+  var timer=null;
+  localStorage.setItem=function(k,v){
+    origSet(k,v);
+    if(SYNC_KEYS.indexOf(k)>-1 && !window.__syncing && typeof window.__cloudSave==='function'){
+      clearTimeout(timer); timer=setTimeout(window.__cloudSave,800);
+    }
+  };
+})();
+</script>
+</head>
+<body>
+<!-- LOGIN GATE -->
+<div id="auth-gate">
+  <div class="ag-card">
+    <div class="ag-emoji">🌞</div>
+    <div class="ag-title">Summer Planner 2026</div>
+    <div id="ag-body">
+      <div class="ag-spin"></div>
+      <div class="ag-sub">Зареждане…</div>
+    </div>
+    <div class="ag-err" id="ag-err"></div>
+  </div>
+</div>
+<!-- USER BAR -->
+<div id="user-bar">
+  <img id="ub-avatar" alt="" src="">
+  <span class="ub-name" id="ub-name"></span>
+  <button id="ub-logout">Изход</button>
+</div>
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="english" onclick="showTab('english')">
+    <span class="tab-icon">🌞</span>English
+  </button>
+  <button class="tab-btn" data-tab="books" onclick="showTab('books')">
+    <span class="tab-icon">📚</span>Books
+  </button>
+  <button class="tab-btn" data-tab="writing" onclick="showTab('writing')">
+    <span class="tab-icon">✏️</span>Writing
+  </button>
+  <button class="tab-btn" data-tab="math" onclick="showTab('math')">
+    <span class="tab-icon">📐</span>Math
+  </button>
+  <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">
+    <span class="tab-icon">📅</span>Calendar
+  </button>
+</nav>
+
+<!-- ════════════════════ ENGLISH TAB ════════════════════ -->
+<section id="tab-english" class="tab-section active">
+  <div class="eng-header">
+    <h1>🌞 Summer English Study Plan 2026</h1>
+    <p>Fun for Movers 4 (Units 1–50) · Home Fun Booklet 4 (15 topics) · June 15 – August 18</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eng-progressFill" style="width:0%"></div></div>
+    <div class="progress-text" id="eng-progressText">0 / 39 sessions completed</div>
+  </div>
+  <div class="eng-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>Fun for Movers</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>Home Fun Booklet</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Practice Test</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div>Review</div>
+  </div>
+  <div class="eng-controls">
+    <button class="btn-filter active" onclick="engFilter('all')">All Sessions</button>
+    <button class="btn-filter" onclick="engFilter('pending')">To Do</button>
+    <button class="btn-filter" onclick="engFilter('done')">Completed</button>
+    <button class="btn-filter" onclick="engFilter('movers')">Fun for Movers</button>
+    <button class="btn-filter" onclick="engFilter('booklet')">Home Fun Booklet</button>
+  </div>
+  <div id="eng-rank-card"></div>
+  <div class="mot-badges-wrap" id="eng-badges-wrap">
+    <div class="mot-badges-title">🏅 Achievements</div>
+    <div class="mot-badges" id="eng-badges"></div>
+  </div>
+  <div id="eng-sessions-container"></div>
+  <button class="eng-reset-btn" onclick="engResetProgress()">↺ Reset Progress</button>
+</section>
+
+<!-- ════════════════════ BOOKS TAB ════════════════════ -->
+<section id="tab-books" class="tab-section">
+  <div class="container">
+    <div class="bk-header">
+      <h1><i class="ti ti-books"></i>Лятно четене 2026</h1>
+      <p>1 юни – 15 септември &nbsp;·&nbsp; 107 дни &nbsp;·&nbsp; след 2. клас</p>
+    </div>
+    <div class="bk-stats" id="bk-stats"></div>
+    <div class="overall-progress">
+      <div class="progress-label"><span>Общ напредък</span><span id="bk-pct-label">0%</span></div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="bk-overall-bar" style="width:0%"></div></div>
+    </div>
+    <div id="bk-rank-card"></div>
+    <div class="daily-goal">
+      <i class="ti ti-target"></i>
+      Дневна цел: <strong>30 страници</strong>
+    </div>
+    <div id="bk-read-achievements"></div>
+    <div class="books-list" id="bk-books-list"></div>
+    <div class="bk-footer">Прогресът се запазва автоматично в браузъра.</div>
+  </div>
+</section>
+
+<!-- ════════════════════ WRITING TAB ════════════════════ -->
+<section id="tab-writing" class="tab-section">
+  <div class="container">
+    <div class="wr-header">
+      <h1><i class="ti ti-pencil"></i>Писане всеки ден</h1>
+      <p>30 май – 30 август 2026 &nbsp;·&nbsp; Диктовки, преписи и съчинения</p>
+    </div>
+    <div class="wr-overall" id="wr-overall"></div>
+    <div class="wr-stats" id="wr-stats"></div>
+    <div id="wr-achievements"></div>
+    <div class="write-today" id="wr-today-box"></div>
+    <div id="wr-calendar"></div>
+    <div class="wr-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#2F80ED"></div>Съчинение</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Препис</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#9B59B6"></div>Диктовка</div>
+    </div>
+    <div class="wr-footer">Прогресът се запазва автоматично в браузъра.</div>
+  </div>
+</section>
+
+<!-- ════════════════════ MATH TAB ════════════════════ -->
+<section id="tab-math" class="tab-section">
+  <header>
+    <h1>📐 Програма за математически състезания</h1>
+    <p>30 май – 30 август 2026 &nbsp;·&nbsp; 85 дни, 161 състезания</p>
+  </header>
+  <div class="math-stats">
+    <div class="math-stat"><div class="num">161</div><div class="lbl">Общо</div></div>
+    <div class="math-stat"><div class="num">85</div><div class="lbl">Дни</div></div>
+    <div class="math-stat"><div class="num" id="math-done-count">0</div><div class="lbl">Решени</div></div>
+    <div class="math-stat"><div class="num" id="math-remain-count">161</div><div class="lbl">Остават</div></div>
+  </div>
+  <div class="math-progress-wrap">
+    <div class="math-pb-bg"><div class="math-pb-fill" id="math-pb-fill" style="width:0%"></div></div>
+    <div class="math-pb-lbl" id="math-pb-lbl">0 / 161 решени (0%)</div>
+  </div>
+  <div id="math-rank-card"></div>
+  <div class="mot-badges-wrap" id="math-badges-wrap">
+    <div class="mot-badges-title">🏅 Постижения</div>
+    <div class="mot-badges" id="math-badges"></div>
+  </div>
+  <div class="math-controls">
+    <label>Месец:
+      <select id="math-month-filter">
+        <option value="all">Всички</option>
+        <option value="may">Май (30.05–06.06)</option>
+        <option value="jun">Юни (15.06+)</option>
+        <option value="jul">Юли</option>
+        <option value="aug">Август</option>
+      </select>
+    </label>
+    <label>Само незавършени: <input type="checkbox" id="math-show-undone"></label>
+    <button onclick="mathResetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:.82rem;cursor:pointer;">↺ Нулиране</button>
+  </div>
+  <div class="math-legend">
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 6 юни (8 бр. — по 1 на ден)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (58 бр.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #744210"></div>ХП – Хитър Петър</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ecfdf5;border:1px solid #065f46"></div>КМС – Коледно</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Зима</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (92 бр.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Пролет</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fff7ed;border:1px solid #7c2d12"></div>СМТ – Софийски турнир</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e6fffa;border:1px solid #234e52"></div>ЕК – Европейско Кенгуру</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f0fdf4;border:1px solid #14532d"></div>ВМС – Великденско</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Полуфинал / Финал 3кл</div>
+  </div>
+  <div class="math-calendar" id="math-calendar"></div>
+  <footer>Математика · Програма за лятото 2026</footer>
+</section>
+
+<!-- ════════════════════ CALENDAR TAB ════════════════════ -->
+<section id="tab-calendar" class="tab-section">
+  <div class="cl-stats-hero" id="cl-stats-hero">
+    <svg width="0" height="0"><defs><linearGradient id="calRingGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#f97316"/></linearGradient></defs></svg>
+  </div>
+  <div class="cl-picker-wrap">
+    <button class="cl-nav-btn" onclick="calPrevDay()">‹</button>
+    <div class="cl-cal-picker" id="cl-cal-picker">
+      <button class="cl-cal-trigger" id="cl-cal-trigger" onclick="calTogglePicker()">
+        <span id="cl-cal-trigger-label">—</span>
+        <span class="trig-arrow">▾</span>
+      </button>
+      <div class="cl-cal-popup" id="cl-cal-popup" style="display:none">
+        <div class="cl-pop-header">
+          <button class="cl-pop-nav" id="cl-pop-prev" onclick="calPickerNav(-1)">‹</button>
+          <span class="cl-pop-month-label" id="cl-pop-month-label">—</span>
+          <button class="cl-pop-nav" id="cl-pop-next" onclick="calPickerNav(1)">›</button>
+        </div>
+        <div class="cl-pop-grid" id="cl-pop-grid"></div>
+      </div>
+    </div>
+    <button class="cl-nav-btn" onclick="calNextDay()">›</button>
+    <button class="cl-today-btn" onclick="calGoToday()">Днес</button>
+  </div>
+  <div class="cl-summary" id="cl-summary"></div>
+  <div class="cl-tasks" id="cl-tasks"></div>
+</section>
+<script>
+// ══ TAB SWITCHING ══
+function showTab(name){
+  document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelector('.tab-btn[data-tab="'+name+'"]').classList.add('active');
+  localStorage.setItem('activeTab2026',name);
+}
+(function(){const t=localStorage.getItem('activeTab2026');if(t)showTab(t);})();
+
+// ══════════════════════════════════════════
+// ENGLISH SECTION
+// ══════════════════════════════════════════
+const ENG_SESSIONS=[
+  // ── Fun for Movers 4 – one unit per day ──
+  {date:"June 15",type:"movers",unit:"Unit 1: Watch us! We're moving!",topic:"Action verbs & movement",activities:[{icon:"📖",text:"Learn action verbs: jump, run, hop, skip, swim, climb, fly, ride (pp. 6–7)"},{icon:"🔊",text:"Listen and do: mime each action as you hear it"},{icon:"✏️",text:"Write 5 sentences: 'I can… / I can't…' using today's verbs"}],tip:"Act every verb out as you say it – your body remembers what your brain forgets!"},
+  {date:"June 16",type:"movers",unit:"Unit 2: Animals animals...",topic:"Wild & domestic animals",activities:[{icon:"📖",text:"Learn animal vocabulary: elephant, giraffe, dolphin, parrot, spider, camel (pp. 9–10)"},{icon:"🗣️",text:"Describe an animal for someone to guess: 'It's big, it's grey, it has a long nose…'"},{icon:"✏️",text:"Write 3 facts about your favourite animal using 'can', 'has got', and 'lives in'"}],tip:"Group animals by where they live – jungle, ocean, farm, sky. It helps them stick!"},
+  {date:"June 17",type:"movers",unit:"Unit 3: Fun at the farm",topic:"Farm animals & plural nouns",activities:[{icon:"📖",text:"Farm vocabulary: cow, sheep, horse, goat, duck, hen, field, barn (pp. 12–13)"},{icon:"✏️",text:"Write sentences: 'There is one… / There are three…' for 5 different farm animals"},{icon:"🗣️",text:"Say what each farm animal gives us: 'Cows give us milk. Hens give us…'"}],tip:"'Sheep' has no plural -s! Learn tricky plurals: sheep/sheep, mouse/mice, child/children."},
+  {date:"June 18",type:"movers",unit:"Unit 4: Your hair looks great!",topic:"Describing hair & appearance",activities:[{icon:"📖",text:"Adjectives for hair and appearance: long, short, curly, straight, dark, fair, tall, thin (pp. 15–16)"},{icon:"🎨",text:"Draw a face and label it with 5 adjectives: 'She has curly dark hair and blue eyes'"},{icon:"🗣️",text:"Describe a family member – can someone guess who it is from your description?"}],tip:"Order of adjectives: size → shape → colour → noun. 'Short curly brown hair.'"},
+  {date:"June 19",type:"movers",unit:"Unit 5: The woman in the red dress",topic:"Clothes & colours",activities:[{icon:"📖",text:"Clothes vocabulary: dress, shirt, trousers, coat, scarf, gloves, boots, jacket (pp. 18–19)"},{icon:"✏️",text:"Look at a picture and write 3 sentences about what people are wearing"},{icon:"🗣️",text:"Describe what you are wearing today in full sentences"}],tip:"Describe what you're wearing right now – great speaking practice and you already know the answer!"},
+  {date:"June 20",type:"movers",unit:"Unit 6: My neck, my shoulders",topic:"Body parts",activities:[{icon:"📖",text:"Body parts: neck, shoulder, elbow, knee, thumb, toe, chin, chest, back (pp. 21–22)"},{icon:"🔊",text:"Listen and point: touch each body part as you hear it named"},{icon:"✏️",text:"Draw a body outline and label at least 12 body parts"}],tip:"'Head, Shoulders, Knees and Toes' – sing it fast! Then name parts the song doesn't include."},
+  {date:"June 21",type:"movers",unit:"Unit 7: What's the weather like?",topic:"Weather vocabulary",activities:[{icon:"📖",text:"Weather: sunny, cloudy, rainy, windy, snowy, foggy, stormy, hot, cold (pp. 24–25)"},{icon:"✏️",text:"Write a 3-day weather forecast for your city using full sentences"},{icon:"🗣️",text:"Describe the weather today AND what you are wearing because of it"}],tip:"Weather and clothes go together in the exam – practise them as a pair every time!"},
+  {date:"June 22",type:"movers",unit:"Unit 8: The hottest and coldest places",topic:"Superlatives",activities:[{icon:"📖",text:"Superlative adjectives: the biggest, the smallest, the hottest, the most beautiful (pp. 27–28)"},{icon:"✏️",text:"Write 5 superlative sentences about animals: 'The cheetah is the fastest land animal'"},{icon:"🗣️",text:"Superlative challenge: say a superlative sentence about someone in your family!"}],tip:"Short adjective → add -est. Long adjective → the most ___. One-syllable rule: big → biggest."},
+  {date:"June 23",type:"movers",unit:"Unit 9: Me and my family",topic:"Family members & have got",activities:[{icon:"📖",text:"Family vocabulary + have got / has got for descriptions (pp. 30–31)"},{icon:"✏️",text:"Draw your family tree and write one sentence about each person using 'has got'"},{icon:"🗣️",text:"Describe a family member without saying their name – someone has to guess who!"}],tip:"'Have got' = 'have'. Both are correct. 'I've got a sister' = 'I have a sister'."},
+  {date:"June 24",type:"movers",unit:"Unit 10: Things we eat and drink",topic:"Food, drink & countable/uncountable",activities:[{icon:"📖",text:"Food vocabulary + countable vs uncountable nouns, some / any (pp. 33–34)"},{icon:"✏️",text:"Sort 10 foods into countable and uncountable – write a sentence for each"},{icon:"🗣️",text:"Describe what's in your fridge: 'There is some… / There are some… / There isn't any…'"}],tip:"Uncountable = no 'a', no plural -s: water, bread, rice, milk, cheese, meat. Memorise these!"},
+  {date:"June 25",type:"movers",unit:"Unit 11: People on our street",topic:"Jobs & workplaces",activities:[{icon:"📖",text:"Jobs: doctor, teacher, farmer, pilot, cook, nurse, driver, firefighter (pp. 36–37)"},{icon:"✏️",text:"Write 5 sentences: 'A doctor works in a hospital. A ___ works in a ___'"},{icon:"🗣️",text:"Guess the job: give 3 clues without saying the job name, someone has to guess"}],tip:"Learn where people work AND what they use: 'A farmer works on a farm and uses a tractor.'"},
+  {date:"June 26",type:"movers",unit:"Unit 12: Party things!",topic:"Celebrations & prepositions of place",activities:[{icon:"📖",text:"Party vocabulary: balloon, candle, cake, present, invitation, prize (pp. 39–40)"},{icon:"✏️",text:"Describe a party scene using prepositions: 'The cake is on the table. The balloons are next to…'"},{icon:"🗣️",text:"Tell someone about the best birthday party you've ever been to – use past tense!"}],tip:"Prepositions to know: on, in, under, next to, in front of, behind, between, opposite."},
+  {date:"June 27",type:"movers",unit:"Unit 13: Different places",topic:"Places in town & there is/are",activities:[{icon:"📖",text:"Places: library, hospital, station, café, zoo, cinema, museum, park, supermarket (pp. 42–43)"},{icon:"✏️",text:"Write about your town: 'In my town there is a… / there are… / there isn't a…'"},{icon:"🗣️",text:"Name a place – someone says what you can do there: 'library → you can read books'"}],tip:"Learn each place with what you do there and what you can find inside. Three facts per place!"},
+  {date:"June 28",type:"movers",unit:"Unit 14: Our home...",topic:"Rooms, furniture & prepositions",activities:[{icon:"📖",text:"Rooms and furniture: living room, sofa, wardrobe, mirror, shelf, curtain (pp. 45–46)"},{icon:"🗣️",text:"Describe your bedroom – where is everything? Use at least 4 prepositions"},{icon:"✏️",text:"Write 5 there is/are sentences about the rooms in your home"}],tip:"Walk around your home saying what you see in English – real objects = real vocabulary!"},
+  {date:"June 29",type:"movers",unit:"Unit 15: At our school...",topic:"School subjects & objects",activities:[{icon:"📖",text:"School subjects and places: maths, art, PE, science, library, playground, gym (pp. 48–49)"},{icon:"✏️",text:"Write your ideal school timetable for one day and explain which subject you like most and why"},{icon:"🗣️",text:"Name everything on your desk in English right now"}],tip:"School vocabulary is very common in Movers Listening – practise subject names until they're instant."},
+  {date:"June 30",type:"movers",unit:"Unit 16: Let's do some sport!",topic:"Sports & like/love/hate + -ing",activities:[{icon:"📖",text:"Sports: football, swimming, cycling, tennis, basketball, gymnastics, judo (pp. 51–52)"},{icon:"✏️",text:"Write 5 sentences: 'I love playing…', 'I don't like doing…', 'I hate going…'"},{icon:"🗣️",text:"Sports verbs quiz: play / do / go + which sport? Test yourself on all sports you know"}],tip:"Play football/tennis/basketball. Do gymnastics/judo/yoga. Go swimming/cycling/skiing."},
+  {date:"July 1",type:"movers",unit:"Unit 17: Our hobbies!",topic:"Hobbies & How often?",activities:[{icon:"📖",text:"Hobbies: reading, painting, cooking, collecting stamps, playing computer games (pp. 54–55)"},{icon:"✏️",text:"Write your top 3 hobbies with How often? – 'I always… / I sometimes… / I never…'"},{icon:"🗣️",text:"Ask a family member about their hobbies and report back: 'She usually…'"}],tip:"Adverbs of frequency go BEFORE the main verb: 'I always read.' NOT 'I read always.'"},
+  {date:"July 2",type:"movers",unit:"Unit 18: At the hospital",topic:"Health & illnesses",activities:[{icon:"📖",text:"Health vocabulary: headache, stomachache, toothache, cold, temperature, broken leg (pp. 57–58)"},{icon:"✏️",text:"Write a 'get well soon' card using 4 health words and giving some advice"},{icon:"🗣️",text:"Role play: patient tells the doctor what hurts, doctor gives advice"}],tip:"'I've got a headache' – use 'have got' for illnesses. 'I feel sick' – use 'feel' for general state."},
+  {date:"July 3",type:"movers",unit:"Unit 19: What is the matter?",topic:"Health problems & giving advice",activities:[{icon:"📖",text:"More health problems and advice phrases: 'You should / You shouldn't…' (pp. 60–61)"},{icon:"✏️",text:"Match each problem to advice: headache → You should rest and drink water"},{icon:"🗣️",text:"Make up 3 silly health problems – someone gives you advice using 'You should...'"}],tip:"'You should' = good advice. 'You shouldn't' = bad idea. Both appear a lot in Movers Writing!"},
+  {date:"July 4",type:"movers",unit:"Unit 20: Where?",topic:"Prepositions of place – full set",activities:[{icon:"📖",text:"Prepositions: on, in, under, next to, in front of, behind, between, opposite (pp. 63–64)"},{icon:"🗣️",text:"Place 6 objects on a desk and describe exactly where each one is"},{icon:"✏️",text:"Draw a simple room and write a sentence for every object using a different preposition"}],tip:"In the exam you must describe pictures – knowing ALL prepositions makes you score higher every time."},
+  {date:"July 5",type:"movers",unit:"Unit 21: Here and there in town",topic:"Asking for & giving directions",activities:[{icon:"📖",text:"Direction phrases: turn left/right, go straight on, go past, it's on the corner (pp. 66–67)"},{icon:"✏️",text:"Draw a simple town map and write directions from your home to two different places"},{icon:"🗣️",text:"Give someone real directions to the nearest shop – in English, from memory!"}],tip:"'Turn left at the…' / 'Go straight on past the…' / 'It's opposite the…' – learn these as a set."},
+  {date:"July 6",type:"movers",unit:"Unit 22: A trip to the city",topic:"Transport & past simple (went/came/took)",activities:[{icon:"📖",text:"Transport vocabulary + irregular past: went, came, took, rode, flew, drove (pp. 69–70)"},{icon:"✏️",text:"Write 5 sentences about the last trip you went on: how you got there, what you saw"},{icon:"🗣️",text:"Irregular verb tennis: one person says the verb, the other says the past form – fast!"}],tip:"Irregular verbs: go→went, come→came, take→took, ride→rode, fly→flew, drive→drove."},
+  {date:"July 7",type:"movers",unit:"Unit 23: The world around us",topic:"Nature vocabulary & comparative adjectives",activities:[{icon:"📖",text:"Nature: mountain, river, forest, desert, ocean, island, waterfall, valley (pp. 72–73)"},{icon:"✏️",text:"Write 5 comparative sentences: 'A river is longer than a lake. A mountain is…'"},{icon:"🗣️",text:"Name 3 nature places and describe what the weather is like there"}],tip:"Comparatives: tall → taller, big → bigger (double consonant!), beautiful → more beautiful."},
+  {date:"July 8",type:"movers",unit:"Unit 24: Travelling, texting, phoning",topic:"Communication verbs & present continuous",activities:[{icon:"📖",text:"Communication: text, phone, email, video call, send, receive, download (pp. 75–76)"},{icon:"✏️",text:"Write a short text message to a friend about what you are doing right now – in English!"},{icon:"🗣️",text:"Describe what different people in your family are doing right now using present continuous"}],tip:"Present continuous = right now: 'She is texting her friend.' 'He is watching a video.'"},
+  {date:"July 9",type:"movers",unit:"Unit 25: Which one is different?",topic:"Categorising & odd one out",activities:[{icon:"📖",text:"Categorising vocabulary by topic group, odd-one-out reasoning (pp. 78–79)"},{icon:"🗣️",text:"Odd-one-out game: say 4 words, 3 that go together – someone guesses and explains why"},{icon:"✏️",text:"Write 3 odd-one-out puzzles of your own with explanations: 'X is different because…'"}],tip:"Always explain your answer: 'Because the others are all animals / colours / things in a kitchen…'"},
+  {date:"July 10",type:"movers",unit:"Unit 26: Guess who lives here?",topic:"Reading clues & vocabulary review",activities:[{icon:"📖",text:"Clue-based reading: work out who lives somewhere from objects and details (pp. 81–82)"},{icon:"✏️",text:"Describe your bedroom using clues only – no name. Could someone guess it's yours?"},{icon:"🗣️",text:"Read clues about a mystery person and guess the job, age, and hobby"}],tip:"Read ALL the clues before guessing – the last clue often changes everything!"},
+  {date:"July 11",type:"movers",unit:"Unit 27: Seeing differences",topic:"Spot the difference & comparatives",activities:[{icon:"📖",text:"Spot-the-difference technique using comparative sentences (pp. 84–85)"},{icon:"✏️",text:"Write 5 sentences comparing two pictures: 'In picture A there is a cat, but in picture B…'"},{icon:"🗣️",text:"Find two similar pictures and describe 3 differences out loud"}],tip:"Spot-the-difference tip: go section by section, left to right, top to bottom. Never jump around."},
+  {date:"July 12",type:"movers",unit:"Unit 28: Our busy holidays",topic:"Holiday activities & past simple",activities:[{icon:"📖",text:"Holiday vocabulary + past simple regular and irregular verbs (pp. 87–88)"},{icon:"✏️",text:"Write 6 past tense sentences about your last holiday – mix regular and irregular verbs"},{icon:"🗣️",text:"Tell someone about your favourite ever holiday – aim for 1 full minute of speaking!"}],tip:"Sequence words make stories better: First… Then… After that… Later… Finally…"},
+  {date:"July 13",type:"movers",unit:"Unit 29: About us",topic:"Writing about a group & pronoun revision",activities:[{icon:"📖",text:"Writing about groups using we/our/us, present simple for habits (pp. 90–91)"},{icon:"✏️",text:"Write a paragraph: 'About us' – describe your family as a group using at least 6 sentences"},{icon:"🗣️",text:"Tell someone 3 things your family always does together using 'We always…'"}],tip:"We/us/our: 'We love football. Football is our favourite sport. Football is fun for us.'"},
+  {date:"July 14",type:"movers",unit:"Unit 30: About me",topic:"Personal profile writing",activities:[{icon:"📖",text:"Personal profile structure: name, age, family, home, hobbies, likes/dislikes (pp. 93–94)"},{icon:"✏️",text:"Write your full personal profile – at least 10 sentences. This is Reading & Writing Part 7 practice!"},{icon:"🗣️",text:"Read your profile out loud – fix anything that sounds strange"}],tip:"Movers Reading & Writing Part 7 asks you to write about yourself. This session IS the exam practice!"},
+  {date:"July 15",type:"movers",unit:"Unit 31: Why is Sally crying?",topic:"Feelings & emotions",activities:[{icon:"📖",text:"Emotions: happy, sad, angry, excited, bored, scared, surprised, tired, worried (pp. 66–67)"},{icon:"✏️",text:"Write 5 sentences: 'I feel… because…' using 5 different emotions"},{icon:"🗣️",text:"Emotion charades: act out a feeling, someone guesses and says why you might feel that way"}],tip:"'because' explains why: 'She is crying because she is sad.' 'He is smiling because…'"},
+  {date:"July 16",type:"movers",unit:"Unit 32: Mary goes shopping",topic:"Shopping & would like",activities:[{icon:"📖",text:"Shopping vocabulary: price, receipt, size, cash, discount + 'Would you like…?' (pp. 69–70)"},{icon:"🗣️",text:"Role play: shopkeeper asks 'Can I help you?' – customer buys 3 items and asks prices"},{icon:"✏️",text:"Write a shopping dialogue of at least 6 lines using 'Would you like…' and 'How much is…?'"}],tip:"'Would you like…?' is polite shopping language. Much better than 'Do you want…?' in the exam!"},
+  {date:"July 17",type:"movers",unit:"Unit 33: Last weekend, last week",topic:"Past simple – regular verbs",activities:[{icon:"📖",text:"Past simple regular verbs (-ed endings): walked, watched, played, cooked, cleaned (pp. 72–73)"},{icon:"✏️",text:"Write a diary entry for last weekend – at least 8 regular past tense sentences"},{icon:"🗣️",text:"Spelling rules quiz: add -ed to: stop, play, like, carry, hop, walk – check the rules!"}],tip:"Spelling rules: stop→stopped (double), like→liked (drop e), carry→carried (y→ied)."},
+  {date:"July 18",type:"movers",unit:"Unit 34: What did you do then?",topic:"Past simple – irregular verbs",activities:[{icon:"📖",text:"Past simple irregular verbs: went, saw, ate, drank, made, bought, found, ran (pp. 75–76)"},{icon:"✏️",text:"Write 6 past tense sentences using 6 different irregular verbs from pp. 124–125"},{icon:"🗣️",text:"Irregular verb tennis: one person says the base form, the other says the past – as fast as possible!"}],tip:"Test yourself on pp. 124–125 – cover the right column. Aim to know all 30 irregular verbs!"},
+  {date:"July 19",type:"movers",unit:"Unit 35: What a morning!",topic:"Sequencing a story with past tense",activities:[{icon:"📖",text:"Story sequencing: time words first, then, after that, later, finally + past simple narrative (pp. 78–79)"},{icon:"✏️",text:"Write a funny 'What a morning!' story – 6 things that went wrong, linked with time words"},{icon:"🗣️",text:"Tell your story out loud – time yourself, aim for 45 seconds of fluent speaking"}],tip:"Time words turn a list of sentences into a real story. Never write 5 sentences without one!"},
+  {date:"July 20",type:"movers",unit:"Unit 36: Could you do it?",topic:"could / couldn't for past ability",activities:[{icon:"📖",text:"Could/couldn't for past ability: 'When I was 5, I could… / I couldn't…' (pp. 81–82)"},{icon:"✏️",text:"Write 6 sentences comparing what you could/couldn't do at age 5 and what you can do now"},{icon:"🗣️",text:"Interview a parent: 'Could you ride a bike when you were 6?' Report their answers"}],tip:"Could = past of can. 'I can swim now, but I couldn't swim when I was three.'"},
+  {date:"July 21",type:"movers",unit:"Unit 37: Mr Must changes his job",topic:"Jobs & present simple vs continuous",activities:[{icon:"📖",text:"More jobs and workplaces + present simple (habit) vs present continuous (now) (pp. 84–85)"},{icon:"✏️",text:"Write 4 pairs of sentences: one present simple + one present continuous for the same person"},{icon:"🗣️",text:"Look at a busy scene and describe: what does each person usually do? What are they doing now?"}],tip:"'She teaches' (every day) vs 'She is teaching' (right now). Spot the difference every time!"},
+  {date:"July 22",type:"movers",unit:"Unit 38: Playing and working",topic:"Present continuous – describing scenes",activities:[{icon:"📖",text:"Present continuous for ongoing actions, describing busy pictures (pp. 87–88)"},{icon:"🗣️",text:"Open any picture book or magazine – describe what 5 people are doing right now"},{icon:"✏️",text:"Write 6 present continuous sentences describing the scene on a busy page"}],tip:"Describing pictures is a key Movers Speaking task. Practise until it feels automatic!"},
+  {date:"July 23",type:"movers",unit:"Unit 39: We've got lots of things to do",topic:"going to – future plans",activities:[{icon:"📖",text:"Going to + infinitive for planned future: 'We're going to visit grandma tomorrow' (pp. 90–91)"},{icon:"✏️",text:"Write your plans for tomorrow and next weekend using 'I'm going to…' – 6 sentences minimum"},{icon:"🗣️",text:"Tell a family member 3 things you are going to do this summer – they respond with their own plans"}],tip:"'Going to' = a plan you've already decided. 'I'm going to visit grandma' – the ticket is booked!"},
+  {date:"July 24",type:"movers",unit:"Unit 40: People who help us",topic:"Community helpers & present simple",activities:[{icon:"📖",text:"Community helpers: postman, vet, dentist, librarian, police officer, firefighter (pp. 93–94)"},{icon:"✏️",text:"Write a sentence about each helper: who they help, where they work, what they use"},{icon:"🗣️",text:"Guess the helper: give 3 clues without saying the job name, someone guesses"}],tip:"Learn helpers in groups: health (doctor, nurse, dentist), emergency (police, firefighter, vet)."},
+  {date:"July 25",type:"movers",unit:"Unit 41: I had a great birthday!",topic:"Birthday & party narrative",activities:[{icon:"📖",text:"Birthday/party vocabulary + past simple narrative, expressing enjoyment (pp. 96–97)"},{icon:"✏️",text:"Write about your best birthday – what happened, who came, what you ate, your favourite moment"},{icon:"🗣️",text:"Tell your birthday story out loud – use 5 different past tense verbs"}],tip:"Great storytelling checklist: setting ✓ characters ✓ events ✓ feelings ✓ ending ✓"},
+  {date:"July 26",type:"movers",unit:"Unit 42: An exciting week for Alex!",topic:"Diary writing & week sequencing",activities:[{icon:"📖",text:"Week diary structure: Monday–Sunday narrative, past simple, sequencing (pp. 99–100)"},{icon:"✏️",text:"Write a diary entry for each day of last week – at least 2 sentences per day"},{icon:"🗣️",text:"Retell what Alex did each day – retell the story without looking at the book"}],tip:"Days of the week + past tense = natural diary writing. Monday I went…, Tuesday I played…"},
+  {date:"July 27",type:"movers",unit:"Unit 43: My holidays",topic:"Holiday activities & past simple questions",activities:[{icon:"📖",text:"Holiday activities + past simple question forms: Did you…? Where did you go? (pp. 76–77)"},{icon:"🗣️",text:"Holiday interview: one person asks 5 questions in past tense, the other answers in full"},{icon:"✏️",text:"Write 5 questions you would ask a friend about their holiday – then answer them yourself"}],tip:"Past simple questions: Did + subject + base verb. 'Did you go?' NOT 'Did you went?'"},
+  {date:"July 28",type:"movers",unit:"Unit 44: Along the beach",topic:"Beach vocabulary & there was/were",activities:[{icon:"📖",text:"Beach vocabulary + there was/were (past of there is/are): sand, shell, wave, rock, towel (pp. 79–80)"},{icon:"✏️",text:"Write 6 sentences about a beach scene: 3 with 'there was' and 3 with 'there were'"},{icon:"🗣️",text:"Describe your favourite beach or a beach from a photo – speak for 30 seconds!"}],tip:"'There was' = singular past. 'There were' = plural past. Just like 'there is / there are'."},
+  {date:"July 29",type:"movers",unit:"Unit 45: Treasure!",topic:"Adventure story reading",activities:[{icon:"📖",text:"Adventure vocabulary: treasure, map, cave, island, path, clue, chest, pirate (pp. 82–83)"},{icon:"✏️",text:"Write 6 sentences continuing the Treasure story – what happens next to the characters?"},{icon:"🗣️",text:"Retell the Treasure story using only 5 key words as memory prompts"}],tip:"A good story has: a problem, a plan, an action, and a result. Check your continuation has all four!"},
+  {date:"July 30",type:"movers",unit:"Unit 46: A day on the island",topic:"Island & nature vocabulary",activities:[{icon:"📖",text:"Island vocabulary: beach, jungle, cliff, harbour, lighthouse, boat, path (pp. 85–86)"},{icon:"✏️",text:"Write a postcard from the island: what you can see, what you did, how you feel"},{icon:"🗣️",text:"Describe the island scene using there is/are/was/were – at least 5 sentences"}],tip:"Postcard formula: where you are → what you can see → what you did → how you feel → 'Wish you were here!'"},
+  {date:"July 31",type:"movers",unit:"Unit 47: The different things we do",topic:"Routines & adverbs of frequency",activities:[{icon:"📖",text:"Comparing routines: always, usually, often, sometimes, rarely, never + present simple (pp. 88–89)"},{icon:"✏️",text:"Write your daily routine using a different adverb of frequency in every sentence"},{icon:"🗣️",text:"Compare your routine with a family member's: 'I always… but she sometimes…'"}],tip:"Frequency order: always (100%) → usually → often → sometimes → rarely → never (0%)."},
+  {date:"August 1",type:"movers",unit:"Unit 48: We want to do this one day",topic:"want to + verb & wishes",activities:[{icon:"📖",text:"Want to + infinitive for wishes and ambitions, future dreams vocabulary (pp. 91–92)"},{icon:"✏️",text:"Write 5 things you want to do one day – use 'I want to…' and say WHY each time"},{icon:"🗣️",text:"Dream interview: ask a family member 3 'Do you want to…?' questions"}],tip:"'I want to' + base verb: 'I want to travel to Japan.' No 'to' after the verb in the answer!"},
+  {date:"August 2",type:"movers",unit:"Unit 49: Ask me another question",topic:"Question forms – full review",activities:[{icon:"📖",text:"All question types review: Wh- questions, yes/no questions, past and present (pp. 94–95)"},{icon:"✏️",text:"Write one of each question type: What…? Where…? When…? Who…? How…? Why…? Did…? Is…?"},{icon:"🗣️",text:"Quiz game: take turns asking questions from the unit – answer as fast as you can"}],tip:"Wh- questions need subject-verb inversion: 'Where do you live?' NOT 'Where you live?'"},
+  {date:"August 3",type:"movers",unit:"Unit 50: Well done! + Unit wordlist",topic:"Full revision & wordlist review",activities:[{icon:"📖",text:"Unit 50 – 'Well done!': revision activities covering all grammar and vocabulary (pp. 97–104)"},{icon:"📋",text:"Unit wordlist (pp. 116–123): go through every word – tick what you know, circle what needs work"},{icon:"✏️",text:"Look up any circled words and write each one in a sentence you will remember"}],tip:"You finished Fun for Movers 4 – every single unit! Review circled words tomorrow in the Booklet."},
+  // ── Home Fun Booklet 4 – one topic per day ──
+  {date:"August 4",type:"booklet",unit:"Home Fun Booklet – Animals (p.2)",topic:"Animals vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.2 – label, colour, and categorise wild vs farm vs sea animals"},{icon:"✏️",text:"Write 3 sentences about 3 different animals using 'can', 'has got', and 'lives in'"},{icon:"🔍",text:"Play 'Guess the animal' – give 3 clues, someone names the animal"}],tip:"'It has four legs, a long neck and it lives in Africa.' – that's a giraffe! Now you try."},
+  {date:"August 5",type:"booklet",unit:"Home Fun Booklet – The body and face (p.4)",topic:"Body & face vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.4 – label the body diagram and face"},{icon:"✏️",text:"Write 3 sentences describing a character using at least 5 body/face words"},{icon:"🗣️",text:"Describe someone's face without saying who it is – can someone guess?"}],tip:"Body parts appear in Movers Listening (point and draw) and Speaking (describe a person)."},
+  {date:"August 6",type:"booklet",unit:"Home Fun Booklet – Numbers (p.6)",topic:"Numbers vocabulary practice",activities:[{icon:"📝",text:"Complete all number puzzles on p.6 – read and write numbers as words up to 100"},{icon:"🗣️",text:"Number speed drill: someone says a number (1–100), you say the word as fast as possible"},{icon:"✏️",text:"Write and solve 5 simple maths problems in English: 'Twenty plus thirteen equals…'"}],tip:"Practise quickly recognising 13 vs 30, 14 vs 40 – these are classic Movers Listening traps!"},
+  {date:"August 7",type:"booklet",unit:"Home Fun Booklet – Family (p.8)",topic:"Family vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.8 – label the family tree"},{icon:"✏️",text:"Write one 'has got' sentence about every person in the family tree"},{icon:"🗣️",text:"Describe your own family to someone using family vocabulary and 'has got'"}],tip:"'My aunt has got long dark hair. My uncle has got a beard.' – use both adjectives and 'has got'."},
+  {date:"August 8",type:"booklet",unit:"Home Fun Booklet – Food and drink (p.10)",topic:"Food & drink vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.10 – complete the menu, categorise food groups"},{icon:"✏️",text:"Design a healthy dinner plate – draw it and label every item in English"},{icon:"🗣️",text:"Name 5 countable and 5 uncountable foods as fast as you can"}],tip:"Remember: countable = a banana, two apples. Uncountable = some milk, some bread (never 'a bread')."},
+  {date:"August 9",type:"booklet",unit:"Home Fun Booklet – Health (p.12)",topic:"Health vocabulary practice",activities:[{icon:"📝",text:"Complete all exercises on p.12 – name each illness from the picture"},{icon:"✏️",text:"Write advice for 4 different health problems using 'You should… / You shouldn't…'"},{icon:"🗣️",text:"Role play: patient describes symptoms, doctor gives advice – swap roles after 2 minutes"}],tip:"'You should drink lots of water.' 'You shouldn't go to school.' Both appear in Movers Writing!"},
+  {date:"August 10",type:"booklet",unit:"Home Fun Booklet – The home (p.14)",topic:"Home & furniture vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.14 – label the house rooms and furniture"},{icon:"✏️",text:"Describe where 5 items of furniture are using prepositions: 'The sofa is in front of the TV'"},{icon:"🗣️",text:"Describe your bedroom – someone draws it from your words. Did they get it right?"}],tip:"Combine rooms + furniture + prepositions in one sentence: 'In the kitchen there is a table next to the window.'"},
+  {date:"August 11",type:"booklet",unit:"Home Fun Booklet – Places and directions (p.16)",topic:"Places & directions vocabulary practice",activities:[{icon:"📝",text:"Complete all activities on p.16 – read the map and follow the directions"},{icon:"✏️",text:"Write step-by-step directions from your home to the nearest shop"},{icon:"🗣️",text:"Give directions from your home to the nearest park – in English, without notes!"}],tip:"'Turn left at the café, go straight on past the library, it's opposite the park.' – perfect!"},
+  {date:"August 12",type:"booklet",unit:"Home Fun Booklet – Sports and leisure (p.18)",topic:"Sports vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.18 – label the sports and match play/do/go + sport"},{icon:"✏️",text:"Write 5 sentences: what sports you love, like, don't like, hate, and can't do"},{icon:"🗣️",text:"Sports quiz: someone describes a sport, you guess it and say the correct verb (play/do/go)"}],tip:"Play football/tennis, do gymnastics/judo, go swimming/cycling – these 3 verbs are tested every year!"},
+  {date:"August 13",type:"booklet",unit:"Home Fun Booklet – Time (p.20)",topic:"Time vocabulary practice",activities:[{icon:"📝",text:"Complete all activities on p.20 – read and write times, match clocks to sentences"},{icon:"✏️",text:"Write your perfect Saturday from morning to night using a time at every step"},{icon:"🗣️",text:"Time quiz: someone says a time ('quarter past three'), you draw the clock – then swap"}],tip:"Key time phrases: o'clock, half past, quarter past, quarter to. All four appear in Movers Listening!"},
+  {date:"August 14",type:"booklet",unit:"Home Fun Booklet – School (p.22)",topic:"School vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.22 – label classroom objects, match subjects to pictures"},{icon:"✏️",text:"Write your favourite and least favourite subjects and explain why using 'because'"},{icon:"🗣️",text:"Name everything you can see in a classroom in English – aim for 15+ words"}],tip:"School subjects + 'because' = great Movers Writing practice. 'I love art because it's creative.'"},
+  {date:"August 15",type:"booklet",unit:"Home Fun Booklet – Transport (p.24)",topic:"Transport vocabulary practice",activities:[{icon:"📝",text:"Complete all activities on p.24 – categorise vehicles, match to places"},{icon:"✏️",text:"Write how you travel to 5 different places: school, shops, beach, grandma's, the park"},{icon:"🗣️",text:"Transport challenge: name a vehicle for land, sea, and air – say one sentence about each"}],tip:"'I go to school by bus.' 'I go on foot to the park.' – 'on foot' NOT 'by foot'!"},
+  {date:"August 16",type:"booklet",unit:"Home Fun Booklet – Weather (p.26)",topic:"Weather vocabulary practice",activities:[{icon:"🎨",text:"Complete all activities on p.26 – match weather symbols to words, complete the sentences"},{icon:"✏️",text:"Write a 3-day weather forecast for your city – include what to wear each day"},{icon:"🗣️",text:"Describe today's weather AND the best and worst weather you've ever experienced"}],tip:"Weather + clothes + activities = a perfect combo: 'It's sunny so I'm wearing a T-shirt and going swimming.'"},
+  {date:"August 17",type:"booklet",unit:"Home Fun Booklet – The world around us (p.28)",topic:"Nature & world vocabulary practice",activities:[{icon:"📝",text:"Complete all activities on p.28 – nature vocabulary, label the world map features"},{icon:"✏️",text:"Write 5 comparative sentences about world places: 'The Nile is longer than the Thames'"},{icon:"🗣️",text:"Name 3 countries and describe their weather and landscape using comparatives"}],tip:"Nature words + comparatives = Movers Reading favourite. 'The Amazon is the biggest rainforest.'"},
+  {date:"August 18",type:"booklet",unit:"🎉 Home Fun Booklet – Adjectives (p.30)",topic:"Adjectives & Final celebration",activities:[{icon:"📝",text:"Complete all activities on p.30 – opposites, comparative and superlative forms"},{icon:"🎨",text:"Draw two characters and write 5 comparative + 2 superlative sentences about them"},{icon:"🌟",text:"Flip through both books – notice how much you can read now! Write 3 things you learned this summer"}],tip:"You finished the whole plan – 65 sessions, all 50 units + all 15 Booklet topics. You are SO ready for Movers! 🏆"}
+];
+function engPad(n){return n<10?'0'+n:n}
+function engDateKey(s){
+  const m=s.date.split(' ');
+  const months={January:'01',February:'02',March:'03',April:'04',May:'05',June:'06',July:'07',August:'08',September:'09',October:'10',November:'11',December:'12'};
+  return `2026-${months[m[0]]}-${engPad(parseInt(m[1]))}`;
+}
+let engState=JSON.parse(localStorage.getItem('summerPlan2026')||'{}');
+let engCurrentFilter='all';
+function engSave(){localStorage.setItem('summerPlan2026',JSON.stringify(engState));}
+function engToggleDone(idx){engState[idx]=!engState[idx];engSave();renderEnglish();}
+function engResetProgress(){if(confirm('Reset all progress?')){engState={};engSave();renderEnglish();}}
+function engFilter(f){
+  engCurrentFilter=f;
+  document.querySelectorAll('#tab-english .btn-filter').forEach(b=>{
+    b.classList.toggle('active',b.textContent.toLowerCase().includes(
+      f==='all'?'all':f==='pending'?'to do':f==='done'?'completed':f==='movers'?'movers':'booklet'
+    ));
+  });
+  renderEnglish();
+}
+function renderEnglish(){
+  const today=new Date().toISOString().split('T')[0];
+  const done=ENG_SESSIONS.filter((_,i)=>engState[i]).length;
+  document.getElementById('eng-progressFill').style.width=(done/39*100)+'%';
+  document.getElementById('eng-progressText').textContent=`${done} / 39 sessions completed`;
+  const container=document.getElementById('eng-sessions-container');
+  container.innerHTML='';
+  let visible=ENG_SESSIONS.map((s,i)=>({...s,idx:i,key:engDateKey(s)}));
+  if(engCurrentFilter==='pending') visible=visible.filter(s=>!engState[s.idx]);
+  else if(engCurrentFilter==='done') visible=visible.filter(s=>engState[s.idx]);
+  else if(engCurrentFilter==='movers') visible=visible.filter(s=>s.type==='movers');
+  else if(engCurrentFilter==='booklet') visible=visible.filter(s=>s.type==='booklet'||s.type==='test'||s.type==='review');
+  if(!visible.length){container.innerHTML='<div class="empty-state">No sessions to show 🎉</div>';return;}
+  const groups={};
+  visible.forEach(s=>{const month=s.date.split(' ')[0];if(!groups[month])groups[month]={label:month,sessions:[]};groups[month].sessions.push(s);});
+  const monthOrder=['June','July','August'];
+  const monthEmoji={June:'☀️',July:'🏖️',August:'🌅'};
+  monthOrder.forEach(month=>{
+    if(!groups[month])return;
+    const g=groups[month];
+    const wrap=document.createElement('div');
+    wrap.className='month-section';
+    const title=document.createElement('div');
+    title.className='month-title';
+    title.innerHTML=`${monthEmoji[month]} ${month} <span>${g.sessions.length} sessions</span>`;
+    wrap.appendChild(title);
+    g.sessions.forEach(s=>{
+      const isDone=!!engState[s.idx];
+      const isToday=s.key===today;
+      const card=document.createElement('div');
+      card.className='session-card'+(isDone?' done':'')+(isToday?' today-card':'');
+      const badgeClass={movers:'badge-movers',booklet:'badge-booklet',test:'badge-test',review:'badge-review'}[s.type];
+      const badgeText={movers:'Fun for Movers',booklet:'Home Fun Booklet',test:'Practice Test',review:'Review'}[s.type];
+      card.innerHTML=`
+        <div class="card-header">
+          <div class="card-checkbox" onclick="event.stopPropagation();engToggleDone(${s.idx})"><span class="checkmark">✓</span></div>
+          <div class="card-meta">
+            <div class="card-top-row">
+              <span class="session-num">Session ${s.idx+1}</span>
+              <span class="session-date">${s.date}</span>
+              <span class="book-badge ${badgeClass}">${badgeText}</span>
+              ${isToday?'<span class="book-badge" style="background:#FEF3C7;color:#92400E;">📅 Today</span>':''}
+            </div>
+            <div class="card-unit">${s.unit}</div>
+            <div class="card-topic">${s.topic}</div>
+          </div>
+          <div class="card-expand-icon">⌄</div>
+        </div>
+        <div class="card-body">
+          <div class="activities-title">Activities</div>
+          ${s.activities.map(a=>`<div class="activity-item"><span class="activity-icon">${a.icon}</span><span>${a.text}</span></div>`).join('')}
+          ${s.tip?`<div class="tip-box">💡 <span>${s.tip}</span></div>`:''}
+        </div>`;
+      card.querySelector('.card-header').addEventListener('click',function(e){
+        if(e.target.closest('.card-checkbox'))return;
+        card.classList.toggle('expanded');
+      });
+      wrap.appendChild(card);
+    });
+    container.appendChild(wrap);
+  });
+}
+renderEnglish();
+
+// ══════════════════════════════════════════
+// BOOKS SECTION
+// ══════════════════════════════════════════
+const BK_BOOKS=[
+  {title:"Приключенията на Лукчо",author:"Дж. Родари",pages:224},
+  {title:"Ние, врабчетата",author:"Й. Радичков",pages:136},
+  {title:"Страната на сънищата: Любими Попътечо",author:"Ю. Спиридонова",pages:264},
+  {title:"Приключенията на Пинокио",author:"К. Колоди",pages:208},
+  {title:"Приключенията на Незнайко",author:"Н. Носов",pages:144},
+  {title:"Небивалици",author:"Д. Бисет",pages:216},
+  {title:"Книга за джунглата",author:"Р. Киплинг",pages:328},
+  {title:"Антон и Точица / Хвърчащата класна стая / Двойната Лотхен",author:"Е. Кестнер",pages:408},
+  {title:"Това се случи на 35 май",author:"Е. Кестнер",pages:144},
+  {title:"Малкият мъж",author:"Е. Кестнер",pages:208},
+  {title:"Братята с лъвски сърца",author:"А. Линдгрен",pages:240},
+  {title:"Историята на д-р Дулитъл",author:"Хю Лофтинг",pages:144},
+  {title:"Приказки от Оная гора",author:"М. Дългъчева",pages:64}
+];
+const BK_TOTAL_PAGES=2728;
+const BK_STORAGE_KEY='summer_reading_2026';
+function bkLoad(){try{return JSON.parse(localStorage.getItem(BK_STORAGE_KEY))||{};}catch{return {};}}
+function bkSave(s){try{localStorage.setItem(BK_STORAGE_KEY,JSON.stringify(s));}catch{}}
+let bkState=bkLoad();
+BK_BOOKS.forEach((_,i)=>{if(!bkState[i])bkState[i]={read:0,done:false,expanded:false};});
+function bkGetReadPages(){return BK_BOOKS.reduce((sum,b,i)=>sum+(bkState[i].done?b.pages:(bkState[i].read||0)),0);}
+function bkUpdateStats(){
+  const readPages=bkGetReadPages();
+  const doneBooks=BK_BOOKS.filter((_,i)=>bkState[i].done).length;
+  const pct=Math.round(readPages/BK_TOTAL_PAGES*100);
+  const remaining=BK_TOTAL_PAGES-readPages;
+  const daysLeft=remaining>0?Math.ceil(remaining/30):0;
+  document.getElementById('bk-overall-bar').style.width=pct+'%';
+  document.getElementById('bk-pct-label').textContent=pct+'%';
+  document.getElementById('bk-stats').innerHTML=`
+    <div class="bk-stat"><div class="stat-label">Прочетено</div><div class="stat-value">${readPages.toLocaleString('bg')}</div><div class="stat-sub">от ${BK_TOTAL_PAGES.toLocaleString('bg')} стр.</div></div>
+    <div class="bk-stat"><div class="stat-label">Книги</div><div class="stat-value">${doneBooks}</div><div class="stat-sub">от ${BK_BOOKS.length}</div></div>
+    <div class="bk-stat"><div class="stat-label">Остават</div><div class="stat-value">${remaining.toLocaleString('bg')}</div><div class="stat-sub">стр.</div></div>
+    <div class="bk-stat"><div class="stat-label">~Дни</div><div class="stat-value">${daysLeft}</div><div class="stat-sub">при 30 стр./ден</div></div>`;
+}
+const BK_RANKS=[
+  {min:0,max:13,lvl:'lvl1',emoji:'📖',name:'Начинаещ читател',msg:'Добро начало! Всяка страница те прави по-умен.',next:'до Изследовател'},
+  {min:13,max:26,lvl:'lvl2',emoji:'🌟',name:'Книжен изследовател',msg:'Вече изследваш нови книжни светове!',next:'до Авантюрист'},
+  {min:26,max:39,lvl:'lvl3',emoji:'⚡',name:'Книжен авантюрист',msg:'Страхотно! Всяка история те носи напред.',next:'до Откривател'},
+  {min:39,max:52,lvl:'lvl4',emoji:'🔭',name:'Книжен откривател',msg:'Половината е пред теб — дай газ!',next:'до Герой'},
+  {min:52,max:65,lvl:'lvl5',emoji:'🦸',name:'Книжен герой',msg:'Вече си герой! Продължавай напред!',next:'до Воин'},
+  {min:65,max:78,lvl:'lvl6',emoji:'⚔️',name:'Книжен воин',msg:'Невероятно! Само още малко до върха!',next:'до Шампион'},
+  {min:78,max:100,lvl:'lvl7',emoji:'🏆',name:'Книжен шампион',msg:'Последен рунд — дай всичко от себе си!',next:'до Крал на книгите'},
+  {min:100,max:101,lvl:'lvl8',emoji:'👑',name:'Крал на книгите',msg:'Ти направи невъзможното! Браво, шампионе!',next:''}
+];
+function bkGetRank(pct){return BK_RANKS.find(r=>pct>=r.min&&pct<r.max)||BK_RANKS[BK_RANKS.length-1];}
+function bkRenderRankCard(){
+  const readPages=bkGetReadPages();
+  const pct=Math.round(readPages/BK_TOTAL_PAGES*100);
+  const rank=bkGetRank(pct);
+  const nextRank=BK_RANKS[BK_RANKS.indexOf(rank)+1];
+  const withinPct=rank.max>rank.min?Math.round((pct-rank.min)/(rank.max-rank.min)*100):100;
+  document.getElementById('bk-rank-card').innerHTML=`
+    <div class="rank-card ${rank.lvl}">
+      <div class="rank-emoji">${rank.emoji}</div>
+      <div class="rank-info">
+        <div class="rank-name">${rank.name}</div>
+        <div class="rank-msg">${rank.msg}</div>
+        ${nextRank?`<div class="rank-next"><div class="rank-next-label"><span>${rank.next}</span><span>${pct}% / ${rank.max}%</span></div><div class="rank-next-bar-wrap"><div class="rank-next-bar" style="width:${Math.min(withinPct,100)}%"></div></div></div>`:''}
+      </div>
+    </div>`;
+}
+const BK_BADGES=[
+  {icon:'✏️',name:'Първа крачка',req:'Прочети 1 стр.',check:p=>p>=1},
+  {icon:'📗',name:'Първа книга',req:'Завърши 1 книга',check:(p,b,s)=>b.filter((_,i)=>s[i].done).length>=1},
+  {icon:'📚',name:'Три книги',req:'Завърши 3 книги',check:(p,b,s)=>b.filter((_,i)=>s[i].done).length>=3},
+  {icon:'⚡',name:'500 страници',req:'Прочети 500 стр.',check:p=>p>=500},
+  {icon:'🚀',name:'1000 страници',req:'Прочети 1000 стр.',check:p=>p>=1000},
+  {icon:'🌟',name:'Половината',req:'50% прочетено',check:p=>p>=BK_TOTAL_PAGES*.5},
+  {icon:'🏆',name:'2000 страници',req:'Прочети 2000 стр.',check:p=>p>=2000},
+  {icon:'👑',name:'Всички книги',req:'Завърши всички',check:(p,b,s)=>b.every((_,i)=>s[i].done)}
+];
+function bkRenderAchievements(){
+  const readPages=bkGetReadPages();
+  document.getElementById('bk-read-achievements').innerHTML=`
+    <div class="ach-title">🏅 Постижения — четене</div>
+    <div class="badges-grid">${BK_BADGES.map(b=>{
+      const u=b.check(readPages,BK_BOOKS,bkState);
+      return `<div class="bdg ${u?'unlocked':'locked'}" title="${b.req}"><span class="bi">${b.icon}</span><div class="bn">${b.name}</div><div class="br">${u?'✓ изпълнено':b.req}</div></div>`;
+    }).join('')}</div>`;
+}
+function bkToggleDone(i){bkState[i].done=!bkState[i].done;if(bkState[i].done){bkState[i].read=BK_BOOKS[i].pages;bkState[i].expanded=false;}else{bkState[i].read=0;}bkSave(bkState);bkRender();}
+function bkToggleExpand(i){bkState[i].expanded=!bkState[i].expanded;const row=document.getElementById('bk-expand-'+i);if(row)row.style.display=bkState[i].expanded?'flex':'none';}
+function bkUpdatePages(i,val){
+  bkState[i].read=val;
+  const pc=document.getElementById('bk-pc-'+i);if(pc)pc.textContent=val+' / '+BK_BOOKS[i].pages;
+  const badge=document.getElementById('bk-badge-'+i);if(badge)badge.textContent=val+' / '+BK_BOOKS[i].pages+' стр.';
+  const list=document.getElementById('bk-books-list');
+  if(list&&list.children[i]){const mb=list.children[i].querySelector('.mini-bar');if(mb)mb.style.width=Math.round(val/BK_BOOKS[i].pages*100)+'%';}
+  bkSave(bkState);bkUpdateStats();
+}
+function bkRenderList(){
+  const list=document.getElementById('bk-books-list');
+  list.innerHTML='';
+  BK_BOOKS.forEach((b,i)=>{
+    const s=bkState[i];
+    const readPg=s.done?b.pages:(s.read||0);
+    const pct=Math.round(readPg/b.pages*100);
+    const card=document.createElement('div');
+    card.className='book-card'+(s.done?' done':'');
+    card.innerHTML=`
+      <div class="book-row">
+        <button class="check-btn" data-i="${i}">${s.done?'<i class="ti ti-check"></i>':''}</button>
+        <div class="book-info"><div class="book-title" title="${b.title}">„${b.title}"</div><div class="book-author">${b.author}</div></div>
+        <div class="book-meta">
+          <div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div>
+          <span class="pages-badge" id="bk-badge-${i}">${readPg} / ${b.pages} стр.</span>
+          ${!s.done?`<button class="expand-btn" data-expand="${i}"><i class="ti ti-pencil"></i></button>`:''}
+        </div>
+      </div>
+      ${!s.done?`<div class="page-input-row" id="bk-expand-${i}" style="display:${s.expanded?'flex':'none'}">
+        <label for="bk-range-${i}">Прочетени стр.:</label>
+        <input type="range" id="bk-range-${i}" min="0" max="${b.pages}" value="${readPg}" step="1" data-range="${i}">
+        <span class="page-count" id="bk-pc-${i}">${readPg} / ${b.pages}</span>
+      </div>`:''}`;
+    list.appendChild(card);
+  });
+  list.addEventListener('click',function(e){
+    const cb=e.target.closest('.check-btn');
+    const eb=e.target.closest('.expand-btn');
+    if(cb)bkToggleDone(+cb.dataset.i);
+    if(eb)bkToggleExpand(+eb.dataset.expand);
+  });
+  list.addEventListener('input',function(e){
+    if(e.target.dataset.range!==undefined)bkUpdatePages(+e.target.dataset.range,+e.target.value);
+  });
+}
+function bkRender(){bkRenderList();bkUpdateStats();bkRenderRankCard();bkRenderAchievements();}
+bkRender();
+
+// ══════════════════════════════════════════
+// WRITING SECTION
+// ══════════════════════════════════════════
+const WR_KEY='summer_writing_2026';
+const WR_START=new Date('2026-05-30');
+const WR_END=new Date('2026-08-30');
+const WR_TYPES={essay:{label:'Съчинение',cls:'done-type-essay'},prepis:{label:'Препис',cls:'done-type-prepis'},diktovka:{label:'Диктовка',cls:'done-type-diktovka'}};
+const WR_MONTHS_FULL=['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+const WR_MONTHS_SHORT=['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
+function wrLoadState(){try{return JSON.parse(localStorage.getItem(WR_KEY))||{};}catch{return {};}}
+function wrSaveState(s){try{localStorage.setItem(WR_KEY,JSON.stringify(s));}catch{}}
+function wrToKey(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
+function wrTodayKey(){return wrToKey(new Date());}
+let wrState=wrLoadState();
+let wrSelectedType=null;
+function wrAllDays(){const days=[];const cur=new Date(WR_START);while(cur<=WR_END){days.push(new Date(cur));cur.setDate(cur.getDate()+1);}return days;}
+function wrDaysByMonth(){
+  const groups=[];let cur=null;
+  wrAllDays().forEach(d=>{
+    const key=d.getFullYear()*100+d.getMonth();
+    if(!cur||cur.key!==key){cur={key,month:d.getMonth(),year:d.getFullYear(),days:[]};groups.push(cur);}
+    cur.days.push(new Date(d));
+  });
+  return groups;
+}
+function wrCalcStreak(){
+  let streak=0;const d=new Date();
+  if(!wrState[wrToKey(d)])d.setDate(d.getDate()-1);
+  while(wrState[wrToKey(d)]){streak++;d.setDate(d.getDate()-1);}
+  return streak;
+}
+function wrDoneUpToToday(){const today=wrTodayKey();return Object.keys(wrState).filter(k=>k<=today).length;}
+function wrTotalUpToToday(){
+  const today=wrTodayKey(),startKey=wrToKey(WR_START);
+  return wrAllDays().filter(d=>{const k=wrToKey(d);return k>=startKey&&k<=today;}).length;
+}
+function wrRenderOverall(){
+  const done=wrDoneUpToToday(),total=wrTotalUpToToday(),allTotal=wrAllDays().length;
+  const pct=total>0?Math.round(done/total*100):0;
+  document.getElementById('wr-overall').innerHTML=`
+    <div class="progress-label"><span>Общ напредък (писане)</span><span>${done} / ${total} дни изпълнени · ${pct}%</span></div>
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
+    <div style="font-size:11px;color:var(--text-ter);margin-top:4px;text-align:right">${allTotal} дни общо (30 май – 30 авг)</div>`;
+}
+function wrRenderStats(){
+  const streak=wrCalcStreak();
+  const byType={essay:0,prepis:0,diktovka:0};
+  const today=wrTodayKey();
+  Object.entries(wrState).forEach(([k,t])=>{if(k<=today&&byType[t]!==undefined)byType[t]++;});
+  document.getElementById('wr-stats').innerHTML=`
+    <div class="wr-stat"><div class="stat-label">Поредица</div><div class="stat-value" style="color:var(--blue)">${streak}</div><div class="stat-sub">последователни дни</div></div>
+    <div class="wr-stat"><div class="stat-label">Съчинения</div><div class="stat-value" style="color:#2F80ED">${byType.essay}</div><div class="stat-sub">пъти</div></div>
+    <div class="wr-stat"><div class="stat-label">Преписи</div><div class="stat-value" style="color:#1D9E75">${byType.prepis}</div><div class="stat-sub">пъти</div></div>
+    <div class="wr-stat"><div class="stat-label">Диктовки</div><div class="stat-value" style="color:#9B59B6">${byType.diktovka}</div><div class="stat-sub">пъти</div></div>`;
+}
+function wrRenderCalendar(){
+  const cal=document.getElementById('wr-calendar');
+  cal.innerHTML='';
+  const today=wrTodayKey();
+  const DOW=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  wrDaysByMonth().forEach(({month,year,days})=>{
+    const doneCnt=days.filter(d=>wrState[wrToKey(d)]).length;
+    const pastDays=days.filter(d=>wrToKey(d)<=today).length;
+    const pct=pastDays>0?Math.round(doneCnt/pastDays*100):0;
+    const block=document.createElement('div');
+    block.className='month-block';
+    const hdr=document.createElement('div');
+    hdr.className='month-header';
+    hdr.innerHTML=`<span class="month-name">${WR_MONTHS_FULL[month]} ${year}</span><span class="month-progress-text">${doneCnt} / ${pastDays} дни · ${pct}%</span>`;
+    block.appendChild(hdr);
+    const bw=document.createElement('div');bw.className='month-bar-wrap';
+    bw.innerHTML=`<div class="month-bar" style="width:${pct}%"></div>`;
+    block.appendChild(bw);
+    const grid=document.createElement('div');grid.className='calendar-grid';
+    DOW.forEach(l=>{const lbl=document.createElement('div');lbl.className='cal-day-label';lbl.textContent=l;grid.appendChild(lbl);});
+    const firstDow=(days[0].getDay()+6)%7;
+    for(let i=0;i<firstDow;i++)grid.appendChild(document.createElement('div'));
+    days.forEach(d=>{
+      const key=wrToKey(d),isToday=key===today,isFuture=key>today,done=wrState[key];
+      const cell=document.createElement('div');
+      cell.className='cal-cell';
+      if(isFuture)cell.classList.add('future');
+      if(isToday)cell.classList.add('today-cell');
+      if(done){cell.classList.add('done-cell',WR_TYPES[done].cls);cell.setAttribute('title',`${d.getDate()} ${WR_MONTHS_SHORT[d.getMonth()]} – ${WR_TYPES[done].label}`);}
+      cell.textContent=d.getDate();
+      grid.appendChild(cell);
+    });
+    block.appendChild(grid);cal.appendChild(block);
+  });
+}
+function wrRenderToday(){
+  const box=document.getElementById('wr-today-box');
+  const key=wrTodayKey(),done=wrState[key];
+  const now=new Date(),dateStr=`${now.getDate()} ${WR_MONTHS_SHORT[now.getMonth()]}`;
+  if(done){
+    box.innerHTML=`
+      <div class="write-today-label"><span class="today-date">Днес, ${dateStr}</span></div>
+      <div class="already-done-bar"><span>✓ ${WR_TYPES[done].label} — изпълнено!</span><button class="undo-btn" id="wr-undo-btn">отмени</button></div>`;
+    document.getElementById('wr-undo-btn').addEventListener('click',()=>{delete wrState[key];wrSaveState(wrState);wrRender();});
+  }else{
+    box.innerHTML=`
+      <div class="write-today-label">Задача за <span class="today-date">${dateStr}</span> — избери вид:</div>
+      <div class="type-btns">${Object.entries(WR_TYPES).map(([k,v])=>`<button class="type-btn${wrSelectedType===k?' selected':''}" data-type="${k}">${v.label}</button>`).join('')}</div>
+      <button class="mark-done-btn" id="wr-mark-btn" ${wrSelectedType?'':'disabled'}>Маркирай като изпълнено</button>`;
+    box.querySelectorAll('.type-btn').forEach(btn=>{btn.addEventListener('click',()=>{wrSelectedType=btn.dataset.type;wrRenderToday();});});
+    document.getElementById('wr-mark-btn').addEventListener('click',()=>{
+      if(!wrSelectedType)return;
+      wrState[key]=wrSelectedType;wrSaveState(wrState);wrSelectedType=null;wrRender();
+    });
+  }
+}
+const WR_BADGES=[
+  {icon:'✏️',name:'Първи ден',req:'Направи 1 ден',check:(ws)=>Object.keys(ws).length>=1},
+  {icon:'🔥',name:'3 поредни',req:'3 поредни дни',check:(ws,str)=>str>=3},
+  {icon:'⚡',name:'Цяла седмица',req:'7 поредни дни',check:(ws,str)=>str>=7},
+  {icon:'🌊',name:'Две седмици',req:'14 поредни дни',check:(ws,str)=>str>=14},
+  {icon:'📝',name:'10 преписа',req:'Препис 10 пъти',check:(ws)=>Object.values(ws).filter(t=>t==='prepis').length>=10},
+  {icon:'🎤',name:'10 диктовки',req:'Диктовка 10 пъти',check:(ws)=>Object.values(ws).filter(t=>t==='diktovka').length>=10},
+  {icon:'✍️',name:'10 съчинения',req:'Съчинение 10 пъти',check:(ws)=>Object.values(ws).filter(t=>t==='essay').length>=10},
+  {icon:'🏆',name:'30 дни',req:'Изпълни 30 дни общо',check:(ws)=>Object.keys(ws).length>=30}
+];
+function wrRenderAchievements(){
+  const streak=wrCalcStreak(),today=wrTodayKey();
+  const ws={};Object.entries(wrState).forEach(([k,v])=>{if(k<=today)ws[k]=v;});
+  document.getElementById('wr-achievements').innerHTML=`
+    <div class="ach-title">🏅 Постижения — писане</div>
+    <div class="badges-grid">${WR_BADGES.map(b=>{
+      const u=b.check(ws,streak);
+      return `<div class="bdg ${u?'unlocked':'locked'}" title="${b.req}"><span class="bi">${b.icon}</span><div class="bn">${b.name}</div><div class="br">${u?'✓ изпълнено':b.req}</div></div>`;
+    }).join('')}</div>`;
+}
+function wrRender(){wrRenderOverall();wrRenderStats();wrRenderAchievements();wrRenderToday();wrRenderCalendar();}
+wrRender();
+
+// ══════════════════════════════════════════
+// MATH SECTION
+// ══════════════════════════════════════════
+const MATH_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
+const MATH_TOTAL=161;
+let mathChecked={};
+function mathGetKey(di,ii){return `${di}_${ii}`;}
+function mathLoadState(){try{const s=localStorage.getItem('math_prog_2026');if(s)mathChecked=JSON.parse(s);}catch(e){}}
+function mathSaveState(){try{localStorage.setItem('math_prog_2026',JSON.stringify(mathChecked));}catch(e){}}
+function mathUpdateProgress(){
+  const done=Object.values(mathChecked).filter(Boolean).length;
+  const pct=Math.round(done/MATH_TOTAL*100);
+  document.getElementById('math-done-count').textContent=done;
+  document.getElementById('math-remain-count').textContent=MATH_TOTAL-done;
+  document.getElementById('math-pb-fill').style.width=pct+'%';
+  document.getElementById('math-pb-lbl').textContent=`${done} / ${MATH_TOTAL} решени (${pct}%)`;
+}
+function mathResetAll(){if(!confirm('Нулирай целия прогрес?'))return;mathChecked={};mathSaveState();mathRender();}
+function mathIsDayDone(di){const day=MATH_SCHED[di];return day.items.every((_,i)=>mathChecked[mathGetKey(di,i)]);}
+
+function mathBuildSchedule(){
+  const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  const mbgFin2All=mbgFin2Years.map(y=>({type:'МБГ-Фин2',file:`5_Final_2klas_${y}.pdf`,year:String(y)}));
+  const preItems=mbgFin2All.slice(0,8);
+  const preStart=new Date(2026,4,30);
+  const preDays=[];
+  for(let i=0;i<8;i++){
+    const d=new Date(preStart);d.setDate(preStart.getDate()+i);
+    preDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:[preItems[i]],count:1});
+  }
+  const remaining3=mbgFin2All.slice(8);
+  const typesPhase1=[
+    {k:'МБГ',years:['1_Fall_2013','1_Fall_2014','1_Fall_2015','1_Fall_2016','1_Fall_2017','1_Fall_2018','1_Fall_2019','1_Fall_2020'],fmt:s=>`${s}.pdf`,raw:true},
+    {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
+    {k:'САЛ',years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SAL_3 klas.pdf`},
+    {k:'ХП',years:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_HP_3 klas.pdf`},
+    {k:'КМС',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_KMS_3 klas.pdf`},
+    {k:'МБГ',years:['2_Winter_2014','2_Winter_2015','2_Winter_2016','2_Winter_2017','2_Winter_2018','2_Winter_2019','2_Winter_2020'],fmt:s=>`${s}.pdf`,raw:true}
+  ];
+  const typesPhase2=[
+    {k:'МБГ',years:['3_Spring_2014','3_Spring_2015','3_Spring_2016','3_Spring_2017','3_Spring_2018','3_Spring_2019','3_Spring_2020'],fmt:s=>`${s}.pdf`,raw:true},
+    {k:'СМТ',years:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SMT_3 klas.pdf`},
+    {k:'ЕК',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_EK_3 klas.pdf`},
+    {k:'ВМС',years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019],fmt:y=>`${y}_VMS_3 klas.pdf`},
+    {k:'МБГ',years:['4_Semifinal_2019','4_Semifinal_2020'],fmt:s=>`${s}.pdf`,raw:true},
+    {k:'МБГ',years:['5_Final_2014','5_Final_2015','5_Final_2016','5_Final_2017','5_Final_2018','5_Final_2019','5_Final_2020'],fmt:s=>`${s}.pdf`,raw:true}
+  ];
+  function interleave(types){
+    const pools=types.map(t=>({k:t.k,items:t.years.map(y=>t.raw?{type:t.k,file:t.fmt(y)}:{type:t.k,file:t.fmt(y)})}));
+    const result=[];let changed=true;
+    while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
+    return result;
+  }
+  const mainAll=[...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
+  const dayCounts=Array(77).fill(2);dayCounts[76]=1;
+  const mainDays=[];let idx=0;
+  const startDate=new Date(2026,5,15);
+  for(let i=0;i<77;i++){
+    const d=new Date(startDate);d.setDate(startDate.getDate()+i);
+    const n=dayCounts[i];
+    mainDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:mainAll.slice(idx,idx+n),count:n});
+    idx+=n;
+  }
+  return [...preDays,...mainDays];
+}
+const MATH_SCHED=mathBuildSchedule();
+
+function mathRender(){
+  const monthFilter=document.getElementById('math-month-filter').value;
+  const showUndone=document.getElementById('math-show-undone').checked;
+  const monthNames={5:'Май (30.05–06.06)',6:'Юни',7:'Юли',8:'Август'};
+  const monthOrder=[5,6,7,8];
+  const cal=document.getElementById('math-calendar');
+  cal.innerHTML='';
+  for(const mo of monthOrder){
+    if(monthFilter!=='all'){const map={may:5,jun:6,jul:7,aug:8};if(map[monthFilter]!==mo)continue;}
+    const days=MATH_SCHED.map((d,i)=>({...d,idx:i})).filter(d=>d.mm===mo);
+    if(!days.length)continue;
+    let filtered=days;
+    if(showUndone)filtered=days.filter(d=>!mathIsDayDone(d.idx));
+    if(!filtered.length)continue;
+    const block=document.createElement('div');block.className='month-block';
+    const totalInMonth=days.reduce((s,d)=>s+d.count,0);
+    block.innerHTML=`<div class="month-title">📅 ${monthNames[mo]} <span>(${days.length} дни, ${totalInMonth} бр.)</span></div>`;
+    const grid=document.createElement('div');grid.className='day-grid';
+    for(const day of filtered){
+      const dayName=MATH_BG_DAYS[day.date.getDay()];
+      const done=mathIsDayDone(day.idx);
+      const card=document.createElement('div');
+      card.className='day-card'+(done?' done':'');
+      let html=`<div class="day-header"><div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div><span class="day-badge badge-${day.count}">${day.count} бр.</span></div><ul class="comp-list">`;
+      for(let i=0;i<day.items.length;i++){
+        const item=day.items[i];
+        const key=mathGetKey(day.idx,i);
+        const isChecked=!!mathChecked[key];
+        const year=item.year||(item.file.match(/\d{4}/)||[''])[0];
+        let label=item.type,cssType=item.type;
+        if(item.type==='МБГ'){
+          if(item.file.includes('Fall'))label='МБГ-Есен';
+          else if(item.file.includes('Winter'))label='МБГ-Зима';
+          else if(item.file.includes('Spring'))label='МБГ-Пролет';
+          else if(item.file.includes('Semifinal'))label='МБГ-П/фин';
+          else if(item.file.includes('Final'))label='МБГ-Фин';
+        }
+        if(item.type==='МБГ-Фин2'){label='МБГ-Фин2кл';cssType='МБГ-Фин2';}
+        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}</span></li>`;
+      }
+      html+='</ul>';
+      card.innerHTML=html;
+      grid.appendChild(card);
+    }
+    block.appendChild(grid);cal.appendChild(block);
+  }
+  document.querySelectorAll('#math-calendar input[type=checkbox][data-key]').forEach(cb=>{
+    cb.addEventListener('change',function(){
+      const key=this.getAttribute('data-key');
+      mathChecked[key]=this.checked;
+      mathSaveState();
+      const label=this.closest('li').querySelector('.comp-name');
+      if(label)label.classList.toggle('checked',this.checked);
+      const card=this.closest('.day-card');
+      if(card){const allDone=Array.from(card.querySelectorAll('input[type=checkbox]')).every(c=>c.checked);card.classList.toggle('done',allDone);}
+      mathUpdateProgress();
+    });
+  });
+  mathUpdateProgress();
+}
+mathLoadState();
+document.getElementById('math-month-filter').addEventListener('change',mathRender);
+document.getElementById('math-show-undone').addEventListener('change',mathRender);
+mathRender();
+
+// ══════════════════════════════════════════
+// MOTIVATION — ENGLISH
+// ══════════════════════════════════════════
+const ENG_RANKS=[
+  {min:0, max:1, emoji:'🌱',name:'Beginner Explorer',  msg:'Your adventure is just starting — every word counts!',   grad:'#6366f1,#8b5cf6'},
+  {min:1, max:8, emoji:'📚',name:'Word Collector',      msg:'You\'re collecting words like treasure — keep going!',    grad:'#3b82f6,#6366f1'},
+  {min:8, max:17,emoji:'⚡',name:'Grammar Ninja',       msg:'Fast, sharp, and stealthy — the ninja life chose you!',  grad:'#0ea5e9,#3b82f6'},
+  {min:17,max:26,emoji:'🔥',name:'Vocabulary Warrior',  msg:'You\'re on fire! Nothing can stop you now!',             grad:'#f97316,#ef4444'},
+  {min:26,max:35,emoji:'🌟',name:'Language Star',       msg:'Stars shine bright — and so do you! Keep shining!',      grad:'#eab308,#f97316'},
+  {min:35,max:44,emoji:'🦸',name:'English Hero',        msg:'Heroes don\'t give up — and neither do you!',            grad:'#10b981,#059669'},
+  {min:44,max:53,emoji:'🏅',name:'Study Champion',      msg:'You\'re in champion territory now. Feel that power!',    grad:'#06b6d4,#0ea5e9'},
+  {min:53,max:62,emoji:'🏆',name:'Master Learner',      msg:'Mastery unlocked! The finish line is right there!',      grad:'#a855f7,#7c3aed'},
+  {min:62,max:65,emoji:'🚀',name:'Cambridge Ace',       msg:'ROCKET MODE! Three sessions left — you\'ve got this!',   grad:'#ec4899,#a855f7'},
+  {min:65,max:66,emoji:'👑',name:'Cambridge STAR',      msg:'🎉 YOU DID IT! You are an absolute legend! 🎉',           grad:'#f59e0b,#ef4444'}
+];
+const ENG_BADGES=[
+  {icon:'🎯',name:'First Move!',    req:'Complete 1 session',    check:d=>d>=1},
+  {icon:'🔥',name:'Getting Hot',    req:'Complete 5 sessions',   check:d=>d>=5},
+  {icon:'📖',name:'Bookworm',       req:'Complete 10 sessions',  check:d=>d>=10},
+  {icon:'⚡',name:'Ninja Mode',     req:'Complete 20 sessions',  check:d=>d>=20},
+  {icon:'🎨',name:'Creative Pro',   req:'All 8 booklet tasks',   check:(d,s)=>ENG_SESSIONS.filter((x,i)=>x.type==='booklet'&&s[i]).length>=8},
+  {icon:'🏅',name:'Movers Master',  req:'All 25 Fun for Movers units', check:(d,s)=>ENG_SESSIONS.filter((x,i)=>x.type==='movers'&&s[i]).length>=25},
+  {icon:'🌟',name:'Almost There!',  req:'Complete 60 sessions',  check:d=>d>=60},
+  {icon:'👑',name:'Cambridge STAR', req:'Complete ALL 65 sessions!', check:d=>d>=65}
+];
+function renderEngMotivation(){
+  const done=ENG_SESSIONS.filter((_,i)=>engState[i]).length;
+  const rank=ENG_RANKS.find(r=>done>=r.min&&done<r.max)||ENG_RANKS[ENG_RANKS.length-1];
+  const nextRank=ENG_RANKS[ENG_RANKS.indexOf(rank)+1];
+  const within=nextRank?Math.round((done-rank.min)/(nextRank.min-rank.min)*100):100;
+  const xp=done*100;
+  const el=document.getElementById('eng-rank-card');
+  el.innerHTML=`<div class="mot-rank-card" style="background:linear-gradient(135deg,${rank.grad})">
+    <div class="mot-emoji">${rank.emoji}</div>
+    <div class="mot-info">
+      <div class="mot-name">${rank.name}</div>
+      <div class="mot-msg">${rank.msg}</div>
+      <div class="mot-bar-row">
+        <div class="mot-bar-wrap"><div class="mot-bar" style="width:${within}%"></div></div>
+        <span class="mot-bar-label">${done}${nextRank?' → '+nextRank.min:' / 39'} sessions</span>
+      </div>
+    </div>
+    <div class="mot-xp"><div class="xp-num">${xp}</div><div class="xp-lbl">XP</div></div>
+  </div>`;
+  const grid=document.getElementById('eng-badges');
+  grid.innerHTML=ENG_BADGES.map(b=>{
+    const u=b.check(done,engState);
+    return `<div class="mot-bdg ${u?'unlocked':'locked'}">
+      <span class="mbi">${b.icon}</span>
+      <div class="mbn">${b.name}</div>
+      <div class="mbr">${u?'✓ Unlocked!':b.req}</div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// MOTIVATION — MATH
+// ══════════════════════════════════════════
+const MATH_RANKS=[
+  {min:0,  max:1,  emoji:'🌱',name:'Math Seedling',      msg:'Всеки шампион е започнал от нулата — ти вече си тръгнал!', grad:'#6366f1,#8b5cf6'},
+  {min:1,  max:16, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
+  {min:16, max:41, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
+  {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш задачите една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
+  {min:81, max:121,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
+  {min:121,max:151,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
+  {min:151,max:161,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
+  {min:161,max:162,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
+];
+const MATH_BADGES=[
+  {icon:'🎯',name:'Първа победа!',  req:'Реши 1 задача',      check:d=>d>=1},
+  {icon:'💪',name:'Загрявка',       req:'Реши 10 задачи',     check:d=>d>=10},
+  {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 задачи',    check:d=>d>=25},
+  {icon:'🔥',name:'На пламъци!',    req:'Реши 50 задачи',     check:d=>d>=50},
+  {icon:'💯',name:'Клуб 100',       req:'Реши 100 задачи',    check:d=>d>=100},
+  {icon:'🌟',name:'Почти там!',     req:'Реши 150 задачи',    check:d=>d>=150},
+  {icon:'🏆',name:'Недостижим',     req:'Реши 160 задачи',    check:d=>d>=160},
+  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 161!',   check:d=>d>=161}
+];
+function renderMathMotivation(){
+  const done=Object.values(mathChecked).filter(Boolean).length;
+  const rank=MATH_RANKS.find(r=>done>=r.min&&done<r.max)||MATH_RANKS[MATH_RANKS.length-1];
+  const nextRank=MATH_RANKS[MATH_RANKS.indexOf(rank)+1];
+  const within=nextRank?Math.round((done-rank.min)/(nextRank.min-rank.min)*100):100;
+  const xp=done*10;
+  const el=document.getElementById('math-rank-card');
+  el.innerHTML=`<div class="mot-rank-card" style="background:linear-gradient(135deg,${rank.grad})">
+    <div class="mot-emoji">${rank.emoji}</div>
+    <div class="mot-info">
+      <div class="mot-name">${rank.name}</div>
+      <div class="mot-msg">${rank.msg}</div>
+      <div class="mot-bar-row">
+        <div class="mot-bar-wrap"><div class="mot-bar" style="width:${within}%"></div></div>
+        <span class="mot-bar-label">${done}${nextRank?' → '+nextRank.min:' / 161'} задачи</span>
+      </div>
+    </div>
+    <div class="mot-xp"><div class="xp-num">${xp}</div><div class="xp-lbl">XP</div></div>
+  </div>`;
+  const grid=document.getElementById('math-badges');
+  grid.innerHTML=MATH_BADGES.map(b=>{
+    const u=b.check(done);
+    return `<div class="mot-bdg ${u?'unlocked':'locked'}">
+      <span class="mbi">${b.icon}</span>
+      <div class="mbn">${b.name}</div>
+      <div class="mbr">${u?'✓ Отключено!':b.req}</div>
+    </div>`;
+  }).join('');
+}
+
+// Hook motivation renders into existing update flows
+const _origRenderEnglish=renderEnglish;
+renderEnglish=function(){_origRenderEnglish();renderEngMotivation();};
+const _origMathUpdateProgress=mathUpdateProgress;
+mathUpdateProgress=function(){_origMathUpdateProgress();renderMathMotivation();};
+renderEngMotivation();
+renderMathMotivation();
+
+// ══════════════════════════════════════════
+// CALENDAR TAB
+// ══════════════════════════════════════════
+const CAL_START=new Date(2026,4,30); // May 30
+const CAL_END=new Date(2026,7,30);   // Aug 30
+const BG_DOW=['Нд','Пн','Вт','Ср','Чт','Пт','Сб'];
+const BG_MONTHS_LONG=['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+const BG_MONTHS_SHORT=['яну','фев','мар','апр','май','юни','юли','авг'];
+let calDate=new Date();
+if(calDate<CAL_START)calDate=new Date(CAL_START);
+if(calDate>CAL_END)calDate=new Date(CAL_END);
+let calWrSelected=null;
+
+function calFmt(d){
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function calSameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
+function calInRange(d){return d>=CAL_START&&d<=CAL_END;}
+
+function calPrevDay(){
+  const d=new Date(calDate);d.setDate(d.getDate()-1);
+  if(calInRange(d)){calDate=d;calRender();}
+}
+function calNextDay(){
+  const d=new Date(calDate);d.setDate(d.getDate()+1);
+  if(calInRange(d)){calDate=d;calRender();}
+}
+function calGoToday(){
+  const t=new Date();
+  calDate=calInRange(t)?t:new Date(CAL_START);
+  calRender();
+}
+
+// ── data helpers ──
+function calGetEngSession(dateStr){
+  return ENG_SESSIONS.map((s,i)=>({...s,idx:i})).find(s=>engDateKey(s)===dateStr)||null;
+}
+function calGetMathDay(dateStr){
+  return MATH_SCHED.map((d,i)=>({...d,idx:i})).find(d=>calFmt(d.date)===dateStr)||null;
+}
+function calDayScore(d){
+  const key=calFmt(d);
+  let done=0,total=0;
+  total++;if(wrState[key])done++;
+  const md=calGetMathDay(key);
+  if(md){md.items.forEach((_,i)=>{total++;if(mathChecked[mathGetKey(md.idx,i)])done++;});}
+  const es=calGetEngSession(key);
+  if(es){total++;if(engState[es.idx])done++;}
+  return {done,total};
+}
+function calDayComplete(d){const s=calDayScore(d);return s.total>0&&s.done===s.total;}
+
+// ── overall summer stats ──
+function calGetSummerStats(){
+  const today=calFmt(new Date());
+  // English
+  const engDone=ENG_SESSIONS.filter((_,i)=>engState[i]).length;
+  const engTotal=ENG_SESSIONS.length;
+  // Math
+  const mathDone=Object.values(mathChecked).filter(Boolean).length;
+  const mathTotal=MATH_TOTAL;
+  // Writing — count days done up to today
+  const wrDone=Object.keys(wrState).filter(k=>k>=calFmt(CAL_START)&&k<=today).length;
+  const wrTotal=Math.max(1,Math.ceil((Math.min(new Date(),CAL_END)-CAL_START)/(86400000))+1);
+  // Reading
+  const bkS=bkLoad();BK_BOOKS.forEach((_,i)=>{if(!bkS[i])bkS[i]={read:0,done:false};});
+  const readDone=BK_BOOKS.reduce((s,b,i)=>s+(bkS[i].done?b.pages:(bkS[i].read||0)),0);
+  const readTotal=BK_TOTAL_PAGES;
+  // Overall %
+  const pcts=[engDone/engTotal,mathDone/mathTotal,Math.min(wrDone/wrTotal,1),readDone/readTotal];
+  const overall=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length*100);
+  return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,readDone,readTotal,overall};
+}
+
+// ── render stats hero ──
+function calRenderStats(){
+  const el=document.getElementById('cl-stats-hero');
+  if(!el)return;
+  const s=calGetSummerStats();
+  const msgs=[
+    [0,'🌱 Лятото тъкмо започна — давай юнак!'],
+    [15,'⚡ Добро начало! Така се прави!'],
+    [30,'🔥 Загрян си! Продължавай!'],
+    [45,'🌟 Перфектно! Наполовина си!'],
+    [60,'🚀 Страхотно! Почти там!'],
+    [80,'🏆 Легенда в ставане! Още малко!'],
+    [95,'👑 ЛЕГЕНДА! Близо до финала!'],
+    [100,'🎉 СВЪРШЕНО! Шампион на лятото!']
+  ];
+  const msg=(msgs.slice().reverse().find(([p])=>s.overall>=p)||msgs[0])[1];
+  const r=40,circ=2*Math.PI*r;
+  const dash=circ*(s.overall/100);
+  el.innerHTML=`
+    <svg width="0" height="0" style="position:absolute"><defs>
+      <linearGradient id="calRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#f97316"/>
+      </linearGradient>
+    </defs></svg>
+    <div class="cl-hero-title">📅 Дневен план</div>
+    <div class="cl-hero-sub">Лято 2026 · 30 май – 30 август</div>
+    <div class="cl-ring-row">
+      <div class="cl-ring-wrap">
+        <svg class="cl-ring-svg" viewBox="0 0 88 88">
+          <circle class="cl-ring-track" cx="44" cy="44" r="${r}"/>
+          <circle class="cl-ring-fill" cx="44" cy="44" r="${r}"
+            stroke-dasharray="${dash} ${circ}" stroke-dashoffset="0"/>
+        </svg>
+        <div class="cl-ring-pct">${s.overall}%<small>общо</small></div>
+      </div>
+      <div class="cl-ring-info">
+        <p>Напредък за лятото</p>
+        <strong>${msg}</strong>
+      </div>
+    </div>
+    <div class="cl-stat-grid">
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">🌞</span><span class="cl-sc-label">Английски</span></div>
+        <div class="cl-sc-nums">${s.engDone}<em> / ${s.engTotal} сесии</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(s.engDone/s.engTotal*100)}%;background:linear-gradient(90deg,#60a5fa,#a78bfa)"></div></div>
+      </div>
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">📐</span><span class="cl-sc-label">Математика</span></div>
+        <div class="cl-sc-nums">${s.mathDone}<em> / ${s.mathTotal} задачи</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(s.mathDone/s.mathTotal*100)}%;background:linear-gradient(90deg,#34d399,#059669)"></div></div>
+      </div>
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">✏️</span><span class="cl-sc-label">Писане</span></div>
+        <div class="cl-sc-nums">${s.wrDone}<em> / ${s.wrTotal} дни</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(Math.min(s.wrDone/s.wrTotal,1)*100)}%;background:linear-gradient(90deg,#f472b6,#ec4899)"></div></div>
+      </div>
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">📚</span><span class="cl-sc-label">Четене</span></div>
+        <div class="cl-sc-nums">${s.readDone.toLocaleString('bg')}<em> / ${s.readTotal.toLocaleString('bg')} стр.</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(s.readDone/s.readTotal*100)}%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div>
+      </div>
+    </div>`;
+}
+
+// ── calendar popup picker ──
+let calPickerMonth=new Date(calDate.getFullYear(),calDate.getMonth(),1);
+let calPickerOpen=false;
+
+function calTogglePicker(){
+  calPickerOpen=!calPickerOpen;
+  const popup=document.getElementById('cl-cal-popup');
+  const trigger=document.getElementById('cl-cal-trigger');
+  if(!popup||!trigger)return;
+  popup.style.display=calPickerOpen?'block':'none';
+  trigger.classList.toggle('open',calPickerOpen);
+  if(calPickerOpen){
+    calPickerMonth=new Date(calDate.getFullYear(),calDate.getMonth(),1);
+    calRenderPickerGrid();
+  }
+}
+
+function calClosePicker(){
+  calPickerOpen=false;
+  const popup=document.getElementById('cl-cal-popup');
+  const trigger=document.getElementById('cl-cal-trigger');
+  if(popup)popup.style.display='none';
+  if(trigger)trigger.classList.remove('open');
+}
+
+function calPickerNav(dir){
+  calPickerMonth=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth()+dir,1);
+  calRenderPickerGrid();
+}
+
+function calPickerSelect(dateStr){
+  const parts=dateStr.split('-');
+  calDate=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
+  calClosePicker();
+  calRender();
+}
+
+function calRenderPickerGrid(){
+  const grid=document.getElementById('cl-pop-grid');
+  const monthLabel=document.getElementById('cl-pop-month-label');
+  const prevBtn=document.getElementById('cl-pop-prev');
+  const nextBtn=document.getElementById('cl-pop-next');
+  if(!grid||!monthLabel)return;
+
+  // month label
+  monthLabel.textContent=BG_MONTHS_LONG[calPickerMonth.getMonth()]+' '+calPickerMonth.getFullYear();
+
+  // disable nav at boundaries
+  const prevMonth=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth()-1,1);
+  const nextMonth=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth()+1,1);
+  const lastDayOfNextMonth=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth()+2,0);
+  if(prevBtn)prevBtn.disabled=prevMonth>CAL_END||new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth(),0)<CAL_START;
+  if(nextBtn)nextBtn.disabled=new Date(nextMonth.getFullYear(),nextMonth.getMonth()+1,0)<CAL_START||nextMonth>CAL_END;
+
+  const todayStr=calFmt(new Date());
+  const selStr=calFmt(calDate);
+
+  grid.innerHTML='';
+  // day-of-week headers (Mon first)
+  ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'].forEach(d=>{
+    const el=document.createElement('div');
+    el.className='cl-pop-dow';
+    el.textContent=d;
+    grid.appendChild(el);
+  });
+
+  // first cell offset (Mon=0)
+  const firstDow=(calPickerMonth.getDay()+6)%7;
+  for(let i=0;i<firstDow;i++){
+    const el=document.createElement('div');
+    el.className='cl-pop-day cl-pop-empty';
+    grid.appendChild(el);
+  }
+
+  // days in month
+  const daysInMonth=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth()+1,0).getDate();
+  for(let d=1;d<=daysInMonth;d++){
+    const day=new Date(calPickerMonth.getFullYear(),calPickerMonth.getMonth(),d);
+    const val=calFmt(day);
+    const inRange=calInRange(day);
+    const btn=document.createElement('button');
+    btn.className='cl-pop-day';
+    btn.textContent=d;
+    if(val===todayStr)btn.classList.add('pd-today');
+    if(val===selStr)btn.classList.add('pd-selected');
+    if(inRange&&calDayComplete(day))btn.classList.add('pd-done');
+    if(!inRange){btn.disabled=true;}
+    else{btn.onclick=()=>calPickerSelect(val);}
+    grid.appendChild(btn);
+  }
+}
+
+// update the trigger label
+function calRenderDropdown(){
+  const lbl=document.getElementById('cl-cal-trigger-label');
+  if(!lbl)return;
+  const dow=BG_DOW[calDate.getDay()];
+  lbl.textContent=`${dow}, ${calDate.getDate()} ${BG_MONTHS_LONG[calDate.getMonth()]}`;
+  // refresh grid if popup is open
+  if(calPickerOpen)calRenderPickerGrid();
+}
+
+// close picker when clicking outside
+document.addEventListener('click',function(e){
+  if(calPickerOpen&&!document.getElementById('cl-cal-picker')?.contains(e.target))calClosePicker();
+});
+
+// ── render summary bar (includes date label) ──
+function calRenderSummary(){
+  const el=document.getElementById('cl-summary');
+  if(!el)return;
+  const s=calDayScore(calDate);
+  const pct=s.total>0?Math.round(s.done/s.total*100):0;
+  const isToday=calSameDay(calDate,new Date());
+  const dow=BG_DOW[calDate.getDay()];
+  const dateLabel=`${dow}, ${calDate.getDate()} ${BG_MONTHS_LONG[calDate.getMonth()]}${isToday?' · Днес':''}`;
+  el.innerHTML=`
+    <div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:6px;padding-left:2px">${dateLabel}</div>
+    <div class="cl-summary-bar">
+      <span class="cl-summary-text">${s.done} от ${s.total} задачи изпълнени</span>
+      <div class="cl-mini-prog-wrap"><div class="cl-mini-prog" style="width:${pct}%"></div></div>
+      <span class="cl-summary-pct">${pct}%</span>
+    </div>`;
+}
+
+// ── MATH TAG COLORS ──
+const MATH_TAG_STYLES={
+  'МБГ-Фин2':'background:#fef9c3;color:#713f12',
+  'МБГ':'background:#ede9fe;color:#4c1d95',
+  'ЧХХ':'background:#ebf8ff;color:#2b6cb0',
+  'САЛ':'background:#fce7f3;color:#831843',
+  'ХП':'background:#fef3c7;color:#744210',
+  'КМС':'background:#ecfdf5;color:#065f46',
+  'СМТ':'background:#fff7ed;color:#7c2d12',
+  'ЕК':'background:#e6fffa;color:#234e52',
+  'ВМС':'background:#f0fdf4;color:#14532d',
+};
+
+// ── render tasks ──
+function calRenderTasks(){
+  const container=document.getElementById('cl-tasks');
+  if(!container)return;
+  container.innerHTML='';
+  const dateStr=calFmt(calDate);
+  const today=new Date();
+  const isFuture=calDate>today;
+
+  // ── ENGLISH card ──
+  const engSess=calGetEngSession(dateStr);
+  if(engSess){
+    const isDone=!!engState[engSess.idx];
+    const card=document.createElement('div');
+    card.className='cl-card'+(isDone?' cl-done':'');
+    const bColors={movers:'#1d4ed8',booklet:'#065f46',test:'#991b1b',review:'#5b21b6'};
+    const bLabels={movers:'Fun for Movers',booklet:'Home Fun Booklet',test:'Practice Test',review:'Review'};
+    card.innerHTML=`
+      <div class="cl-card-head">
+        <span class="cl-card-icon">🌞</span>
+        <div class="cl-card-info">
+          <div class="cl-card-title">Английски — Сесия ${engSess.idx+1}</div>
+          <div class="cl-card-sub">${engSess.unit}</div>
+        </div>
+        <span class="cl-card-status ${isDone?'':'pending'}">${isDone?'✓ Готово':'Чака'}</span>
+      </div>
+      <div class="cl-card-body">
+        <div class="cl-eng-check" id="cl-eng-check-${engSess.idx}">
+          <div class="cl-check-circle ${isDone?'checked':''}">
+            ${isDone?'<span style="font-size:14px">✓</span>':''}
+          </div>
+          <span class="cl-check-label">${isDone?'Маркирано като изпълнено — кликни за отмяна':'Кликни за да маркираш като изпълнено'}</span>
+        </div>
+        <div class="cl-eng-activities">
+          ${engSess.activities.map(a=>`<div class="cl-eng-act"><span>${a.icon}</span><span>${a.text}</span></div>`).join('')}
+          ${engSess.tip?`<div class="cl-eng-tip">💡 ${engSess.tip}</div>`:''}
+        </div>
+      </div>`;
+    card.querySelector('.cl-eng-check').addEventListener('click',()=>{
+      engToggleDone(engSess.idx);calRender();
+    });
+    container.appendChild(card);
+  }
+
+  // ── WRITING card ──
+  const wrDone=wrState[dateStr];
+  const wrCard=document.createElement('div');
+  wrCard.className='cl-card'+(wrDone?' cl-done':'');
+  const WR_CLS={essay:'sel-essay',prepis:'sel-prepis',diktovka:'sel-diktovka'};
+  const WR_LBL={essay:'Съчинение',prepis:'Препис',diktovka:'Диктовка'};
+  const WR_COLOR={essay:'#2f80ed',prepis:'#1d9e75',diktovka:'#9b59b6'};
+  let wrBodyHtml;
+  if(wrDone){
+    wrBodyHtml=`<div class="cl-done-bar" style="border-color:${WR_COLOR[wrDone]};background:${WR_COLOR[wrDone]}18;color:${WR_COLOR[wrDone]}">
+      <span>✓ ${WR_LBL[wrDone]} — изпълнено!</span>
+      <button class="cl-undo-btn" id="cl-wr-undo">отмени</button>
+    </div>`;
+  }else{
+    wrBodyHtml=`<div class="cl-wr-type-btns">
+      ${Object.entries(WR_LBL).map(([k,v])=>`<button class="cl-wr-type-btn ${calWrSelected===k&&!isFuture?WR_CLS[k]:''}" data-wrtype="${k}" ${isFuture?'disabled style="opacity:.4;cursor:default"':''}>${v}</button>`).join('')}
+    </div>
+    <button class="cl-mark-btn" id="cl-wr-mark" ${calWrSelected&&!isFuture?'':'disabled'}>Маркирай като изпълнено</button>`;
+  }
+  wrCard.innerHTML=`
+    <div class="cl-card-head">
+      <span class="cl-card-icon">✏️</span>
+      <div class="cl-card-info">
+        <div class="cl-card-title">Писане</div>
+        <div class="cl-card-sub">Съчинение, препис или диктовка</div>
+      </div>
+      <span class="cl-card-status ${wrDone?'':'pending'}">${wrDone?'✓ Готово':'Чака'}</span>
+    </div>
+    <div class="cl-card-body" id="cl-wr-body">${wrBodyHtml}</div>`;
+  if(wrDone){
+    wrCard.querySelector('#cl-wr-undo').addEventListener('click',()=>{
+      delete wrState[dateStr];wrSaveState(wrState);calWrSelected=null;wrRender();calRender();
+    });
+  }else{
+    wrCard.querySelectorAll('.cl-wr-type-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(isFuture)return;
+        calWrSelected=btn.dataset.wrtype;calRender();
+      });
+    });
+    const markBtn=wrCard.querySelector('#cl-wr-mark');
+    if(markBtn){
+      markBtn.addEventListener('click',()=>{
+        if(!calWrSelected||isFuture)return;
+        wrState[dateStr]=calWrSelected;wrSaveState(wrState);calWrSelected=null;wrRender();calRender();
+      });
+    }
+  }
+  container.appendChild(wrCard);
+
+  // ── MATH card ──
+  const mathDay=calGetMathDay(dateStr);
+  if(mathDay){
+    const allDone=mathDay.items.every((_,i)=>mathChecked[mathGetKey(mathDay.idx,i)]);
+    const card=document.createElement('div');
+    card.className='cl-card'+(allDone?' cl-done':'');
+    const doneCnt=mathDay.items.filter((_,i)=>mathChecked[mathGetKey(mathDay.idx,i)]).length;
+    card.innerHTML=`
+      <div class="cl-card-head">
+        <span class="cl-card-icon">📐</span>
+        <div class="cl-card-info">
+          <div class="cl-card-title">Математика</div>
+          <div class="cl-card-sub">${doneCnt} / ${mathDay.items.length} задачи решени</div>
+        </div>
+        <span class="cl-card-status ${allDone?'':'pending'}">${allDone?'✓ Готово':'Чака'}</span>
+      </div>
+      <div class="cl-card-body">
+        ${mathDay.items.map((item,i)=>{
+          const key=mathGetKey(mathDay.idx,i);
+          const checked=!!mathChecked[key];
+          const style=MATH_TAG_STYLES[item.type]||'background:#f3f4f6;color:#374151';
+          return `<div class="cl-math-item">
+            <input type="checkbox" class="cl-math-cb" data-mathkey="${key}" ${checked?'checked':''}>
+            <span class="cl-math-label">${item.file.replace('.pdf','')}</span>
+            <span class="cl-math-tag" style="${style}">${item.type}</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+    card.querySelectorAll('.cl-math-cb').forEach(cb=>{
+      cb.addEventListener('change',()=>{
+        mathChecked[cb.dataset.mathkey]=cb.checked;
+        mathSaveState();mathUpdateProgress();calRender();
+      });
+    });
+    container.appendChild(card);
+  }
+
+  // ── BOOKS card ──
+  let bkState2=bkLoad();
+  BK_BOOKS.forEach((_,i)=>{if(!bkState2[i])bkState2[i]={read:0,done:false};});
+  const readPages=BK_BOOKS.reduce((s,b,i)=>s+(bkState2[i].done?b.pages:(bkState2[i].read||0)),0);
+  const pct=Math.round(readPages/BK_TOTAL_PAGES*100);
+  const bkDone=bkState2&&BK_BOOKS.every((_,i)=>bkState2[i].done);
+  // find current book (first not done)
+  const curBookIdx=BK_BOOKS.findIndex((_,i)=>!bkState2[i]||!bkState2[i].done);
+  const bkCard=document.createElement('div');
+  bkCard.className='cl-card'+(bkDone?' cl-done':'');
+  let bkBodyHtml=`<div style="font-size:12px;color:#6b7280;margin-bottom:8px">Прочетено общо: <strong style="color:#111">${readPages.toLocaleString('bg')} / ${BK_TOTAL_PAGES.toLocaleString('bg')} стр.</strong> · ${pct}%</div>`;
+  if(curBookIdx>=0){
+    const cb=BK_BOOKS[curBookIdx];
+    const cs=bkState2[curBookIdx];
+    const curRead=cs.read||0;
+    bkBodyHtml+=`
+      <div class="cl-book-item">
+        <div class="cl-book-name">${cb.title}</div>
+        <div class="cl-book-prog">${curRead} / ${cb.pages} стр. · ${cb.author}</div>
+        <div class="cl-books-slider-row">
+          <label>Стр:</label>
+          <input type="range" min="0" max="${cb.pages}" value="${curRead}" id="cl-bk-slider-${curBookIdx}">
+          <span class="cl-books-pages" id="cl-bk-pages-${curBookIdx}">${curRead} / ${cb.pages}</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="cl-mark-btn" id="cl-bk-save-${curBookIdx}" style="background:#1d9e75">Запази напредъка</button>
+          <button class="cl-mark-btn" id="cl-bk-done-${curBookIdx}" style="flex:0 0 auto;width:auto;padding:9px 14px;background:#065f46">✓ Книгата е готова</button>
+        </div>
+      </div>`;
+  }
+  bkCard.innerHTML=`
+    <div class="cl-card-head">
+      <span class="cl-card-icon">📚</span>
+      <div class="cl-card-info">
+        <div class="cl-card-title">Четене</div>
+        <div class="cl-card-sub">Дневна цел: 30 стр. · ${curBookIdx>=0?BK_BOOKS[curBookIdx].title:'Всички книги прочетени!'}</div>
+      </div>
+      <span class="cl-card-status ${pct>=100?'':'pending'}">${pct>=100?'✓ Готово':pct+'%'}</span>
+    </div>
+    <div class="cl-card-body">${bkBodyHtml}</div>`;
+  if(curBookIdx>=0){
+    const slider=bkCard.querySelector(`#cl-bk-slider-${curBookIdx}`);
+    const pagesLbl=bkCard.querySelector(`#cl-bk-pages-${curBookIdx}`);
+    slider.addEventListener('input',()=>{pagesLbl.textContent=`${slider.value} / ${BK_BOOKS[curBookIdx].pages}`;});
+    bkCard.querySelector(`#cl-bk-save-${curBookIdx}`).addEventListener('click',()=>{
+      bkState[curBookIdx]={...bkState[curBookIdx],read:parseInt(slider.value)};
+      bkSave(bkState);bkUpdateStats();bkRenderAchievements();calRender();
+    });
+    bkCard.querySelector(`#cl-bk-done-${curBookIdx}`).addEventListener('click',()=>{
+      bkState[curBookIdx]={...bkState[curBookIdx],read:BK_BOOKS[curBookIdx].pages,done:true};
+      bkSave(bkState);bkUpdateStats();bkRenderAchievements();calRender();
+    });
+  }
+  container.appendChild(bkCard);
+}
+
+function calRender(){
+  if(!document.getElementById('cl-tasks'))return;
+  calRenderStats();
+  calRenderDropdown();
+  calRenderSummary();
+  calRenderTasks();
+}
+
+// Hook into showTab to render calendar when tab is opened
+const _origShowTab=showTab;
+showTab=function(name){
+  _origShowTab(name);
+  if(name==='calendar')calRender();
+};
+
+// If calendar tab is active on load, render it
+if(localStorage.getItem('activeTab2026')==='calendar')calRender();
+</script>
+
+<!-- ════════════════ CLOUD SYNC (Firebase) ════════════════ -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+/* ┌───────────────────────────────────────────────────────────┐
+   │  ПОПЪЛНИ ТУК: копирай конфигурацията от Firebase конзолата   │
+   │  (Project settings → Your apps → SDK setup → Config)        │
+   └───────────────────────────────────────────────────────────┘ */
+const firebaseConfig = {
+  apiKey:            "PASTE_API_KEY",
+  authDomain:        "PASTE_PROJECT.firebaseapp.com",
+  projectId:         "PASTE_PROJECT_ID",
+  storageBucket:     "PASTE_PROJECT.appspot.com",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId:             "PASTE_APP_ID"
+};
+
+const SYNC_KEYS = window.__SYNC_KEYS;
+const gateBody = document.getElementById('ag-body');
+const errEl    = document.getElementById('ag-err');
+
+function showLogin(onClick){
+  gateBody.innerHTML =
+    '<div class="ag-sub">Влез с Google акаунта си, за да виждаш и пазиш своя прогрес от всяко устройство.</div>'+
+    '<button class="ag-btn" id="ag-google">'+
+      '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">'+
+      'Вход с Google</button>';
+  document.getElementById('ag-google').addEventListener('click', onClick);
+}
+function showLoading(msg){
+  gateBody.innerHTML = '<div class="ag-spin"></div><div class="ag-sub">'+(msg||'Зареждане…')+'</div>';
+}
+
+let db, auth, currentUid=null;
+
+try {
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db   = getFirestore(app);
+  await setPersistence(auth, browserLocalPersistence);
+} catch(e){
+  showLoading('');
+  errEl.textContent = 'Грешка в конфигурацията на Firebase. Попълни firebaseConfig в кода.';
+  console.error(e);
+}
+
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });  // винаги показвай избор на акаунт
+
+async function cloudSave(){
+  if(!currentUid) return;
+  const payload = {};
+  SYNC_KEYS.forEach(k=>{ const v = localStorage.getItem(k); if(v!=null) payload[k]=v; });
+  payload.updatedAt = Date.now();
+  try { await setDoc(doc(db,'planners',currentUid), payload, { merge:true }); }
+  catch(e){ console.error('cloudSave failed', e); }
+}
+window.__cloudSave = cloudSave;
+
+async function syncDown(uid){
+  const ref = doc(db,'planners',uid);
+  const snap = await getDoc(ref);
+  const data = snap.exists() ? snap.data() : {};
+  window.__syncing = true;                       // don't re-trigger saves while writing
+  SYNC_KEYS.forEach(k=>{
+    if(data[k]!==undefined && data[k]!==null) window.__origSet(k, data[k]);
+  });
+  window.__syncing = false;
+  // Seed the cloud doc with any local-only progress (e.g. first-time login)
+  await cloudSave();
+}
+
+if(auth){
+  onAuthStateChanged(auth, async (user)=>{
+    errEl.textContent = '';
+    if(!user){
+      currentUid = null;
+      document.body.classList.remove('authed');
+      const doLogin = async ()=>{
+        showLoading('Влизане…');
+        try { await signInWithPopup(auth, provider); }
+        catch(e){ showLogin(doLogin); errEl.textContent = 'Входът не успя. Опитай пак.'; console.error(e); }
+      };
+      showLogin(doLogin);
+      return;
+    }
+    currentUid = user.uid;
+    // user bar
+    document.getElementById('ub-name').textContent   = user.displayName || user.email || 'Профил';
+    if(user.photoURL) document.getElementById('ub-avatar').src = user.photoURL;
+    const flag = 'synced::'+user.uid;
+    if(!sessionStorage.getItem(flag)){
+      showLoading('Зареждане на прогреса…');
+      try {
+        await syncDown(user.uid);
+        sessionStorage.setItem(flag,'1');
+        location.reload();                         // reload so the app reads synced data
+        return;
+      } catch(e){
+        errEl.textContent = 'Не успях да заредя прогреса. Опитай да презаредиш.';
+        console.error(e);
+        return;
+      }
+    }
+    document.body.classList.add('authed');         // already synced this session → reveal app
+  });
+
+  document.getElementById('ub-logout').addEventListener('click', async ()=>{
+    if(currentUid) sessionStorage.removeItem('synced::'+currentUid);
+    try { await signOut(auth); } catch(e){ console.error(e); }
+    location.reload();
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Програма за математически състезания — Лято 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a202c; }
+
+  header {
+    background: linear-gradient(135deg, #1a56db 0%, #0e3fa3 100%);
+    color: white;
+    padding: 28px 32px 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  header h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+  header p { opacity: 0.85; font-size: 0.95rem; }
+
+  .stats {
+    display: flex; gap: 16px; padding: 20px 32px; flex-wrap: wrap;
+    background: white; border-bottom: 1px solid #e2e8f0;
+  }
+  .stat {
+    background: #f7f9fc; border-radius: 10px; padding: 12px 20px;
+    text-align: center; border: 1px solid #e2e8f0; min-width: 120px;
+  }
+  .stat .num { font-size: 1.8rem; font-weight: 800; color: #1a56db; line-height: 1; }
+  .stat .lbl { font-size: 0.75rem; color: #718096; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .controls {
+    padding: 16px 32px; background: white; border-bottom: 1px solid #e2e8f0;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  }
+  .controls label { font-size: 0.85rem; color: #4a5568; font-weight: 500; }
+  select, input[type=text] {
+    border: 1px solid #cbd5e0; border-radius: 6px; padding: 6px 10px;
+    font-size: 0.85rem; color: #2d3748; background: white;
+  }
+  .progress-wrap { padding: 16px 32px; background: white; border-bottom: 2px solid #e2e8f0; }
+  .progress-bar-bg { background: #e2e8f0; border-radius: 999px; height: 14px; overflow: hidden; }
+  .progress-bar-fill { background: linear-gradient(90deg, #1a56db, #38b2ac); height: 100%; border-radius: 999px; transition: width 0.3s; }
+  .progress-lbl { font-size: 0.8rem; color: #4a5568; margin-top: 6px; }
+
+  .calendar { padding: 24px 32px; }
+  .month-block { margin-bottom: 32px; }
+  .month-title {
+    font-size: 1.15rem; font-weight: 700; color: #1a56db;
+    margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid #bee3f8;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .month-title span { font-size: 0.8rem; color: #718096; font-weight: 400; }
+
+  .day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
+
+  .day-card {
+    background: white; border-radius: 10px; padding: 12px 14px;
+    border: 1px solid #e2e8f0; transition: box-shadow 0.15s, transform 0.1s;
+    cursor: pointer; position: relative;
+  }
+  .day-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.1); transform: translateY(-1px); }
+  .day-card.done { background: #f0fff4; border-color: #9ae6b4; }
+  .day-card.done .day-num { color: #276749; }
+
+  .day-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .day-num { font-weight: 700; font-size: 0.95rem; color: #1a56db; }
+  .day-name { font-size: 0.72rem; color: #a0aec0; }
+  .day-badge {
+    font-size: 0.68rem; font-weight: 700; border-radius: 999px;
+    padding: 2px 8px;
+  }
+  .badge-3 { background: #fed7e2; color: #97266d; }
+  .badge-2 { background: #e9d8fd; color: #553c9a; }
+
+  .comp-list { list-style: none; }
+  .comp-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 0; font-size: 0.8rem; border-bottom: 1px solid #f7f8fa;
+  }
+  .comp-item:last-child { border-bottom: none; }
+  .comp-item input[type=checkbox] { width: 15px; height: 15px; cursor: pointer; accent-color: #1a56db; }
+  .comp-tag {
+    font-size: 0.68rem; font-weight: 700; border-radius: 4px;
+    padding: 1px 5px; white-space: nowrap; min-width: 36px; text-align: center;
+  }
+  .comp-name { color: #4a5568; }
+  .comp-name.checked { text-decoration: line-through; color: #a0aec0; }
+
+  .type-ЧХХ      { background: #ebf8ff; color: #2b6cb0; }
+  .type-ЕК       { background: #e6fffa; color: #234e52; }
+  .type-ХП       { background: #fef3c7; color: #744210; }
+  .type-САЛ      { background: #fce7f3; color: #831843; }
+  .type-КМС      { background: #ecfdf5; color: #065f46; }
+  .type-МБГ      { background: #ede9fe; color: #4c1d95; }
+  .type-СМТ      { background: #fff7ed; color: #7c2d12; }
+  .type-ВМС      { background: #f0fdf4; color: #14532d; }
+  .type-МБГ-Фин2 { background: #fef9c3; color: #713f12; }
+  .badge-1 { background: #e0f2fe; color: #0369a1; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px; padding: 0 32px 20px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.78rem; color: #4a5568; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  footer { text-align: center; padding: 20px; color: #a0aec0; font-size: 0.8rem; }
+
+  @media (max-width: 600px) {
+    header, .stats, .controls, .calendar, .legend { padding-left: 16px; padding-right: 16px; }
+    .day-grid { grid-template-columns: 1fr; }
+    .stats { gap: 10px; }
+    .stat { min-width: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📐 Програма за математически състезания</h1>
+  <p>30 май – 30 август 2026 &nbsp;·&nbsp; 85 дни, 161 състезания</p>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="num">161</div><div class="lbl">Общо</div></div>
+  <div class="stat"><div class="num">85</div><div class="lbl">Дни</div></div>
+  <div class="stat"><div class="num" id="done-count">0</div><div class="lbl">Решени</div></div>
+  <div class="stat"><div class="num" id="remain-count">161</div><div class="lbl">Остават</div></div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+  <div class="progress-lbl" id="progress-lbl">0 / 161 решени (0%)</div>
+</div>
+
+<div class="controls">
+  <label>Месец:
+    <select id="month-filter">
+      <option value="all">Всички</option>
+      <option value="may">Май (30.05–06.06)</option>
+      <option value="jun">Юни (15.06+)</option>
+      <option value="jul">Юли</option>
+      <option value="aug">Август</option>
+    </select>
+  </label>
+  <label>Само незавършени:
+    <input type="checkbox" id="show-undone">
+  </label>
+  <button onclick="resetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:0.82rem;cursor:pointer;">↺ Нулиране</button>
+</div>
+
+<div class="legend">
+  <div style="width:100%;font-size:0.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">⭐ 30 май – 6 юни (8 бр. — по 1 на ден)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
+  <div style="width:100%;font-size:0.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (58 бр.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024 (първи на 15 юни)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър (ноем.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев (ноем.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #744210"></div>ХП – Хитър Петър (дек.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ecfdf5;border:1px solid #065f46"></div>КМС – Коледно (дек.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Зима (ян.)</div>
+  <div style="width:100%;font-size:0.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (92 бр.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Пролет (март)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fff7ed;border:1px solid #7c2d12"></div>СМТ – Софийски турнир (март)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e6fffa;border:1px solid #234e52"></div>ЕК – Европейско Кенгуру (март)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0fdf4;border:1px solid #14532d"></div>ВМС – Великденско (апр.)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Полуфинал / Финал 3кл (май–юни)</div>
+</div>
+
+<div class="calendar" id="calendar"></div>
+<footer>Математичко · Програма за лятото 2026</footer>
+
+<script>
+const BG_DAYS = ['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
+const BG_MONTHS = ['','Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+
+const schedule = [
+  // Auto-generated: 77 days, 15.06 – 30.08
+  // Format: { date, month, items: [{type, file}] }
+];
+
+// Build schedule programmatically
+function buildSchedule() {
+  // МБГ Финал 2 клас 2014–2024 (11 бр., от най-стари към най-нови)
+  const mbgFin2Years = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  const mbgFin2All = mbgFin2Years.map(y => ({type:'МБГ-Фин2', file:`5_Final_2klas_${y}.pdf`, year:String(y)}));
+
+  // ── ПРЕ-ПЕРИОД: 30 май – 6 юни (8 дни × 1) ──
+  // Първите 8: 2014–2021
+  const preItems = mbgFin2All.slice(0, 8);
+  const preStart = new Date(2026, 4, 30); // May 30
+  const preDays = [];
+  for (let i = 0; i < 8; i++) {
+    const d = new Date(preStart);
+    d.setDate(preStart.getDate() + i);
+    preDays.push({
+      date: d,
+      dd: String(d.getDate()).padStart(2,'0'),
+      mm: d.getMonth() + 1,
+      items: [preItems[i]],
+      count: 1
+    });
+  }
+
+  // ── ГЛАВЕН ПЕРИОД: 15 юни – 30 август (77 дни) ──
+  // Оставащите 3 МБГ-Фин2 (2022,2023,2024) идват първи
+  const remaining3 = mbgFin2All.slice(8); // 3 бр.
+
+  // ФАЗА 1: Септември – Януари (58 бр., без 2021-2025)
+  const typesPhase1 = [
+    {k:'МБГ', years:['1_Fall_2013','1_Fall_2014','1_Fall_2015','1_Fall_2016','1_Fall_2017','1_Fall_2018','1_Fall_2019','1_Fall_2020'],
+      fmt: s=>`${s}.pdf`, raw:true},
+    {k:'ЧХХ', years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_CHH_3 klas.pdf`},
+    {k:'САЛ', years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_SAL_3 klas.pdf`},
+    {k:'ХП',  years:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_HP_3 klas.pdf`},
+    {k:'КМС', years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_KMS_3 klas.pdf`},
+    {k:'МБГ', years:['2_Winter_2014','2_Winter_2015','2_Winter_2016','2_Winter_2017','2_Winter_2018','2_Winter_2019','2_Winter_2020'],
+      fmt: s=>`${s}.pdf`, raw:true},
+  ];
+
+  // ФАЗА 2: Февруари – Юни (92 бр., без 2021-2025)
+  const typesPhase2 = [
+    {k:'МБГ', years:['3_Spring_2014','3_Spring_2015','3_Spring_2016','3_Spring_2017','3_Spring_2018','3_Spring_2019','3_Spring_2020'],
+      fmt: s=>`${s}.pdf`, raw:true},
+    {k:'СМТ', years:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_SMT_3 klas.pdf`},
+    {k:'ЕК',  years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020], fmt: y=>`${y}_EK_3 klas.pdf`},
+    {k:'ВМС', years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019], fmt: y=>`${y}_VMS_3 klas.pdf`},
+    {k:'МБГ', years:['4_Semifinal_2019','4_Semifinal_2020'], fmt: s=>`${s}.pdf`, raw:true},
+    {k:'МБГ', years:['5_Final_2014','5_Final_2015','5_Final_2016','5_Final_2017','5_Final_2018','5_Final_2019','5_Final_2020'],
+      fmt: s=>`${s}.pdf`, raw:true},
+  ];
+
+  function interleave(types) {
+    const pools = types.map(t => ({
+      k: t.k,
+      items: t.years.map(y => t.raw ? {type:t.k, file:t.fmt(y)} : {type:t.k, file:t.fmt(y)})
+    }));
+    const result = [];
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const p of pools) {
+        if (p.items.length > 0) { result.push(p.items.shift()); changed = true; }
+      }
+    }
+    return result;
+  }
+
+  // Пул за главния период: 3 МБГ-Фин2 + 150 = 153 бр.
+  const mainAll = [...remaining3, ...interleave(typesPhase1), ...interleave(typesPhase2)];
+
+  // 153 бр. / 77 дни → 76 дни × 2, 1 ден × 1 (последен ден)
+  const dayCounts = Array(77).fill(2);
+  dayCounts[76] = 1; // 76×2 + 1 = 153
+
+  const mainDays = [];
+  let idx = 0;
+  const startDate = new Date(2026, 5, 15); // June 15
+  for (let i = 0; i < 77; i++) {
+    const d = new Date(startDate);
+    d.setDate(startDate.getDate() + i);
+    const n = dayCounts[i];
+    mainDays.push({
+      date: d,
+      dd: String(d.getDate()).padStart(2,'0'),
+      mm: d.getMonth() + 1,
+      items: mainAll.slice(idx, idx+n),
+      count: n
+    });
+    idx += n;
+  }
+
+  return [...preDays, ...mainDays];
+}
+
+const SCHED = buildSchedule();
+const TOTAL = 161;
+let checked = {};
+
+function getKey(dayIdx, itemIdx) { return `${dayIdx}_${itemIdx}`; }
+
+function loadState() {
+  try { const s = localStorage.getItem('math_prog_2026'); if(s) checked = JSON.parse(s); } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('math_prog_2026', JSON.stringify(checked)); } catch(e) {}
+}
+
+function updateProgress() {
+  const done = Object.values(checked).filter(Boolean).length;
+  const pct = Math.round(done / TOTAL * 100);
+  document.getElementById('done-count').textContent = done;
+  document.getElementById('remain-count').textContent = TOTAL - done;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-lbl').textContent = `${done} / ${TOTAL} решени (${pct}%)`;
+}
+
+function resetAll() {
+  if (!confirm('Нулирай целия прогрес?')) return;
+  checked = {};
+  saveState();
+  render();
+}
+
+function isDayDone(dayIdx) {
+  const day = SCHED[dayIdx];
+  return day.items.every((_, i) => checked[getKey(dayIdx, i)]);
+}
+
+function render() {
+  const monthFilter = document.getElementById('month-filter').value;
+  const showUndone = document.getElementById('show-undone').checked;
+
+  const monthNames = {5:'Май (30.05–06.06)', 6:'Юни', 7:'Юли', 8:'Август'};
+  const monthOrder = [5,6,7,8];
+
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+
+  for (const mo of monthOrder) {
+    if (monthFilter !== 'all') {
+      const map = {may:5, jun:6, jul:7, aug:8};
+      if (map[monthFilter] !== mo) continue;
+    }
+
+    const days = SCHED.map((d,i) => ({...d, idx:i})).filter(d => d.mm === mo);
+    if (!days.length) continue;
+
+    let filtered = days;
+    if (showUndone) filtered = days.filter(d => !isDayDone(d.idx));
+    if (!filtered.length) continue;
+
+    const block = document.createElement('div');
+    block.className = 'month-block';
+
+    const totalInMonth = days.reduce((s,d)=>s+d.count,0);
+    block.innerHTML = `<div class="month-title">📅 ${monthNames[mo]} <span>(${days.length} дни, ${totalInMonth} бр.)</span></div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'day-grid';
+
+    for (const day of filtered) {
+      const dayName = BG_DAYS[day.date.getDay()];
+      const done = isDayDone(day.idx);
+      const card = document.createElement('div');
+      card.className = 'day-card' + (done ? ' done' : '');
+
+      let html = `<div class="day-header">
+        <div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div>
+        <span class="day-badge badge-${day.count}">${day.count} бр.</span>
+      </div><ul class="comp-list">`;
+
+      for (let i = 0; i < day.items.length; i++) {
+        const item = day.items[i];
+        const key = getKey(day.idx, i);
+        const isChecked = !!checked[key];
+        // Extract year from item.year or filename
+        const year = item.year || (item.file.match(/\d{4}/) || [''])[0];
+        // Subtype label
+        let label = item.type;
+        let cssType = item.type;
+        if (item.type === 'МБГ') {
+          if (item.file.includes('Fall')) label = 'МБГ-Есен';
+          else if (item.file.includes('Winter')) label = 'МБГ-Зима';
+          else if (item.file.includes('Spring')) label = 'МБГ-Пролет';
+          else if (item.file.includes('Semifinal')) label = 'МБГ-П/фин';
+          else if (item.file.includes('Final')) label = 'МБГ-Фин';
+        }
+        if (item.type === 'МБГ-Фин2') { label = 'МБГ-Фин2кл'; cssType = 'МБГ-Фин2'; }
+        html += `<li class="comp-item">
+          <input type="checkbox" data-key="${key}" ${isChecked?'checked':''}>
+          <span class="comp-tag type-${cssType}">${label}</span>
+          <span class="comp-name${isChecked?' checked':''}">${year}</span>
+        </li>`;
+      }
+      html += '</ul>';
+      card.innerHTML = html;
+      grid.appendChild(card);
+    }
+
+    block.appendChild(grid);
+    cal.appendChild(block);
+  }
+
+  // Attach checkbox listeners
+  document.querySelectorAll('input[type=checkbox][data-key]').forEach(cb => {
+    cb.addEventListener('change', function() {
+      const key = this.getAttribute('data-key');
+      checked[key] = this.checked;
+      saveState();
+      const label = this.closest('li').querySelector('.comp-name');
+      if (label) label.classList.toggle('checked', this.checked);
+      const card = this.closest('.day-card');
+      if (card) {
+        // check if all done
+        const allCbs = card.querySelectorAll('input[type=checkbox]');
+        const allDone = Array.from(allCbs).every(c => c.checked);
+        card.classList.toggle('done', allDone);
+      }
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+}
+
+loadState();
+document.getElementById('month-filter').addEventListener('change', render);
+document.getElementById('show-undone').addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
