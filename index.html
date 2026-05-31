@@ -958,8 +958,9 @@ const BK_RANKS=[
 ];
 function bkGetRank(pct){return BK_RANKS.find(r=>pct>=r.min&&pct<r.max)||BK_RANKS[BK_RANKS.length-1];}
 function bkRenderRankCard(){
-  const readPages=bkGetReadPages();
-  const pct=Math.round(readPages/BK_TOTAL_PAGES*100);
+  const doneBooks=BK_BOOKS.filter((_,i)=>bkState[i].done).length;
+  const totalBooks=BK_BOOKS.length;
+  const pct=totalBooks>0?Math.round(doneBooks/totalBooks*100):0;
   const rank=bkGetRank(pct);
   const nextRank=BK_RANKS[BK_RANKS.indexOf(rank)+1];
   const withinPct=rank.max>rank.min?Math.round((pct-rank.min)/(rank.max-rank.min)*100):100;
