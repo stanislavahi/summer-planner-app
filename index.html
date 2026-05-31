@@ -561,7 +561,6 @@ body.authed #user-bar{display:flex}
     <button class="btn-filter" onclick="engFilter('movers')">Fun for Movers</button>
     <button class="btn-filter" onclick="engFilter('booklet')">Home Fun Booklet</button>
   </div>
-  <div id="eng-rank-card"></div>
   <div class="mot-badges-wrap" id="eng-badges-wrap">
     <div class="mot-badges-title">🏅 Achievements</div>
     <div class="mot-badges" id="eng-badges"></div>
@@ -1498,21 +1497,6 @@ function renderEngMotivation(){
   const done=ENG_SESSIONS.filter((_,i)=>engState[i]).length;
   const rank=ENG_RANKS.find(r=>done>=r.min&&done<r.max)||ENG_RANKS[ENG_RANKS.length-1];
   const nextRank=ENG_RANKS[ENG_RANKS.indexOf(rank)+1];
-  const within=nextRank?Math.round((done-rank.min)/(nextRank.min-rank.min)*100):100;
-  const xp=done*100;
-  const el=document.getElementById('eng-rank-card');
-  el.innerHTML=`<div class="mot-rank-card" style="background:linear-gradient(135deg,${rank.grad})">
-    <div class="mot-emoji">${rank.emoji}</div>
-    <div class="mot-info">
-      <div class="mot-name">${rank.name}</div>
-      <div class="mot-msg">${rank.msg}</div>
-      <div class="mot-bar-row">
-        <div class="mot-bar-wrap"><div class="mot-bar" style="width:${within}%"></div></div>
-        <span class="mot-bar-label">${done}${nextRank?' → '+nextRank.min:' / 39'} sessions</span>
-      </div>
-    </div>
-    <div class="mot-xp"><div class="xp-num">${xp}</div><div class="xp-lbl">XP</div></div>
-  </div>`;
   const grid=document.getElementById('eng-badges');
   grid.innerHTML=ENG_BADGES.map(b=>{
     const u=b.check(done,engState);
