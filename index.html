@@ -546,13 +546,11 @@ body.authed #user-bar{display:flex}
     <h1>🌞 Summer English Study Plan 2026</h1>
     <p>Fun for Movers 4 (Units 1–50) · Home Fun Booklet 4 (15 topics) · June 15 – August 18</p>
     <div class="progress-bar-wrap"><div class="progress-bar-fill" id="eng-progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="eng-progressText">0 / 39 sessions completed</div>
+    <div class="progress-text" id="eng-progressText">0 / 65 sessions completed</div>
   </div>
   <div class="eng-legend">
     <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div>Fun for Movers</div>
     <div class="legend-item"><div class="legend-dot" style="background:#10B981"></div>Home Fun Booklet</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Practice Test</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6"></div>Review</div>
   </div>
   <div class="eng-controls">
     <button class="btn-filter active" onclick="engFilter('all')">All Sessions</button>
@@ -817,8 +815,8 @@ function engFilter(f){
 function renderEnglish(){
   const today=new Date().toISOString().split('T')[0];
   const done=ENG_SESSIONS.filter((_,i)=>engState[i]).length;
-  document.getElementById('eng-progressFill').style.width=(done/39*100)+'%';
-  document.getElementById('eng-progressText').textContent=`${done} / 39 sessions completed`;
+  document.getElementById('eng-progressFill').style.width=(done/65*100)+'%';
+  document.getElementById('eng-progressText').textContent=`${done} / 65 sessions completed`;
   const container=document.getElementById('eng-sessions-container');
   container.innerHTML='';
   let visible=ENG_SESSIONS.map((s,i)=>({...s,idx:i,key:engDateKey(s)}));
