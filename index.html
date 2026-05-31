@@ -1589,11 +1589,15 @@ function calGetSummerStats(){
   const read30Days=Object.entries(rdS).filter(([k,v])=>v>=RD_GOAL&&k>=rdToKey(RD_START)&&k<=rdToKey(RD_END)).length;
   const readTotalDays=Math.round((RD_END-RD_START)/86400000)+1;
   const readElapsedDays=Math.min(Math.max(Math.floor((new Date()-RD_START)/86400000)+1,0),readTotalDays);
-  // Overall % — pace-based (how on-track vs. what should be done by today)
-  const elapsed=Math.min(Math.max((Math.min(new Date(),CAL_END)-CAL_START)/86400000+1,0),(CAL_END-CAL_START)/86400000+1);
-  const frac=elapsed/((CAL_END-CAL_START)/86400000+1);
-  const onPace=(done,total)=>frac>0?Math.min(done/(total*frac),1):0;
-  const pcts=[onPace(engDone,engTotal),onPace(mathDone,mathTotal),Math.min(wrDone/wrTotal,1),onPace(readDone,readTotal)];
+  // Overall % — average of: English sessions/65, Math done/total,
+  // Reading pages/total, Writing days/90
+  const WR_GOAL_DAYS=90;
+  const pcts=[
+    engDone/engTotal,
+    mathDone/mathTotal,
+    readDone/readTotal,
+    Math.min(wrDone/WR_GOAL_DAYS,1)
+  ];
   const overall=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length*100);
   return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,readDone,readTotal,read30Days,readElapsedDays,readTotalDays,overall};
 }
