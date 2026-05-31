@@ -1670,6 +1670,11 @@ function calRenderStats(){
         <div class="cl-sc-nums">${s.read30Days}<em> / ${s.readElapsedDays} дни (от ${s.readTotalDays})</em></div>
         <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${s.readElapsedDays>0?Math.round(s.read30Days/s.readElapsedDays*100):0}%;background:linear-gradient(90deg,#34d399,#1D9E75)"></div></div>
       </div>
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">📖</span><span class="cl-sc-label">Средно стр./ден</span></div>
+        <div class="cl-sc-nums">${s.avgPagesPerDay}<em> стр. на ден</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.min(Math.round(s.avgPagesPerDay/30*100),100)}%;background:linear-gradient(90deg,#fbbf24,#f97316)"></div></div>
+      </div>
     </div>`;
 }
 
