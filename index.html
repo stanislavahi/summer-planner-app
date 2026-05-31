@@ -646,7 +646,6 @@ body.authed #user-bar{display:flex}
     <div class="math-pb-bg"><div class="math-pb-fill" id="math-pb-fill" style="width:0%"></div></div>
     <div class="math-pb-lbl" id="math-pb-lbl">0 / 161 решени (0%)</div>
   </div>
-  <div id="math-rank-card"></div>
   <div class="mot-badges-wrap" id="math-badges-wrap">
     <div class="mot-badges-title">🏅 Постижения</div>
     <div class="mot-badges" id="math-badges"></div>
@@ -1551,22 +1550,6 @@ const MATH_BADGES=[
 function renderMathMotivation(){
   const done=Object.values(mathChecked).filter(Boolean).length;
   const rank=MATH_RANKS.find(r=>done>=r.min&&done<r.max)||MATH_RANKS[MATH_RANKS.length-1];
-  const nextRank=MATH_RANKS[MATH_RANKS.indexOf(rank)+1];
-  const within=nextRank?Math.round((done-rank.min)/(nextRank.min-rank.min)*100):100;
-  const xp=done*10;
-  const el=document.getElementById('math-rank-card');
-  el.innerHTML=`<div class="mot-rank-card" style="background:linear-gradient(135deg,${rank.grad})">
-    <div class="mot-emoji">${rank.emoji}</div>
-    <div class="mot-info">
-      <div class="mot-name">${rank.name}</div>
-      <div class="mot-msg">${rank.msg}</div>
-      <div class="mot-bar-row">
-        <div class="mot-bar-wrap"><div class="mot-bar" style="width:${within}%"></div></div>
-        <span class="mot-bar-label">${done}${nextRank?' → '+nextRank.min:' / 161'} задачи</span>
-      </div>
-    </div>
-    <div class="mot-xp"><div class="xp-num">${xp}</div><div class="xp-lbl">XP</div></div>
-  </div>`;
   const grid=document.getElementById('math-badges');
   grid.innerHTML=MATH_BADGES.map(b=>{
     const u=b.check(done);
