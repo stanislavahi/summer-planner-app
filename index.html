@@ -146,6 +146,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-books .bdg.unlocked .bn{color:var(--text)}
 #tab-books .bdg .br{font-size:9px;color:var(--text-ter);margin-top:2px}
 #tab-books .bk-footer{margin-top:2rem;text-align:center;font-size:12px;color:var(--text-ter)}
+/* add-book form */
+#tab-books .bk-add-book{margin-top:14px;background:var(--bg-sec);border-radius:var(--r-lg);padding:14px 16px}
+#tab-books .bk-add-title{font-size:13px;font-weight:500;color:var(--text-sec);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+#tab-books .bk-add-title .ti{color:var(--green)}
+#tab-books .bk-add-row{display:flex;gap:8px;flex-wrap:wrap}
+#tab-books .bk-add-row input{padding:9px 12px;border:1.5px solid var(--bdr-hov);border-radius:var(--r-md);font-size:14px;background:var(--bg-card);color:var(--text)}
+#tab-books .bk-add-row input:focus{outline:none;border-color:var(--green)}
+#tab-books .bk-add-row #bk-add-name{flex:2;min-width:140px}
+#tab-books .bk-add-row #bk-add-author{flex:1.4;min-width:110px}
+#tab-books .bk-add-row #bk-add-pages{width:80px;flex:0 0 auto}
+#tab-books .bk-add-btn{padding:9px 18px;border-radius:var(--r-md);border:none;background:var(--green);color:white;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+#tab-books .bk-add-btn:hover{opacity:.85}
+#tab-books .bk-remove-btn{background:none;border:none;cursor:pointer;color:var(--text-ter);padding:2px 4px;display:flex;align-items:center;font-size:16px;border-radius:4px;transition:color .15s,background .15s}
+#tab-books .bk-remove-btn:hover{color:#EB5757;background:var(--bg-sec)}
 /* reading daily-pages calendar */
 #tab-books .read-today{background:var(--bg-sec);border-radius:var(--r-lg);padding:14px 16px;margin:1.25rem 0}
 #tab-books .read-today-label{font-size:12px;color:var(--text-sec);margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -575,6 +589,15 @@ body.authed #user-bar{display:flex}
     </div>
     <div id="bk-read-achievements"></div>
     <div class="books-list" id="bk-books-list"></div>
+    <div class="bk-add-book">
+      <div class="bk-add-title"><i class="ti ti-plus"></i> Добави книга</div>
+      <div class="bk-add-row">
+        <input type="text" id="bk-add-name" placeholder="Заглавие">
+        <input type="text" id="bk-add-author" placeholder="Автор (по избор)">
+        <input type="number" id="bk-add-pages" min="1" placeholder="Стр.">
+        <button class="bk-add-btn" id="bk-add-btn">Добави</button>
+      </div>
+    </div>
     <div class="read-today" id="rd-today-box"></div>
     <div id="rd-calendar"></div>
     <div class="read-legend">
@@ -860,7 +883,7 @@ renderEnglish();
 // ══════════════════════════════════════════
 // BOOKS SECTION
 // ══════════════════════════════════════════
-const BK_BOOKS=[
+const BK_BASE_BOOKS=[
   {title:"Приключенията на Лукчо",author:"Дж. Родари",pages:224},
   {title:"Ние, врабчетата",author:"Й. Радичков",pages:136},
   {title:"Страната на сънищата: Любими Попътечо",author:"Ю. Спиридонова",pages:264},
@@ -877,12 +900,37 @@ const BK_BOOKS=[
   {title:"Историята на д-р Дулитъл",author:"Хю Лофтинг",pages:144},
   {title:"Приказки от Оная гора",author:"М. Дългъчева",pages:64}
 ];
-const BK_TOTAL_PAGES=2725;
 const BK_STORAGE_KEY='summer_reading_2026';
+const BK_CUSTOM_KEY='summer_custom_books_2026';
+function bkLoadCustom(){try{const a=JSON.parse(localStorage.getItem(BK_CUSTOM_KEY));return Array.isArray(a)?a:[];}catch{return [];}}
+function bkSaveCustom(){try{localStorage.setItem(BK_CUSTOM_KEY,JSON.stringify(BK_CUSTOM));}catch{}}
+let BK_CUSTOM=bkLoadCustom();
+let BK_BOOKS=BK_BASE_BOOKS.concat(BK_CUSTOM);
+let BK_TOTAL_PAGES=BK_BOOKS.reduce((s,b)=>s+(b.pages||0),0);
+function bkRecompute(){BK_BOOKS=BK_BASE_BOOKS.concat(BK_CUSTOM);BK_TOTAL_PAGES=BK_BOOKS.reduce((s,b)=>s+(b.pages||0),0);}
 function bkLoad(){try{return JSON.parse(localStorage.getItem(BK_STORAGE_KEY))||{};}catch{return {};}}
 function bkSave(s){try{localStorage.setItem(BK_STORAGE_KEY,JSON.stringify(s));}catch{}}
 let bkState=bkLoad();
 BK_BOOKS.forEach((_,i)=>{if(!bkState[i])bkState[i]={read:0,done:false,expanded:false};});
+function bkAddBook(title,pages,author){
+  const p=Math.max(1,Math.round(+pages||0));
+  if(!title||!title.trim()||!p)return false;
+  BK_CUSTOM.push({title:title.trim(),author:(author||'').trim(),pages:p,custom:true});
+  bkSaveCustom();bkRecompute();
+  BK_BOOKS.forEach((_,i)=>{if(!bkState[i])bkState[i]={read:0,done:false,expanded:false};});
+  bkSave(bkState);bkRender();if(typeof calRenderStats==='function')calRenderStats();
+  return true;
+}
+function bkRemoveBook(i){
+  const ci=i-BK_BASE_BOOKS.length;
+  if(ci<0)return;
+  if(!confirm('Изтрий книгата „'+BK_BOOKS[i].title+'"?'))return;
+  BK_CUSTOM.splice(ci,1);bkSaveCustom();
+  // reindex bkState: drop removed, shift later custom entries
+  const ns={};BK_BASE_BOOKS.forEach((_,k)=>{ns[k]=bkState[k]||{read:0,done:false,expanded:false};});
+  BK_CUSTOM.forEach((_,k)=>{const oldIdx=BK_BASE_BOOKS.length+(k>=ci?k+1:k);ns[BK_BASE_BOOKS.length+k]=bkState[oldIdx]||{read:0,done:false,expanded:false};});
+  bkState=ns;bkRecompute();bkSave(bkState);bkRender();if(typeof calRenderStats==='function')calRenderStats();
+}
 function bkGetReadPages(){return BK_BOOKS.reduce((sum,b,i)=>sum+(bkState[i].done?b.pages:(bkState[i].read||0)),0);}
 function bkUpdateStats(){
   const readPages=bkGetReadPages();
@@ -972,11 +1020,12 @@ function bkRenderList(){
     card.innerHTML=`
       <div class="book-row">
         <button class="check-btn" data-i="${i}">${s.done?'<i class="ti ti-check"></i>':''}</button>
-        <div class="book-info"><div class="book-title" title="${b.title}">„${b.title}"</div><div class="book-author">${b.author}</div></div>
+        <div class="book-info"><div class="book-title" title="${b.title}">„${b.title}"</div><div class="book-author">${b.author||''}</div></div>
         <div class="book-meta">
           <div class="mini-bar-wrap"><div class="mini-bar" style="width:${pct}%"></div></div>
           <span class="pages-badge" id="bk-badge-${i}">${readPg} / ${b.pages} стр.</span>
           ${!s.done?`<button class="expand-btn" data-expand="${i}"><i class="ti ti-pencil"></i></button>`:''}
+          ${b.custom?`<button class="bk-remove-btn" data-remove="${i}" title="Изтрий книгата"><i class="ti ti-trash"></i></button>`:''}
         </div>
       </div>
       ${!s.done?`<div class="page-input-row" id="bk-expand-${i}" style="display:${s.expanded?'flex':'none'}">
@@ -986,14 +1035,34 @@ function bkRenderList(){
       </div>`:''}`;
     list.appendChild(card);
   });
-  list.addEventListener('click',function(e){
-    const cb=e.target.closest('.check-btn');
-    const eb=e.target.closest('.expand-btn');
-    if(cb)bkToggleDone(+cb.dataset.i);
-    if(eb)bkToggleExpand(+eb.dataset.expand);
-  });
-  list.addEventListener('input',function(e){
-    if(e.target.dataset.range!==undefined)bkUpdatePages(+e.target.dataset.range,+e.target.value);
+  if(!list.dataset.bound){
+    list.dataset.bound='1';
+    list.addEventListener('click',function(e){
+      const cb=e.target.closest('.check-btn');
+      const eb=e.target.closest('.expand-btn');
+      const rb=e.target.closest('.bk-remove-btn');
+      if(cb)bkToggleDone(+cb.dataset.i);
+      if(eb)bkToggleExpand(+eb.dataset.expand);
+      if(rb)bkRemoveBook(+rb.dataset.remove);
+    });
+    list.addEventListener('input',function(e){
+      if(e.target.dataset.range!==undefined)bkUpdatePages(+e.target.dataset.range,+e.target.value);
+    });
+  }
+}
+function bkBindAddBook(){
+  const btn=document.getElementById('bk-add-btn');if(!btn||btn.dataset.bound)return;
+  btn.dataset.bound='1';
+  const submit=()=>{
+    const name=document.getElementById('bk-add-name');
+    const pages=document.getElementById('bk-add-pages');
+    const author=document.getElementById('bk-add-author');
+    if(bkAddBook(name.value,pages.value,author.value)){name.value='';pages.value='';author.value='';name.focus();}
+    else{alert('Въведи заглавие и брой страници.');}
+  };
+  btn.addEventListener('click',submit);
+  ['bk-add-name','bk-add-pages','bk-add-author'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
   });
 }
 function bkRender(){bkRenderList();bkUpdateStats();bkRenderRankCard();bkRenderAchievements();rdRender();}
@@ -1094,6 +1163,7 @@ function rdRenderSummary(){
 }
 function rdRender(){rdRenderToday();rdRenderCalendar();}
 bkRender();
+bkBindAddBook();
 
 // ══════════════════════════════════════════
 // WRITING SECTION
