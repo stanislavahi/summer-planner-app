@@ -575,6 +575,7 @@ body.authed #user-bar{display:flex}
     <div id="bk-read-achievements"></div>
     <div class="books-list" id="bk-books-list"></div>
     <div class="read-today" id="rd-today-box"></div>
+    <div class="bk-stats" id="rd-summary" style="grid-template-columns:repeat(2,1fr);margin-bottom:1.25rem"></div>
     <div id="rd-calendar"></div>
     <div class="read-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Над 30 стр.</div>
@@ -1078,7 +1079,20 @@ function rdRenderCalendar(){
     block.appendChild(grid);cal.appendChild(block);
   });
 }
-function rdRender(){rdRenderToday();rdRenderCalendar();}
+function rdRenderSummary(){
+  const box=document.getElementById('rd-summary');if(!box)return;
+  const today=rdTodayKey();
+  const entries=Object.entries(rdState).filter(([k])=>k>=rdToKey(RD_START)&&k<=today);
+  const totalPages=entries.reduce((s,[,v])=>s+v,0);
+  const elapsedDays=Math.min(Math.max(Math.floor((new Date()-RD_START)/86400000)+1,0),Math.round((RD_END-RD_START)/86400000)+1);
+  const activeDays=entries.length;
+  const avgElapsed=elapsedDays>0?Math.round(totalPages/elapsedDays):0;
+  const avgActive=activeDays>0?Math.round(totalPages/activeDays):0;
+  box.innerHTML=`
+    <div class="bk-stat"><div class="stat-label">Средно на ден</div><div class="stat-value">${avgElapsed}</div><div class="stat-sub">стр./ден (от ${elapsedDays} дни)</div></div>
+    <div class="bk-stat"><div class="stat-label">Средно в дни с четене</div><div class="stat-value">${avgActive}</div><div class="stat-sub">стр. в ${activeDays} дни</div></div>`;
+}
+function rdRender(){rdRenderToday();rdRenderSummary();rdRenderCalendar();}
 bkRender();
 
 // ══════════════════════════════════════════
