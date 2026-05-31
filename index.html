@@ -867,14 +867,16 @@ const BK_BOOKS=[
   {title:"Приключенията на Незнайко",author:"Н. Носов",pages:144},
   {title:"Небивалици",author:"Д. Бисет",pages:216},
   {title:"Книга за джунглата",author:"Р. Киплинг",pages:328},
-  {title:"Антон и Точица / Хвърчащата класна стая / Двойната Лотхен",author:"Е. Кестнер",pages:408},
+  {title:"Антон и Точица",author:"Е. Кестнер",pages:125},
+  {title:"Хвърчащата класна стая",author:"Е. Кестнер",pages:145},
+  {title:"Двойната Лотхен",author:"Е. Кестнер",pages:135},
   {title:"Това се случи на 35 май",author:"Е. Кестнер",pages:144},
   {title:"Малкият мъж",author:"Е. Кестнер",pages:208},
   {title:"Братята с лъвски сърца",author:"А. Линдгрен",pages:240},
   {title:"Историята на д-р Дулитъл",author:"Хю Лофтинг",pages:144},
   {title:"Приказки от Оная гора",author:"М. Дългъчева",pages:64}
 ];
-const BK_TOTAL_PAGES=2728;
+const BK_TOTAL_PAGES=2725;
 const BK_STORAGE_KEY='summer_reading_2026';
 function bkLoad(){try{return JSON.parse(localStorage.getItem(BK_STORAGE_KEY))||{};}catch{return {};}}
 function bkSave(s){try{localStorage.setItem(BK_STORAGE_KEY,JSON.stringify(s));}catch{}}
@@ -930,7 +932,13 @@ const BK_BADGES=[
   {icon:'🚀',name:'1000 страници',req:'Прочети 1000 стр.',check:p=>p>=1000},
   {icon:'🌟',name:'Половината',req:'50% прочетено',check:p=>p>=BK_TOTAL_PAGES*.5},
   {icon:'🏆',name:'2000 страници',req:'Прочети 2000 стр.',check:p=>p>=2000},
-  {icon:'👑',name:'Всички книги',req:'Завърши всички',check:(p,b,s)=>b.every((_,i)=>s[i].done)}
+  {icon:'👑',name:'Всички книги',req:'Завърши всички',check:(p,b,s)=>b.every((_,i)=>s[i].done)},
+  {icon:'🟢',name:'Първи 30+',req:'1 ден с ≥30 стр.',check:()=>rdDays30Count()>=1},
+  {icon:'🔥',name:'3 поредни 30+',req:'3 поредни дни ≥30 стр.',check:()=>rdMaxStreak30()>=3},
+  {icon:'⚡',name:'Седмица 30+',req:'7 поредни дни ≥30 стр.',check:()=>rdMaxStreak30()>=7},
+  {icon:'🌊',name:'2 седмици 30+',req:'14 поредни дни ≥30 стр.',check:()=>rdMaxStreak30()>=14},
+  {icon:'💪',name:'10 дни 30+',req:'10 дни общо ≥30 стр.',check:()=>rdDays30Count()>=10},
+  {icon:'🏅',name:'30 дни 30+',req:'30 дни общо ≥30 стр.',check:()=>rdDays30Count()>=30}
 ];
 function bkRenderAchievements(){
   const readPages=bkGetReadPages();
@@ -1004,7 +1012,18 @@ function rdTodayKey(){return rdToKey(new Date());}
 function rdAllDays(){const days=[];const cur=new Date(RD_START);while(cur<=RD_END){days.push(new Date(cur));cur.setDate(cur.getDate()+1);}return days;}
 function rdDaysByMonth(){const groups=[];let cur=null;rdAllDays().forEach(d=>{const key=d.getFullYear()*100+d.getMonth();if(!cur||cur.key!==key){cur={key,month:d.getMonth(),year:d.getFullYear(),days:[]};groups.push(cur);}cur.days.push(new Date(d));});return groups;}
 function rdColorClass(p){if(p>=RD_GOAL)return 'read-green';if(p>0)return 'read-orange';return 'read-red';}
-function rdSetPages(key,val){const n=Math.max(0,Math.round(+val||0));if(isNaN(n)){return;}rdState[key]=n;rdSave(rdState);rdRender();}
+function rdDays30Count(){return Object.entries(rdState).filter(([k,v])=>v>=RD_GOAL).length;}
+function rdMaxStreak30(){
+  const keys=Object.keys(rdState).filter(k=>rdState[k]>=RD_GOAL).sort();
+  let max=0,cur=0,prev=null;
+  keys.forEach(k=>{
+    const d=new Date(k);
+    if(prev&&(d-prev)===86400000)cur++;else cur=1;
+    if(cur>max)max=cur;prev=d;
+  });
+  return max;
+}
+function rdSetPages(key,val){const n=Math.max(0,Math.round(+val||0));if(isNaN(n)){return;}rdState[key]=n;rdSave(rdState);rdRender();bkRenderAchievements();if(typeof calRenderStats==='function')calRenderStats();}
 function rdRenderToday(){
   const box=document.getElementById('rd-today-box');if(!box)return;
   const key=rdTodayKey();const now=new Date();const dateStr=`${now.getDate()} ${RD_MONTHS_SHORT[now.getMonth()]}`;
@@ -1051,7 +1070,7 @@ function rdRenderCalendar(){
         cell.addEventListener('click',()=>{
           const v=prompt(`Прочетени страници на ${d.getDate()} ${RD_MONTHS_SHORT[d.getMonth()]}:`,rdState[key]!==undefined?rdState[key]:'');
           if(v!==null&&v.trim()!=='')rdSetPages(key,v.trim());
-          else if(v!==null&&v.trim()===''){delete rdState[key];rdSave(rdState);rdRender();}
+          else if(v!==null&&v.trim()===''){delete rdState[key];rdSave(rdState);rdRender();bkRenderAchievements();if(typeof calRenderStats==='function')calRenderStats();}
         });
       }
       grid.appendChild(cell);
@@ -1551,10 +1570,18 @@ function calGetSummerStats(){
   const bkS=bkLoad();BK_BOOKS.forEach((_,i)=>{if(!bkS[i])bkS[i]={read:0,done:false};});
   const readDone=BK_BOOKS.reduce((s,b,i)=>s+(bkS[i].done?b.pages:(bkS[i].read||0)),0);
   const readTotal=BK_TOTAL_PAGES;
-  // Overall %
-  const pcts=[engDone/engTotal,mathDone/mathTotal,Math.min(wrDone/wrTotal,1),readDone/readTotal];
+  // Reading days with >=30 pages (30.05 – 14.09)
+  const rdS=rdLoad();
+  const read30Days=Object.entries(rdS).filter(([k,v])=>v>=RD_GOAL&&k>=rdToKey(RD_START)&&k<=rdToKey(RD_END)).length;
+  const readTotalDays=Math.round((RD_END-RD_START)/86400000)+1;
+  const readElapsedDays=Math.min(Math.max(Math.floor((new Date()-RD_START)/86400000)+1,0),readTotalDays);
+  // Overall % — pace-based (how on-track vs. what should be done by today)
+  const elapsed=Math.min(Math.max((Math.min(new Date(),CAL_END)-CAL_START)/86400000+1,0),(CAL_END-CAL_START)/86400000+1);
+  const frac=elapsed/((CAL_END-CAL_START)/86400000+1);
+  const onPace=(done,total)=>frac>0?Math.min(done/(total*frac),1):0;
+  const pcts=[onPace(engDone,engTotal),onPace(mathDone,mathTotal),Math.min(wrDone/wrTotal,1),onPace(readDone,readTotal)];
   const overall=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length*100);
-  return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,readDone,readTotal,overall};
+  return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,readDone,readTotal,read30Days,readElapsedDays,readTotalDays,overall};
 }
 
 // ── render stats hero ──
@@ -1617,6 +1644,11 @@ function calRenderStats(){
         <div class="cl-sc-top"><span class="cl-sc-icon">📚</span><span class="cl-sc-label">Четене</span></div>
         <div class="cl-sc-nums">${s.readDone.toLocaleString('bg')}<em> / ${s.readTotal.toLocaleString('bg')} стр.</em></div>
         <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(s.readDone/s.readTotal*100)}%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div>
+      </div>
+      <div class="cl-stat-card">
+        <div class="cl-sc-top"><span class="cl-sc-icon">🟢</span><span class="cl-sc-label">Дни ≥30 стр.</span></div>
+        <div class="cl-sc-nums">${s.read30Days}<em> / ${s.readElapsedDays} дни (от ${s.readTotalDays})</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${s.readElapsedDays>0?Math.round(s.read30Days/s.readElapsedDays*100):0}%;background:linear-gradient(90deg,#34d399,#1D9E75)"></div></div>
       </div>
     </div>`;
 }
