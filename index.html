@@ -576,10 +576,6 @@ body.authed #user-bar{display:flex}
       <p>1 юни – 15 септември &nbsp;·&nbsp; 107 дни &nbsp;·&nbsp; след 2. клас</p>
     </div>
     <div class="bk-stats" id="bk-stats"></div>
-    <div class="overall-progress">
-      <div class="progress-label"><span>Общ напредък</span><span id="bk-pct-label">0%</span></div>
-      <div class="progress-bar-wrap"><div class="progress-bar" id="bk-overall-bar" style="width:0%"></div></div>
-    </div>
     <div id="bk-rank-card"></div>
     <div class="daily-goal">
       <i class="ti ti-target"></i>
@@ -935,8 +931,8 @@ function bkUpdateStats(){
   const pct=Math.round(readPages/BK_TOTAL_PAGES*100);
   const remaining=BK_TOTAL_PAGES-readPages;
   const daysLeft=remaining>0?Math.ceil(remaining/30):0;
-  document.getElementById('bk-overall-bar').style.width=pct+'%';
-  document.getElementById('bk-pct-label').textContent=pct+'%';
+  const ob=document.getElementById('bk-overall-bar');if(ob)ob.style.width=pct+'%';
+  const pl=document.getElementById('bk-pct-label');if(pl)pl.textContent=pct+'%';
   document.getElementById('bk-stats').innerHTML=`
     <div class="bk-stat"><div class="stat-label">Прочетено</div><div class="stat-value">${readPages.toLocaleString('bg')}</div><div class="stat-sub">от ${BK_TOTAL_PAGES.toLocaleString('bg')} стр.</div></div>
     <div class="bk-stat"><div class="stat-label">Книги</div><div class="stat-value">${doneBooks}</div><div class="stat-sub">от ${BK_BOOKS.length}</div></div>
@@ -959,15 +955,14 @@ function bkRenderRankCard(){
   const totalBooks=BK_BOOKS.length;
   const pct=totalBooks>0?Math.round(doneBooks/totalBooks*100):0;
   const rank=bkGetRank(pct);
-  const nextRank=BK_RANKS[BK_RANKS.indexOf(rank)+1];
-  const withinPct=rank.max>rank.min?Math.round((pct-rank.min)/(rank.max-rank.min)*100):100;
+  const overallPct=BK_TOTAL_PAGES>0?Math.round(bkGetReadPages()/BK_TOTAL_PAGES*100):0;
   document.getElementById('bk-rank-card').innerHTML=`
     <div class="rank-card ${rank.lvl}">
       <div class="rank-emoji">${rank.emoji}</div>
       <div class="rank-info">
         <div class="rank-name">${rank.name}</div>
         <div class="rank-msg">${rank.msg}</div>
-        ${nextRank?`<div class="rank-next"><div class="rank-next-label"><span>${rank.next}</span><span>${pct}% / ${rank.max}%</span></div><div class="rank-next-bar-wrap"><div class="rank-next-bar" style="width:${Math.min(withinPct,100)}%"></div></div></div>`:''}
+        <div class="rank-next"><div class="rank-next-label"><span>Общ напредък</span><span>${overallPct}%</span></div><div class="rank-next-bar-wrap"><div class="rank-next-bar" style="width:${Math.min(overallPct,100)}%"></div></div></div>
       </div>
     </div>`;
 }
