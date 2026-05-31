@@ -1202,7 +1202,7 @@ function wrTotalUpToToday(){
   return wrAllDays().filter(d=>{const k=wrToKey(d);return k>=startKey&&k<=today;}).length;
 }
 function wrRenderOverall(){
-  const done=wrDoneUpToToday(),total=wrTotalUpToToday(),allTotal=wrAllDays().length;
+  const done=wrDoneUpToToday(),total=90,allTotal=wrAllDays().length;
   const pct=total>0?Math.round(done/total*100):0;
   document.getElementById('wr-overall').innerHTML=`
     <div class="progress-label"><span>Общ напредък (писане)</span><span>${done} / ${total} дни изпълнени · ${pct}%</span></div>
