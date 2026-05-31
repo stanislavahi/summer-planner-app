@@ -576,7 +576,6 @@ body.authed #user-bar{display:flex}
     <div id="bk-read-achievements"></div>
     <div class="books-list" id="bk-books-list"></div>
     <div class="read-today" id="rd-today-box"></div>
-    <div class="bk-stats" id="rd-summary" style="grid-template-columns:repeat(2,1fr);margin-bottom:1.25rem"></div>
     <div id="rd-calendar"></div>
     <div class="read-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Над 30 стр.</div>
@@ -1093,7 +1092,7 @@ function rdRenderSummary(){
     <div class="bk-stat"><div class="stat-label">Средно на ден</div><div class="stat-value">${avgElapsed}</div><div class="stat-sub">стр./ден (от ${elapsedDays} дни)</div></div>
     <div class="bk-stat"><div class="stat-label">Средно в дни с четене</div><div class="stat-value">${avgActive}</div><div class="stat-sub">стр. в ${activeDays} дни</div></div>`;
 }
-function rdRender(){rdRenderToday();rdRenderSummary();rdRenderCalendar();}
+function rdRender(){rdRenderToday();rdRenderCalendar();}
 bkRender();
 
 // ══════════════════════════════════════════
@@ -1610,7 +1609,7 @@ function calRenderStats(){
   if(!el)return;
   const s=calGetSummerStats();
   const msgs=[
-    [0,'🌱 Лятото тъкмо започна — давай юнак!'],
+    [0,'🌱 Лятото тъкмо започна — давай напред!'],
     [15,'⚡ Добро начало! Така се прави!'],
     [30,'🔥 Загрян си! Продължавай!'],
     [45,'🌟 Перфектно! Наполовина си!'],
