@@ -591,7 +591,7 @@ body.authed #user-bar{display:flex}
   <div class="container">
     <div class="wr-header">
       <h1><i class="ti ti-pencil"></i>Писане всеки ден</h1>
-      <p>30 май – 30 август 2026 &nbsp;·&nbsp; Диктовки, преписи и съчинения</p>
+      <p>30 май – 14 септември 2026 &nbsp;·&nbsp; Диктовки, преписи и съчинения</p>
     </div>
     <div class="wr-overall" id="wr-overall"></div>
     <div class="wr-stats" id="wr-stats"></div>
@@ -1100,7 +1100,7 @@ bkRender();
 // ══════════════════════════════════════════
 const WR_KEY='summer_writing_2026';
 const WR_START=new Date('2026-05-30');
-const WR_END=new Date('2026-08-30');
+const WR_END=new Date('2026-09-14');
 const WR_TYPES={essay:{label:'Съчинение',cls:'done-type-essay'},prepis:{label:'Препис',cls:'done-type-prepis'},diktovka:{label:'Диктовка',cls:'done-type-diktovka'}};
 const WR_MONTHS_FULL=['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
 const WR_MONTHS_SHORT=['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
@@ -1137,7 +1137,7 @@ function wrRenderOverall(){
   document.getElementById('wr-overall').innerHTML=`
     <div class="progress-label"><span>Общ напредък (писане)</span><span>${done} / ${total} дни изпълнени · ${pct}%</span></div>
     <div class="progress-bar-wrap"><div class="progress-bar" style="width:${pct}%"></div></div>
-    <div style="font-size:11px;color:var(--text-ter);margin-top:4px;text-align:right">${allTotal} дни общо (30 май – 30 авг)</div>`;
+    <div style="font-size:11px;color:var(--text-ter);margin-top:4px;text-align:right">${allTotal} дни общо (30 май – 14 сеп)</div>`;
 }
 function wrRenderStats(){
   const streak=wrCalcStreak();
