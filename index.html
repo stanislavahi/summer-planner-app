@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌞 Summer Planner 2026</title>
+<title>Summer Planner 2026</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
 <style>
 /* ── RESET & SHARED ── */
@@ -1599,7 +1600,8 @@ function calGetSummerStats(){
     Math.min(wrDone/WR_GOAL_DAYS,1)
   ];
   const overall=Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length*100);
-  return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,readDone,readTotal,read30Days,readElapsedDays,readTotalDays,overall};
+  const avgPagesPerDay=readElapsedDays>0?Math.round(readDone/readElapsedDays):0;
+  return {engDone,engTotal,mathDone,mathTotal,wrDone,wrTotal,wrGoalDays:WR_GOAL_DAYS,readDone,readTotal,read30Days,readElapsedDays,readTotalDays,avgPagesPerDay,overall};
 }
 
 // ── render stats hero ──
@@ -1655,8 +1657,8 @@ function calRenderStats(){
       </div>
       <div class="cl-stat-card">
         <div class="cl-sc-top"><span class="cl-sc-icon">✏️</span><span class="cl-sc-label">Писане</span></div>
-        <div class="cl-sc-nums">${s.wrDone}<em> / ${s.wrTotal} дни</em></div>
-        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(Math.min(s.wrDone/s.wrTotal,1)*100)}%;background:linear-gradient(90deg,#f472b6,#ec4899)"></div></div>
+        <div class="cl-sc-nums">${s.wrDone}<em> / ${s.wrGoalDays} дни</em></div>
+        <div class="cl-sc-bar"><div class="cl-sc-fill" style="width:${Math.round(Math.min(s.wrDone/s.wrGoalDays,1)*100)}%;background:linear-gradient(90deg,#f472b6,#ec4899)"></div></div>
       </div>
       <div class="cl-stat-card">
         <div class="cl-sc-top"><span class="cl-sc-icon">📚</span><span class="cl-sc-label">Четене</span></div>
