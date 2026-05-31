@@ -145,6 +145,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-books .bdg.unlocked .bn{color:var(--text)}
 #tab-books .bdg .br{font-size:9px;color:var(--text-ter);margin-top:2px}
 #tab-books .bk-footer{margin-top:2rem;text-align:center;font-size:12px;color:var(--text-ter)}
+/* reading daily-pages calendar */
+#tab-books .read-today{background:var(--bg-sec);border-radius:var(--r-lg);padding:14px 16px;margin:1.25rem 0}
+#tab-books .read-today-label{font-size:12px;color:var(--text-sec);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+#tab-books .read-today-label .today-date{font-weight:500;color:var(--text)}
+#tab-books .read-today-row{display:flex;align-items:center;gap:8px}
+#tab-books .read-today-row input{flex:1;padding:9px 12px;border:1.5px solid var(--bdr-hov);border-radius:var(--r-md);font-size:14px;background:var(--bg-card);color:var(--text);min-width:0}
+#tab-books .read-today-row input:focus{outline:none;border-color:var(--green)}
+#tab-books .read-save-btn{padding:9px 16px;border-radius:var(--r-md);border:none;background:var(--green);color:white;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+#tab-books .read-save-btn:hover{opacity:.85}
+#tab-books .month-block{margin-bottom:1.25rem}
+#tab-books .month-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+#tab-books .month-name{font-size:13px;font-weight:500;color:var(--text);text-transform:capitalize}
+#tab-books .month-progress-text{font-size:12px;color:var(--text-sec)}
+#tab-books .month-bar-wrap{background:var(--bg-sec);border-radius:99px;height:4px;overflow:hidden;margin-bottom:8px}
+#tab-books .month-bar{height:100%;border-radius:99px;background:var(--green);transition:width .4s ease}
+#tab-books .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+#tab-books .cal-day-label{font-size:10px;color:var(--text-ter);text-align:center;padding-bottom:4px;text-transform:uppercase}
+#tab-books .cal-cell{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;background:var(--bg-sec);color:var(--text-ter);position:relative;cursor:pointer}
+#tab-books .cal-cell.future{opacity:.35;cursor:default}
+#tab-books .cal-cell.today-cell{box-shadow:0 0 0 1.5px var(--green) inset;color:var(--text);font-weight:600}
+#tab-books .cal-cell.read-green{background:#1D9E75;color:white}
+#tab-books .cal-cell.read-orange{background:#F2994A;color:white}
+#tab-books .cal-cell.read-red{background:#EB5757;color:white}
+#tab-books .cal-cell[title]:hover::after{content:attr(title);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.78);color:white;font-size:10px;padding:3px 6px;border-radius:4px;white-space:nowrap;pointer-events:none;z-index:10}
+#tab-books .read-legend{display:flex;gap:14px;margin-top:4px;flex-wrap:wrap;margin-bottom:1rem}
+#tab-books .read-legend .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-sec)}
+#tab-books .read-legend .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 </style>
 <style>
 /* ══ WRITING SECTION ══ */
@@ -547,6 +574,13 @@ body.authed #user-bar{display:flex}
     </div>
     <div id="bk-read-achievements"></div>
     <div class="books-list" id="bk-books-list"></div>
+    <div class="read-today" id="rd-today-box"></div>
+    <div id="rd-calendar"></div>
+    <div class="read-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Над 30 стр.</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F2994A"></div>Под 30 стр.</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EB5757"></div>0 стр.</div>
+    </div>
     <div class="bk-footer">Прогресът се запазва автоматично в браузъра.</div>
   </div>
 </section>
@@ -953,7 +987,79 @@ function bkRenderList(){
     if(e.target.dataset.range!==undefined)bkUpdatePages(+e.target.dataset.range,+e.target.value);
   });
 }
-function bkRender(){bkRenderList();bkUpdateStats();bkRenderRankCard();bkRenderAchievements();}
+function bkRender(){bkRenderList();bkUpdateStats();bkRenderRankCard();bkRenderAchievements();rdRender();}
+
+// ── reading daily-pages calendar ──
+const RD_KEY='summer_reading_pages_2026';
+const RD_START=new Date('2026-06-01');
+const RD_END=new Date('2026-09-15');
+const RD_GOAL=30;
+const RD_MONTHS_FULL=['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
+const RD_MONTHS_SHORT=['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
+function rdLoad(){try{return JSON.parse(localStorage.getItem(RD_KEY))||{};}catch{return {};}}
+function rdSave(s){try{localStorage.setItem(RD_KEY,JSON.stringify(s));}catch{}}
+let rdState=rdLoad();
+function rdToKey(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
+function rdTodayKey(){return rdToKey(new Date());}
+function rdAllDays(){const days=[];const cur=new Date(RD_START);while(cur<=RD_END){days.push(new Date(cur));cur.setDate(cur.getDate()+1);}return days;}
+function rdDaysByMonth(){const groups=[];let cur=null;rdAllDays().forEach(d=>{const key=d.getFullYear()*100+d.getMonth();if(!cur||cur.key!==key){cur={key,month:d.getMonth(),year:d.getFullYear(),days:[]};groups.push(cur);}cur.days.push(new Date(d));});return groups;}
+function rdColorClass(p){if(p>=RD_GOAL)return 'read-green';if(p>0)return 'read-orange';return 'read-red';}
+function rdSetPages(key,val){const n=Math.max(0,Math.round(+val||0));if(isNaN(n)){return;}rdState[key]=n;rdSave(rdState);rdRender();}
+function rdRenderToday(){
+  const box=document.getElementById('rd-today-box');if(!box)return;
+  const key=rdTodayKey();const now=new Date();const dateStr=`${now.getDate()} ${RD_MONTHS_SHORT[now.getMonth()]}`;
+  const cur=rdState[key];
+  box.innerHTML=`
+    <div class="read-today-label">Колко страници прочете <span class="today-date">днес, ${dateStr}</span>?</div>
+    <div class="read-today-row">
+      <input type="number" min="0" id="rd-today-input" placeholder="напр. 30" value="${cur!==undefined?cur:''}">
+      <button class="read-save-btn" id="rd-save-btn">Запази</button>
+    </div>`;
+  const inp=document.getElementById('rd-today-input');
+  const save=()=>rdSetPages(key,inp.value);
+  document.getElementById('rd-save-btn').addEventListener('click',save);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')save();});
+}
+function rdRenderCalendar(){
+  const cal=document.getElementById('rd-calendar');if(!cal)return;
+  cal.innerHTML='';
+  const today=rdTodayKey();
+  const DOW=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  rdDaysByMonth().forEach(({month,year,days})=>{
+    const pastDays=days.filter(d=>rdToKey(d)<=today);
+    const sumPages=pastDays.reduce((s,d)=>s+(rdState[rdToKey(d)]||0),0);
+    const goalDays=pastDays.filter(d=>(rdState[rdToKey(d)]||0)>=RD_GOAL).length;
+    const block=document.createElement('div');block.className='month-block';
+    const hdr=document.createElement('div');hdr.className='month-header';
+    hdr.innerHTML=`<span class="month-name">${RD_MONTHS_FULL[month]} ${year}</span><span class="month-progress-text">${sumPages} стр. · ${goalDays} дни ≥${RD_GOAL}</span>`;
+    block.appendChild(hdr);
+    const grid=document.createElement('div');grid.className='calendar-grid';
+    DOW.forEach(l=>{const lbl=document.createElement('div');lbl.className='cal-day-label';lbl.textContent=l;grid.appendChild(lbl);});
+    const firstDow=(days[0].getDay()+6)%7;
+    for(let i=0;i<firstDow;i++)grid.appendChild(document.createElement('div'));
+    days.forEach(d=>{
+      const key=rdToKey(d),isToday=key===today,isFuture=key>today;
+      const cell=document.createElement('div');cell.className='cal-cell';
+      if(isFuture)cell.classList.add('future');
+      if(isToday)cell.classList.add('today-cell');
+      cell.textContent=d.getDate();
+      if(!isFuture&&rdState[key]!==undefined){
+        cell.classList.add(rdColorClass(rdState[key]));
+        cell.setAttribute('title',`${d.getDate()} ${RD_MONTHS_SHORT[d.getMonth()]} – ${rdState[key]} стр.`);
+      }
+      if(!isFuture){
+        cell.addEventListener('click',()=>{
+          const v=prompt(`Прочетени страници на ${d.getDate()} ${RD_MONTHS_SHORT[d.getMonth()]}:`,rdState[key]!==undefined?rdState[key]:'');
+          if(v!==null&&v.trim()!=='')rdSetPages(key,v.trim());
+          else if(v!==null&&v.trim()===''){delete rdState[key];rdSave(rdState);rdRender();}
+        });
+      }
+      grid.appendChild(cell);
+    });
+    block.appendChild(grid);cal.appendChild(block);
+  });
+}
+function rdRender(){rdRenderToday();rdRenderCalendar();}
 bkRender();
 
 // ══════════════════════════════════════════
