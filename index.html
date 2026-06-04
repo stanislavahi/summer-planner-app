@@ -293,6 +293,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math .comp-name{color:#4a5568}
 #tab-math .comp-name.checked{text-decoration:line-through;color:#a0aec0}
 #tab-math .comp-result{flex:0 0 100%;margin:4px 0 6px 23px;padding:8px 10px;background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+#tab-math .comp-move{flex:0 0 100%;margin:2px 0 4px 23px;display:flex;align-items:center;gap:6px;font-size:.72rem;color:#718096}
+#tab-math .comp-move-sel{font-size:.72rem;padding:2px 6px;border:1px solid #cbd5e0;border-radius:6px;background:#fff;color:#2d3748;cursor:pointer;max-width:150px}
+#tab-math .comp-move-reset{font-size:.8rem;line-height:1;padding:2px 7px;border:1px solid #cbd5e0;border-radius:6px;background:#fff;color:#4a5568;cursor:pointer}
+#tab-math .comp-move-reset:hover{background:#edf2f7}
+#tab-math .comp-moved-flag{color:#dd6b20;font-weight:700}
 #tab-math .comp-result .rf{display:flex;align-items:center;gap:5px;font-size:.72rem;color:#276749;font-weight:600}
 #tab-math .comp-result input[type=number]{width:46px;padding:3px 5px;border:1px solid #9ae6b4;border-radius:5px;font-size:.74rem;text-align:center}
 #tab-math .comp-result input.rf-wrongnums{width:120px;padding:3px 6px;border:1px solid #9ae6b4;border-radius:5px;font-size:.74rem}
@@ -1299,10 +1304,45 @@ const MATH_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
 const MATH_TOTAL=161;
 let mathChecked={};
 let mathResults={};
-function mathGetKey(di,ii){return `${di}_${ii}`;}
-function mathLoadState(){try{const s=localStorage.getItem('math_prog_2026');if(s)mathChecked=JSON.parse(s);}catch(e){}try{const r=localStorage.getItem('math_results_2026');if(r)mathResults=JSON.parse(r);}catch(e){}}
+let mathMoves={};            // file -> targetDayIdx (reschedule overrides)
+function mathGetKey(di,ii){return `${di}_${ii}`;}            // legacy positional key
+function mathItemKey(it){return it.file;}                    // stable per-competition key
+function mathMigrateMap(map){
+  // convert any legacy "di_ii" keys to file-based keys
+  const out={};
+  for(const k in map){
+    const m=/^(\d+)_(\d+)$/.exec(k);
+    if(m){const day=MATH_SCHED[+m[1]];if(day&&day.items[+m[2]])out[day.items[+m[2]].file]=map[k];}
+    else out[k]=map[k];
+  }
+  return out;
+}
+function mathLoadState(){
+  try{const s=localStorage.getItem('math_prog_2026');if(s)mathChecked=JSON.parse(s);}catch(e){}
+  try{const r=localStorage.getItem('math_results_2026');if(r)mathResults=JSON.parse(r);}catch(e){}
+  try{const mv=localStorage.getItem('math_moves_2026');if(mv)mathMoves=JSON.parse(mv);}catch(e){}
+  mathChecked=mathMigrateMap(mathChecked);
+  mathResults=mathMigrateMap(mathResults);
+  mathSaveState();mathSaveResults();
+}
 function mathSaveState(){try{localStorage.setItem('math_prog_2026',JSON.stringify(mathChecked));}catch(e){}}
 function mathSaveResults(){try{localStorage.setItem('math_results_2026',JSON.stringify(mathResults));}catch(e){}}
+function mathSaveMoves(){try{localStorage.setItem('math_moves_2026',JSON.stringify(mathMoves));}catch(e){}}
+// base (original) day index for each competition file
+const MATH_BASE_IDX={};
+// effective list of competitions shown on a given day after applying moves
+function mathEffectiveItems(di){
+  const items=MATH_SCHED[di].items.filter(it=>mathMoves[it.file]==null||mathMoves[it.file]===di);
+  for(let d=0;d<MATH_SCHED.length;d++){if(d===di)continue;for(const it of MATH_SCHED[d].items){if(mathMoves[it.file]===di)items.push(it);}}
+  return items;
+}
+// move a competition to another day (or back to its original day)
+function mathMoveItem(file,targetIdx){
+  if(targetIdx===MATH_BASE_IDX[file])delete mathMoves[file];
+  else mathMoves[file]=targetIdx;
+  mathSaveMoves();mathRender();mathUpdateProgress();
+  if(typeof calRender==='function')calRender();
+}
 function mathPctInfo(correct,wrong){
   const c=parseInt(correct,10),w=parseInt(wrong,10);
   const cv=isNaN(c)?0:c,wv=isNaN(w)?0:w,tot=cv+wv;
@@ -1319,8 +1359,8 @@ function mathUpdateProgress(){
   document.getElementById('math-pb-fill').style.width=pct+'%';
   document.getElementById('math-pb-lbl').textContent=`${done} / ${MATH_TOTAL} решени (${pct}%)`;
 }
-function mathResetAll(){if(!confirm('Нулирай целия прогрес?'))return;mathChecked={};mathResults={};mathSaveState();mathSaveResults();mathRender();}
-function mathIsDayDone(di){const day=MATH_SCHED[di];return day.items.every((_,i)=>mathChecked[mathGetKey(di,i)]);}
+function mathResetAll(){if(!confirm('Нулирай целия прогрес?'))return;mathChecked={};mathResults={};mathMoves={};mathSaveState();mathSaveResults();mathSaveMoves();mathRender();}
+function mathIsDayDone(di){const items=mathEffectiveItems(di);return items.length>0&&items.every(it=>mathChecked[mathItemKey(it)]);}
 
 function mathBuildSchedule(){
   const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
@@ -1368,6 +1408,14 @@ function mathBuildSchedule(){
   return [...preDays,...mainDays];
 }
 const MATH_SCHED=mathBuildSchedule();
+MATH_SCHED.forEach((d,i)=>d.items.forEach(it=>{MATH_BASE_IDX[it.file]=i;}));
+// options for the "move to another day" dropdown
+function mathDayOptions(currentIdx){
+  return MATH_SCHED.map((d,i)=>{
+    const dn=MATH_BG_DAYS[d.date.getDay()];
+    return `<option value="${i}" ${i===currentIdx?'selected':''}>${d.dd}.${String(d.mm).padStart(2,'0')} (${dn})</option>`;
+  }).join('');
+}
 
 function mathRender(){
   const monthFilter=document.getElementById('math-month-filter').value;
@@ -1388,15 +1436,18 @@ function mathRender(){
     block.innerHTML=`<div class="month-title">📅 ${monthNames[mo]} <span>(${days.length} дни, ${totalInMonth} бр.)</span></div>`;
     const grid=document.createElement('div');grid.className='day-grid';
     for(const day of filtered){
+      const items=mathEffectiveItems(day.idx);
+      if(!items.length)continue;
       const dayName=MATH_BG_DAYS[day.date.getDay()];
       const done=mathIsDayDone(day.idx);
       const card=document.createElement('div');
       card.className='day-card'+(done?' done':'');
-      let html=`<div class="day-header"><div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div><span class="day-badge badge-${day.count}">${day.count} бр.</span></div><ul class="comp-list">`;
-      for(let i=0;i<day.items.length;i++){
-        const item=day.items[i];
-        const key=mathGetKey(day.idx,i);
+      let html=`<div class="day-header"><div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div><span class="day-badge badge-${Math.min(items.length,3)}">${items.length} бр.</span></div><ul class="comp-list">`;
+      for(let i=0;i<items.length;i++){
+        const item=items[i];
+        const key=mathItemKey(item);
         const isChecked=!!mathChecked[key];
+        const moved=mathMoves[item.file]!=null&&mathMoves[item.file]!==MATH_BASE_IDX[item.file];
         const year=item.year||(item.file.match(/\d{4}/)||[''])[0];
         let label=item.type,cssType=item.type;
         if(item.type==='МБГ'){
@@ -1407,18 +1458,21 @@ function mathRender(){
           else if(item.file.includes('Final'))label='МБГ-Фин';
         }
         if(item.type==='МБГ-Фин2'){label='МБГ-Фин2кл';cssType='МБГ-Фин2';}
-        let resultHtml='';
+        let extraHtml='';
         if(isChecked){
           const res=mathResults[key]||{};
           const pi=mathPctInfo(res.correct,res.wrong);
-          resultHtml=`<div class="comp-result" data-rkey="${key}">`
+          extraHtml=`<div class="comp-result" data-rkey="${key}">`
             +`<span class="rf">✅ Верни:<input type="number" min="0" class="rf-correct" value="${res.correct!=null?res.correct:''}"></span>`
             +`<span class="rf">❌ Грешни:<input type="number" min="0" class="rf-wrong" value="${res.wrong!=null?res.wrong:''}"></span>`
             +`<span class="rf">📊 Успеваемост:<span class="rf-pct ${pi.cls}">${pi.text}</span></span>`
             +`<span class="rf">✍️ Грешни №:<input type="text" class="rf-wrongnums" placeholder="напр. 3, 7, 12" value="${res.wrongNums?res.wrongNums.replace(/"/g,'&quot;'):''}"></span>`
             +`</div>`;
+        }else{
+          // unsolved competition → allow moving it to another day
+          extraHtml=`<div class="comp-move">↪ премести на:<select class="comp-move-sel" data-movefile="${item.file.replace(/"/g,'&quot;')}">${mathDayOptions(day.idx)}</select>${moved?`<button class="comp-move-reset" data-resetfile="${item.file.replace(/"/g,'&quot;')}" title="Върни на първоначалната дата">↺</button>`:''}</div>`;
         }
-        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}</span>${resultHtml}</li>`;
+        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}${moved?' <span class="comp-moved-flag" title="Преместено">↪</span>':''}</span>${extraHtml}</li>`;
       }
       html+='</ul>';
       card.innerHTML=html;
@@ -1436,6 +1490,17 @@ function mathRender(){
       const card=this.closest('.day-card');
       if(card){const allDone=Array.from(card.querySelectorAll('input[type=checkbox]')).every(c=>c.checked);card.classList.toggle('done',allDone);}
       mathUpdateProgress();
+    });
+  });
+  document.querySelectorAll('#math-calendar .comp-move-sel').forEach(sel=>{
+    sel.addEventListener('change',function(){
+      mathMoveItem(this.getAttribute('data-movefile'),parseInt(this.value,10));
+    });
+  });
+  document.querySelectorAll('#math-calendar .comp-move-reset').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const file=this.getAttribute('data-resetfile');
+      mathMoveItem(file,MATH_BASE_IDX[file]);
     });
   });
   document.querySelectorAll('#math-calendar .comp-result').forEach(panel=>{
@@ -1593,7 +1658,7 @@ function calDayScore(d){
   let done=0,total=0;
   total++;if(wrState[key])done++;
   const md=calGetMathDay(key);
-  if(md){md.items.forEach((_,i)=>{total++;if(mathChecked[mathGetKey(md.idx,i)])done++;});}
+  if(md){mathEffectiveItems(md.idx).forEach(it=>{total++;if(mathChecked[mathItemKey(it)])done++;});}
   const es=calGetEngSession(key);
   if(es){total++;if(engState[es.idx])done++;}
   return {done,total};
@@ -1943,28 +2008,30 @@ function calRenderTasks(){
 
   // ── MATH card ──
   const mathDay=calGetMathDay(dateStr);
-  if(mathDay){
-    const allDone=mathDay.items.every((_,i)=>mathChecked[mathGetKey(mathDay.idx,i)]);
+  const mathItems=mathDay?mathEffectiveItems(mathDay.idx):[];
+  if(mathDay&&mathItems.length){
+    const allDone=mathItems.every(it=>mathChecked[mathItemKey(it)]);
     const card=document.createElement('div');
     card.className='cl-card'+(allDone?' cl-done':'');
-    const doneCnt=mathDay.items.filter((_,i)=>mathChecked[mathGetKey(mathDay.idx,i)]).length;
+    const doneCnt=mathItems.filter(it=>mathChecked[mathItemKey(it)]).length;
     card.innerHTML=`
       <div class="cl-card-head">
         <span class="cl-card-icon">📐</span>
         <div class="cl-card-info">
           <div class="cl-card-title">Математика</div>
-          <div class="cl-card-sub">${doneCnt} / ${mathDay.items.length} състезания решени</div>
+          <div class="cl-card-sub">${doneCnt} / ${mathItems.length} състезания решени</div>
         </div>
         <span class="cl-card-status ${allDone?'':'pending'}">${allDone?'✓ Готово':'Чака'}</span>
       </div>
       <div class="cl-card-body">
-        ${mathDay.items.map((item,i)=>{
-          const key=mathGetKey(mathDay.idx,i);
+        ${mathItems.map((item)=>{
+          const key=mathItemKey(item);
           const checked=!!mathChecked[key];
+          const moved=mathMoves[item.file]!=null&&mathMoves[item.file]!==MATH_BASE_IDX[item.file];
           const style=MATH_TAG_STYLES[item.type]||'background:#f3f4f6;color:#374151';
           return `<div class="cl-math-item">
-            <input type="checkbox" class="cl-math-cb" data-mathkey="${key}" ${checked?'checked':''}>
-            <span class="cl-math-label">${item.file.replace('.pdf','')}</span>
+            <input type="checkbox" class="cl-math-cb" data-mathkey="${key.replace(/"/g,'&quot;')}" ${checked?'checked':''}>
+            <span class="cl-math-label">${item.file.replace('.pdf','')}${moved?' ↪':''}</span>
             <span class="cl-math-tag" style="${style}">${item.type}</span>
           </div>`;
         }).join('')}
