@@ -1458,7 +1458,6 @@ function mathRender(){
         const item=items[i];
         const key=mathItemKey(item);
         const isChecked=!!mathChecked[key];
-        const moved=mathMoves[item.file]!=null&&mathMoves[item.file]!==MATH_BASE_IDX[item.file];
         const year=item.year||(item.file.match(/\d{4}/)||[''])[0];
         let label=item.type,cssType=item.type;
         if(item.type==='МБГ'){
@@ -1479,11 +1478,8 @@ function mathRender(){
             +`<span class="rf">📊 Успеваемост:<span class="rf-pct ${pi.cls}">${pi.text}</span></span>`
             +`<span class="rf">✍️ Грешни №:<input type="text" class="rf-wrongnums" placeholder="напр. 3, 7, 12" value="${res.wrongNums?res.wrongNums.replace(/"/g,'&quot;'):''}"></span>`
             +`</div>`;
-        }else{
-          // unsolved competition → allow moving it to another day
-          extraHtml=`<div class="comp-move">↪ премести на:<select class="comp-move-sel" data-movefile="${item.file.replace(/"/g,'&quot;')}">${mathDayOptions(day.idx)}</select>${moved?`<button class="comp-move-reset" data-resetfile="${item.file.replace(/"/g,'&quot;')}" title="Върни на първоначалната дата">↺</button>`:''}</div>`;
         }
-        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}${moved?' <span class="comp-moved-flag" title="Преместено">↪</span>':''}</span>${extraHtml}</li>`;
+        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}</span>${extraHtml}</li>`;
       }
       html+='</ul>';
       card.innerHTML=html;
@@ -1501,17 +1497,6 @@ function mathRender(){
       const card=this.closest('.day-card');
       if(card){const allDone=Array.from(card.querySelectorAll('input[type=checkbox]')).every(c=>c.checked);card.classList.toggle('done',allDone);}
       mathUpdateProgress();
-    });
-  });
-  document.querySelectorAll('#math-calendar .comp-move-sel').forEach(sel=>{
-    sel.addEventListener('change',function(){
-      mathMoveItem(this.getAttribute('data-movefile'),parseInt(this.value,10));
-    });
-  });
-  document.querySelectorAll('#math-calendar .comp-move-reset').forEach(btn=>{
-    btn.addEventListener('click',function(){
-      const file=this.getAttribute('data-resetfile');
-      mathMoveItem(file,MATH_BASE_IDX[file]);
     });
   });
   document.querySelectorAll('#math-calendar .comp-result').forEach(panel=>{
@@ -2038,11 +2023,10 @@ function calRenderTasks(){
         ${mathItems.map((item)=>{
           const key=mathItemKey(item);
           const checked=!!mathChecked[key];
-          const moved=mathMoves[item.file]!=null&&mathMoves[item.file]!==MATH_BASE_IDX[item.file];
           const style=MATH_TAG_STYLES[item.type]||'background:#f3f4f6;color:#374151';
           return `<div class="cl-math-item">
             <input type="checkbox" class="cl-math-cb" data-mathkey="${key.replace(/"/g,'&quot;')}" ${checked?'checked':''}>
-            <span class="cl-math-label">${item.file.replace('.pdf','')}${moved?' ↪':''}</span>
+            <span class="cl-math-label">${item.file.replace('.pdf','')}</span>
             <span class="cl-math-tag" style="${style}">${item.type}</span>
           </div>`;
         }).join('')}
