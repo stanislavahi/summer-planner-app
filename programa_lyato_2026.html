@@ -120,12 +120,12 @@
 
 <header>
   <h1>📐 Програма за математически състезания</h1>
-  <p>30 май – 30 август 2026 &nbsp;·&nbsp; 85 дни, 161 състезания</p>
+  <p>30 май – 3 септември 2026 &nbsp;·&nbsp; 83 дни, 161 състезания</p>
 </header>
 
 <div class="stats">
   <div class="stat"><div class="num">161</div><div class="lbl">Общо</div></div>
-  <div class="stat"><div class="num">85</div><div class="lbl">Дни</div></div>
+  <div class="stat"><div class="num">83</div><div class="lbl">Дни</div></div>
   <div class="stat"><div class="num" id="done-count">0</div><div class="lbl">Решени</div></div>
   <div class="stat"><div class="num" id="remain-count">161</div><div class="lbl">Остават</div></div>
 </div>
@@ -142,9 +142,10 @@
     <select id="month-filter">
       <option value="all">Всички</option>
       <option value="may">Май (30.05–06.06)</option>
-      <option value="jun">Юни (15.06+)</option>
+      <option value="jun">Юни (14.06+)</option>
       <option value="jul">Юли</option>
       <option value="aug">Август</option>
+      <option value="sep">Септември</option>
     </select>
   </label>
   <label>Само незавършени:
@@ -154,10 +155,10 @@
 </div>
 
 <div class="legend">
-  <div style="width:100%;font-size:0.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">⭐ 30 май – 6 юни (8 бр. — по 1 на ден)</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
+  <div style="width:100%;font-size:0.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2017</div>
   <div style="width:100%;font-size:0.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:0.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (58 бр.)</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024 (първи на 15 юни)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2018–2024 (първи на 14 юни)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър (ноем.)</div>
   <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев (ноем.)</div>
@@ -180,7 +181,7 @@ const BG_DAYS = ['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
 const BG_MONTHS = ['','Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември'];
 
 const schedule = [
-  // Auto-generated: 77 days, 15.06 – 30.08
+  // Auto-generated: 79 days, 14.06 – 31.08
   // Format: { date, month, items: [{type, file}] }
 ];
 
@@ -190,12 +191,12 @@ function buildSchedule() {
   const mbgFin2Years = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
   const mbgFin2All = mbgFin2Years.map(y => ({type:'МБГ-Фин2', file:`5_Final_2klas_${y}.pdf`, year:String(y)}));
 
-  // ── ПРЕ-ПЕРИОД: 30 май – 6 юни (8 дни × 1) ──
-  // Първите 8: 2014–2021
-  const preItems = mbgFin2All.slice(0, 8);
+  // ── ПРЕ-ПЕРИОД: 30 май – 2 юни (4 дни × 1) ── (решени)
+  // Първите 4: 2014–2017
+  const preItems = mbgFin2All.slice(0, 4);
   const preStart = new Date(2026, 4, 30); // May 30
   const preDays = [];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 4; i++) {
     const d = new Date(preStart);
     d.setDate(preStart.getDate() + i);
     preDays.push({
@@ -207,9 +208,9 @@ function buildSchedule() {
     });
   }
 
-  // ── ГЛАВЕН ПЕРИОД: 15 юни – 30 август (77 дни) ──
-  // Оставащите 3 МБГ-Фин2 (2022,2023,2024) идват първи
-  const remaining3 = mbgFin2All.slice(8); // 3 бр.
+  // ── ГЛАВЕН ПЕРИОД: 14 юни – 31 август (79 дни) ──
+  // Оставащите 7 МБГ-Фин2 (2018–2024) идват първи
+  const remaining3 = mbgFin2All.slice(4); // 7 бр.
 
   // ФАЗА 1: Септември – Януари (58 бр., без 2021-2025)
   const typesPhase1 = [
@@ -251,20 +252,25 @@ function buildSchedule() {
     return result;
   }
 
-  // Пул за главния период: 3 МБГ-Фин2 + 150 = 153 бр.
+  // Пул за главния период: 7 МБГ-Фин2 + 150 = 157 бр.
   const mainAll = [...remaining3, ...interleave(typesPhase1), ...interleave(typesPhase2)];
 
-  // 153 бр. / 77 дни → 76 дни × 2, 1 ден × 1 (последен ден)
-  const dayCounts = Array(77).fill(2);
-  dayCounts[76] = 1; // 76×2 + 1 = 153
+  // 157 бр. → 78 работни дни × 2 + 1 ден × 1; почивни: 04.07, 17.07, 23.08
+  const restDays = new Set(['2026-07-04','2026-07-17','2026-08-23']);
+  function dateKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
 
   const mainDays = [];
   let idx = 0;
-  const startDate = new Date(2026, 5, 15); // June 15
-  for (let i = 0; i < 77; i++) {
+  const startDate = new Date(2026, 5, 14); // June 14
+  let offset = 0;
+  while (idx < mainAll.length) {
     const d = new Date(startDate);
-    d.setDate(startDate.getDate() + i);
-    const n = dayCounts[i];
+    d.setDate(startDate.getDate() + offset);
+    offset++;
+    if (restDays.has(dateKey(d))) continue;
+    const n = Math.min(2, mainAll.length - idx);
     mainDays.push({
       date: d,
       dd: String(d.getDate()).padStart(2,'0'),
@@ -316,15 +322,15 @@ function render() {
   const monthFilter = document.getElementById('month-filter').value;
   const showUndone = document.getElementById('show-undone').checked;
 
-  const monthNames = {5:'Май (30.05–06.06)', 6:'Юни', 7:'Юли', 8:'Август'};
-  const monthOrder = [5,6,7,8];
+  const monthNames = {5:'Май (30.05–02.06)', 6:'Юни', 7:'Юли', 8:'Август', 9:'Септември'};
+  const monthOrder = [5,6,7,8,9];
 
   const cal = document.getElementById('calendar');
   cal.innerHTML = '';
 
   for (const mo of monthOrder) {
     if (monthFilter !== 'all') {
-      const map = {may:5, jun:6, jul:7, aug:8};
+      const map = {may:5, jun:6, jul:7, aug:8, sep:9};
       if (map[monthFilter] !== mo) continue;
     }
 
