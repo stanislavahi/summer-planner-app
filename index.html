@@ -1393,9 +1393,13 @@ function mathBuildSchedule(){
     while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
     return result;
   }
-  const mainAll=[...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
+  // 14 юни: фиксирано МБГ-Фин2кл 2018 и 2019
+  const june14Items=remaining3.slice(0,2); // [2018, 2019]
+  const june14=new Date(2026,5,14);
+  const mainDays=[{date:june14,dd:'14',mm:6,items:june14Items,count:2}];
+  // от 15 юни: останалите (2020–2024) + фаза 1 + фаза 2
+  const mainAll=[...remaining3.slice(2),...interleave(typesPhase1),...interleave(typesPhase2)];
   const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
-  const mainDays=[];
   const startDate=new Date(2026,5,15); // 15 юни
   let cur=new Date(startDate);
   let idx=0;
