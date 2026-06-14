@@ -1408,8 +1408,8 @@ function mathBuildSchedule(){
     const dd=String(cur.getDate()).padStart(2,'0');
     const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
     if(!skipSet.has(key)){
-      const dow=cur.getDay(); // 0=Нед, 6=Съб
-      const perDay=(dow===0||dow===6)?2:1;
+      const dow=cur.getDay(); // 0=Нед,1=Пон,2=Вт,3=Ср,4=Чет,5=Пет,6=Съб
+      const perDay=(dow===3||dow===6||dow===0)?2:1;
       const n=Math.min(perDay,mainAll.length-idx);
       const items=mainAll.slice(idx,idx+n);
       mainDays.push({date:new Date(cur),dd,mm,items,count:n});
