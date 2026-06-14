@@ -1396,23 +1396,16 @@ function mathBuildSchedule(){
   const mainAll=[...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
   const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
   const mainDays=[];
-  const startDate=new Date(2026,5,14); // 14 юни
-  const cutoff=new Date(2026,5,18);    // след 18 юни → редуване 1/2
+  const startDate=new Date(2026,5,15); // 15 юни
   let cur=new Date(startDate);
   let idx=0;
-  let altToggle=false; // false=1 бр., true=2 бр. (след cutoff)
   while(idx<mainAll.length){
     const mm=cur.getMonth()+1;
     const dd=String(cur.getDate()).padStart(2,'0');
     const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
     if(!skipSet.has(key)){
-      let perDay;
-      if(cur>cutoff){
-        perDay=altToggle?2:1;
-        altToggle=!altToggle;
-      }else{
-        perDay=2;
-      }
+      const dow=cur.getDay(); // 0=Нед, 6=Съб
+      const perDay=(dow===0||dow===6)?2:1;
       const n=Math.min(perDay,mainAll.length-idx);
       const items=mainAll.slice(idx,idx+n);
       mainDays.push({date:new Date(cur),dd,mm,items,count:n});
