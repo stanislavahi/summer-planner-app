@@ -634,7 +634,7 @@ body.authed #user-bar{display:flex}
 <section id="tab-math" class="tab-section">
   <header>
     <h1>📐 Програма за математически състезания</h1>
-    <p>30 май – 30 август 2026 &nbsp;·&nbsp; 85 дни, 161 състезания</p>
+    <p>30 май – 3 септември 2026 &nbsp;·&nbsp; 87 дни, 165 състезания</p>
     <a href="programa_lyato_2026.html" style="display:inline-block;margin-top:10px;padding:6px 14px;background:rgba(255,255,255,0.2);color:white;border-radius:20px;font-size:0.82rem;text-decoration:none;border:1px solid rgba(255,255,255,0.4)">Разширен изглед →</a>
   </header>
   <div class="math-stats">
@@ -656,9 +656,10 @@ body.authed #user-bar{display:flex}
       <select id="math-month-filter">
         <option value="all">Всички</option>
         <option value="may">Май (30.05–06.06)</option>
-        <option value="jun">Юни (15.06+)</option>
+        <option value="jun">Юни (14.06+)</option>
         <option value="jul">Юли</option>
         <option value="aug">Август</option>
+        <option value="sep">Септември</option>
       </select>
     </label>
     <label>Само незавършени: <input type="checkbox" id="math-show-undone"></label>
@@ -1303,7 +1304,7 @@ wrRender();
 // MATH SECTION
 // ══════════════════════════════════════════
 const MATH_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
-const MATH_TOTAL=161;
+const MATH_TOTAL=165;
 let mathChecked={};
 let mathResults={};
 let mathMoves={};            // file -> targetDayIdx (reschedule overrides)
@@ -1397,15 +1398,24 @@ function mathBuildSchedule(){
     while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
     return result;
   }
-  const mainAll=[...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
-  const dayCounts=Array(77).fill(2);dayCounts[76]=1;
-  const mainDays=[];let idx=0;
-  const startDate=new Date(2026,5,15);
-  for(let i=0;i<77;i++){
-    const d=new Date(startDate);d.setDate(startDate.getDate()+i);
-    const n=dayCounts[i];
-    mainDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:mainAll.slice(idx,idx+n),count:n});
-    idx+=n;
+  const extraItems=preItems.slice(4); // МБГ-Фин2 2018,2019,2020,2021 — нерешени 03-06.06
+  const mainAll=[...extraItems,...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
+  const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
+  const mainDays=[];
+  const startDate=new Date(2026,5,14); // 14 юни
+  let cur=new Date(startDate);
+  let idx=0;
+  while(idx<mainAll.length){
+    const mm=cur.getMonth()+1;
+    const dd=String(cur.getDate()).padStart(2,'0');
+    const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
+    if(!skipSet.has(key)){
+      const n=Math.min(2,mainAll.length-idx);
+      const items=mainAll.slice(idx,idx+n);
+      mainDays.push({date:new Date(cur),dd,mm,items,count:n});
+      idx+=n;
+    }
+    cur.setDate(cur.getDate()+1);
   }
   return [...preDays,...mainDays];
 }
@@ -1422,12 +1432,12 @@ function mathDayOptions(currentIdx){
 function mathRender(){
   const monthFilter=document.getElementById('math-month-filter').value;
   const showUndone=document.getElementById('math-show-undone').checked;
-  const monthNames={5:'Май (30.05–06.06)',6:'Юни',7:'Юли',8:'Август'};
-  const monthOrder=[5,6,7,8];
+  const monthNames={5:'Май (30.05–06.06)',6:'Юни',7:'Юли',8:'Август',9:'Септември'};
+  const monthOrder=[5,6,7,8,9];
   const cal=document.getElementById('math-calendar');
   cal.innerHTML='';
   for(const mo of monthOrder){
-    if(monthFilter!=='all'){const map={may:5,jun:6,jul:7,aug:8};if(map[monthFilter]!==mo)continue;}
+    if(monthFilter!=='all'){const map={may:5,jun:6,jul:7,aug:8,sep:9};if(map[monthFilter]!==mo)continue;}
     const days=MATH_SCHED.map((d,i)=>({...d,idx:i})).filter(d=>d.mm===mo);
     if(!days.length)continue;
     let filtered=days;
