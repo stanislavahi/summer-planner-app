@@ -668,7 +668,7 @@ body.authed #user-bar{display:flex}
   <div class="math-legend">
     <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (58 бр.)</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (68 бр.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър</div>
@@ -676,7 +676,7 @@ body.authed #user-bar{display:flex}
     <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #744210"></div>ХП – Хитър Петър</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ecfdf5;border:1px solid #065f46"></div>КМС – Коледно</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Зима</div>
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (92 бр.)</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (51 бр.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Пролет</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fff7ed;border:1px solid #7c2d12"></div>СМТ – Софийски турнир</div>
     <div class="legend-item"><div class="legend-dot" style="background:#e6fffa;border:1px solid #234e52"></div>ЕК – Европейско Кенгуру</div>
@@ -1377,20 +1377,15 @@ function mathBuildSchedule(){
   }
   const remaining3=mbgFin2All.slice(4);
   const typesPhase1=[
-    {k:'МБГ',years:['1_Fall_2013','1_Fall_2014','1_Fall_2015','1_Fall_2016','1_Fall_2017','1_Fall_2018','1_Fall_2019','1_Fall_2020'],fmt:s=>`${s}.pdf`,raw:true},
     {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
     {k:'САЛ',years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SAL_3 klas.pdf`},
     {k:'ХП',years:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_HP_3 klas.pdf`},
-    {k:'КМС',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_KMS_3 klas.pdf`},
-    {k:'МБГ',years:['2_Winter_2014','2_Winter_2015','2_Winter_2016','2_Winter_2017','2_Winter_2018','2_Winter_2019','2_Winter_2020'],fmt:s=>`${s}.pdf`,raw:true}
+    {k:'КМС',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_KMS_3 klas.pdf`}
   ];
   const typesPhase2=[
-    {k:'МБГ',years:['3_Spring_2014','3_Spring_2015','3_Spring_2016','3_Spring_2017','3_Spring_2018','3_Spring_2019','3_Spring_2020'],fmt:s=>`${s}.pdf`,raw:true},
     {k:'СМТ',years:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SMT_3 klas.pdf`},
     {k:'ЕК',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_EK_3 klas.pdf`},
-    {k:'ВМС',years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019],fmt:y=>`${y}_VMS_3 klas.pdf`},
-    {k:'МБГ',years:['4_Semifinal_2019','4_Semifinal_2020'],fmt:s=>`${s}.pdf`,raw:true},
-    {k:'МБГ',years:['5_Final_2014','5_Final_2015','5_Final_2016','5_Final_2017','5_Final_2018','5_Final_2019','5_Final_2020'],fmt:s=>`${s}.pdf`,raw:true}
+    {k:'ВМС',years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019],fmt:y=>`${y}_VMS_3 klas.pdf`}
   ];
   function interleave(types){
     const pools=types.map(t=>({k:t.k,items:t.years.map(y=>t.raw?{type:t.k,file:t.fmt(y)}:{type:t.k,file:t.fmt(y)})}));
@@ -1402,14 +1397,23 @@ function mathBuildSchedule(){
   const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
   const mainDays=[];
   const startDate=new Date(2026,5,14); // 14 юни
+  const cutoff=new Date(2026,5,18);    // след 18 юни → редуване 1/2
   let cur=new Date(startDate);
   let idx=0;
+  let altToggle=false; // false=1 бр., true=2 бр. (след cutoff)
   while(idx<mainAll.length){
     const mm=cur.getMonth()+1;
     const dd=String(cur.getDate()).padStart(2,'0');
     const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
     if(!skipSet.has(key)){
-      const n=Math.min(2,mainAll.length-idx);
+      let perDay;
+      if(cur>cutoff){
+        perDay=altToggle?2:1;
+        altToggle=!altToggle;
+      }else{
+        perDay=2;
+      }
+      const n=Math.min(perDay,mainAll.length-idx);
       const items=mainAll.slice(idx,idx+n);
       mainDays.push({date:new Date(cur),dd,mm,items,count:n});
       idx+=n;
