@@ -655,7 +655,7 @@ body.authed #user-bar{display:flex}
     <label>Месец:
       <select id="math-month-filter">
         <option value="all">Всички</option>
-        <option value="may">Май (30.05–06.06)</option>
+        <option value="may">Май (30.05–02.06)</option>
         <option value="jun">Юни (14.06+)</option>
         <option value="jul">Юли</option>
         <option value="aug">Август</option>
@@ -666,7 +666,7 @@ body.authed #user-bar{display:flex}
     <button onclick="mathResetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:.82rem;cursor:pointer;">↺ Нулиране</button>
   </div>
   <div class="math-legend">
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 6 юни (8 бр. — по 1 на ден)</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
     <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (58 бр.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
@@ -1368,14 +1368,14 @@ function mathIsDayDone(di){const items=mathEffectiveItems(di);return items.lengt
 function mathBuildSchedule(){
   const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
   const mbgFin2All=mbgFin2Years.map(y=>({type:'МБГ-Фин2',file:`5_Final_2klas_${y}.pdf`,year:String(y)}));
-  const preItems=mbgFin2All.slice(0,8);
+  const preItems=mbgFin2All.slice(0,4);
   const preStart=new Date(2026,4,30);
   const preDays=[];
-  for(let i=0;i<8;i++){
+  for(let i=0;i<4;i++){
     const d=new Date(preStart);d.setDate(preStart.getDate()+i);
     preDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:[preItems[i]],count:1});
   }
-  const remaining3=mbgFin2All.slice(8);
+  const remaining3=mbgFin2All.slice(4);
   const typesPhase1=[
     {k:'МБГ',years:['1_Fall_2013','1_Fall_2014','1_Fall_2015','1_Fall_2016','1_Fall_2017','1_Fall_2018','1_Fall_2019','1_Fall_2020'],fmt:s=>`${s}.pdf`,raw:true},
     {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
@@ -1398,8 +1398,7 @@ function mathBuildSchedule(){
     while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
     return result;
   }
-  const extraItems=preItems.slice(4); // МБГ-Фин2 2018,2019,2020,2021 — нерешени 03-06.06
-  const mainAll=[...extraItems,...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
+  const mainAll=[...remaining3,...interleave(typesPhase1),...interleave(typesPhase2)];
   const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
   const mainDays=[];
   const startDate=new Date(2026,5,14); // 14 юни
@@ -1432,7 +1431,7 @@ function mathDayOptions(currentIdx){
 function mathRender(){
   const monthFilter=document.getElementById('math-month-filter').value;
   const showUndone=document.getElementById('math-show-undone').checked;
-  const monthNames={5:'Май (30.05–06.06)',6:'Юни',7:'Юли',8:'Август',9:'Септември'};
+  const monthNames={5:'Май (30.05–02.06)',6:'Юни',7:'Юли',8:'Август',9:'Септември'};
   const monthOrder=[5,6,7,8,9];
   const cal=document.getElementById('math-calendar');
   cal.innerHTML='';
