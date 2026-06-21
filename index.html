@@ -1423,7 +1423,7 @@ function mathBuildSchedule(){
     }
     cur.setDate(cur.getDate()+1);
   }
-  return [...preDays,...mainDays];
+  return [...preDays,...mainDays].sort((a,b)=>a.date-b.date);
 }
 const MATH_SCHED=mathBuildSchedule();
 MATH_SCHED.forEach((d,i)=>d.items.forEach(it=>{MATH_BASE_IDX[it.file]=i;}));
