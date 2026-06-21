@@ -667,7 +667,7 @@ body.authed #user-bar{display:flex}
   </div>
   <div class="math-legend">
     <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021, 2025</div>
     <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (68 бр.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
@@ -1366,7 +1366,7 @@ function mathResetAll(){if(!confirm('Нулирай целия прогрес?')
 function mathIsDayDone(di){const items=mathEffectiveItems(di);return items.length>0&&items.every(it=>mathChecked[mathItemKey(it)]);}
 
 function mathBuildSchedule(){
-  const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
   const mbgFin2All=mbgFin2Years.map(y=>({type:'МБГ-Фин2',file:`5_Final_2klas_${y}.pdf`,year:String(y)}));
   const preItems=mbgFin2All.slice(0,4);
   const preStart=new Date(2026,4,30);
@@ -1396,10 +1396,16 @@ function mathBuildSchedule(){
   // 14 юни: фиксирано МБГ-Фин2кл 2018 и 2019
   const june14Items=remaining3.slice(0,2); // [2018, 2019]
   const june14=new Date(2026,5,14);
-  const mainDays=[{date:june14,dd:'14',mm:6,items:june14Items,count:2}];
+  // 18 юни: фиксирано МБГ-Фин2кл 2025
+  const june18Items=remaining3.slice(-1); // [2025]
+  const june18=new Date(2026,5,18);
+  const mainDays=[
+    {date:june14,dd:'14',mm:6,items:june14Items,count:2},
+    {date:june18,dd:'18',mm:6,items:june18Items,count:1}
+  ];
   // от 15 юни: останалите (2020–2024) + фаза 1 + фаза 2
-  const mainAll=[...remaining3.slice(2),...interleave(typesPhase1),...interleave(typesPhase2)];
-  const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
+  const mainAll=[...remaining3.slice(2,-1),...interleave(typesPhase1),...interleave(typesPhase2)];
+  const skipSet=new Set(['2026-06-18','2026-07-04','2026-07-17','2026-08-23']);
   const startDate=new Date(2026,5,15); // 15 юни
   let cur=new Date(startDate);
   let idx=0;
