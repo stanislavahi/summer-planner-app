@@ -794,13 +794,13 @@ body.authed #user-bar{display:flex}
     <label>Вид:
       <select id="mathc-type-filter">
         <option value="all">Всички</option>
+        <option value="ХП">ХП – Хитър Петър</option>
+        <option value="ЧХХ">ЧХХ – Черноризец Храбър</option>
         <option value="СМТ">СМТ – Софийски турнир</option>
         <option value="САЛ">САЛ – Иван Салабашев</option>
-        <option value="ЧХХ">ЧХХ – Черноризец Храбър</option>
         <option value="КМС">КМС – Коледно</option>
         <option value="ЕК">ЕК – Европейско Кенгуру</option>
         <option value="ВМС">ВМС – Великденско</option>
-        <option value="ХП">ХП – Хитър Петър</option>
       </select>
     </label>
     <label>Само незавършени: <input type="checkbox" id="mathc-show-undone"></label>
@@ -2374,11 +2374,13 @@ function mathcRender(){
   // групиране по вид състезание
   const groups={};
   MATHC_SCHED.forEach(d=>d.items.forEach(it=>{(groups[it.type]=groups[it.type]||[]).push(it);}));
-  // всеки вид: от най-старото към най-новото; видовете подредени по най-ранна година
+  // всеки вид: състезанията от най-старото към най-новото
   Object.values(groups).forEach(arr=>arr.sort((a,b)=>yearOf(a)-yearOf(b)));
+  // ред на секциите по календара на учебната година
+  const TYPE_ORDER=['ХП','ЧХХ','СМТ','САЛ','КМС','ЕК','ВМС'];
   const types=Object.keys(groups).sort((a,b)=>{
-    const ya=Math.min(...groups[a].map(yearOf)),yb=Math.min(...groups[b].map(yearOf));
-    return ya-yb||a.localeCompare(b);
+    const ia=TYPE_ORDER.indexOf(a),ib=TYPE_ORDER.indexOf(b);
+    return (ia<0?999:ia)-(ib<0?999:ib)||a.localeCompare(b);
   });
   for(const t of types){
     if(typeFilter!=='all'&&typeFilter!==t)continue;
