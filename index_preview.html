@@ -769,18 +769,18 @@ body.authed #user-bar{display:flex}
 <section id="tab-math-competition" class="tab-section">
   <header>
     <h1>📐 Програма за математически състезания</h1>
-    <p>30 май – 3 септември 2026 &nbsp;·&nbsp; 87 дни, 165 състезания</p>
+    <p>15 юни – 9 септември 2026 &nbsp;·&nbsp; 84 дни, 119 състезания</p>
     <a href="programa_lyato_2026.html" style="display:inline-block;margin-top:10px;padding:6px 14px;background:rgba(255,255,255,0.2);color:white;border-radius:20px;font-size:0.82rem;text-decoration:none;border:1px solid rgba(255,255,255,0.4)">Разширен изглед →</a>
   </header>
   <div class="math-stats">
-    <div class="math-stat"><div class="num">161</div><div class="lbl">Общо</div></div>
-    <div class="math-stat"><div class="num">85</div><div class="lbl">Дни</div></div>
+    <div class="math-stat"><div class="num">119</div><div class="lbl">Общо</div></div>
+    <div class="math-stat"><div class="num">84</div><div class="lbl">Дни</div></div>
     <div class="math-stat"><div class="num" id="mathc-done-count">0</div><div class="lbl">Решени</div></div>
-    <div class="math-stat"><div class="num" id="mathc-remain-count">161</div><div class="lbl">Остават</div></div>
+    <div class="math-stat"><div class="num" id="mathc-remain-count">119</div><div class="lbl">Остават</div></div>
   </div>
   <div class="math-progress-wrap">
     <div class="math-pb-bg"><div class="math-pb-fill" id="mathc-pb-fill" style="width:0%"></div></div>
-    <div class="math-pb-lbl" id="mathc-pb-lbl">0 / 161 решени (0%)</div>
+    <div class="math-pb-lbl" id="mathc-pb-lbl">0 / 119 решени (0%)</div>
   </div>
   <div class="mot-badges-wrap" id="mathc-badges-wrap">
     <div class="mot-badges-title">🏅 Постижения</div>
@@ -790,8 +790,7 @@ body.authed #user-bar{display:flex}
     <label>Месец:
       <select id="mathc-month-filter">
         <option value="all">Всички</option>
-        <option value="may">Май (30.05–02.06)</option>
-        <option value="jun">Юни (14.06+)</option>
+        <option value="jun">Юни (15.06+)</option>
         <option value="jul">Юли</option>
         <option value="aug">Август</option>
         <option value="sep">Септември</option>
@@ -801,10 +800,7 @@ body.authed #user-bar{display:flex}
     <button onclick="mathcResetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:.82rem;cursor:pointer;">↺ Нулиране</button>
   </div>
   <div class="math-legend">
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021, 2025</div>
     <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (68 бр.)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър</div>
     <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев</div>
@@ -2264,7 +2260,7 @@ if(localStorage.getItem('activeTab2026')==='calendar')calRender();
 // MATH SECTION
 // ══════════════════════════════════════════
 const MATHC_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
-const MATHC_TOTAL=165;
+const MATHC_TOTAL=119;
 let mathcChecked={};
 let mathcResults={};
 let mathcMoves={};            // file -> targetDayIdx (reschedule overrides)
@@ -2326,16 +2322,6 @@ function mathcResetAll(){if(!confirm('Нулирай целия прогрес?'
 function mathcIsDayDone(di){const items=mathcEffectiveItems(di);return items.length>0&&items.every(it=>mathcChecked[mathcItemKey(it)]);}
 
 function mathcBuildSchedule(){
-  const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
-  const mbgFin2All=mbgFin2Years.map(y=>({type:'МБГ-Фин2',file:`5_Final_2klas_${y}.pdf`,year:String(y)}));
-  const preItems=mbgFin2All.slice(0,4);
-  const preStart=new Date(2026,4,30);
-  const preDays=[];
-  for(let i=0;i<4;i++){
-    const d=new Date(preStart);d.setDate(preStart.getDate()+i);
-    preDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:[preItems[i]],count:1});
-  }
-  const remaining3=mbgFin2All.slice(4);
   const typesPhase1=[
     {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
     {k:'САЛ',years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SAL_3 klas.pdf`},
@@ -2353,19 +2339,10 @@ function mathcBuildSchedule(){
     while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
     return result;
   }
-  // 14 юни: фиксирано МБГ-Фин2кл 2018 и 2019
-  const june14Items=remaining3.slice(0,2); // [2018, 2019]
-  const june14=new Date(2026,5,14);
-  // 18 юни: фиксирано МБГ-Фин2кл 2024 и 2025
-  const june18Items=remaining3.slice(6); // [2024, 2025]
-  const june18=new Date(2026,5,18);
-  const mainDays=[
-    {date:june14,dd:'14',mm:6,items:june14Items,count:2},
-    {date:june18,dd:'18',mm:6,items:june18Items,count:2}
-  ];
-  // от 15 юни: останалите (2020–2023) + фаза 1 + фаза 2
-  const mainAll=[...remaining3.slice(2,6),...interleave(typesPhase1),...interleave(typesPhase2)];
-  const skipSet=new Set(['2026-06-18','2026-07-04','2026-07-17','2026-08-23']);
+  const mainDays=[];
+  // фаза 1 + фаза 2 (без МБГ-Фин2кл)
+  const mainAll=[...interleave(typesPhase1),...interleave(typesPhase2)];
+  const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
   const startDate=new Date(2026,5,15); // 15 юни
   let cur=new Date(startDate);
   let idx=0;
@@ -2383,7 +2360,7 @@ function mathcBuildSchedule(){
     }
     cur.setDate(cur.getDate()+1);
   }
-  return [...preDays,...mainDays].sort((a,b)=>a.date-b.date);
+  return mainDays.sort((a,b)=>a.date-b.date);
 }
 const MATHC_SCHED=mathcBuildSchedule();
 MATHC_SCHED.forEach((d,i)=>d.items.forEach(it=>{MATHC_BASE_IDX[it.file]=i;}));
@@ -2498,10 +2475,10 @@ const MATHC_RANKS=[
   {min:1,  max:16, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
   {min:16, max:41, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
   {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш състезанията една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
-  {min:81, max:121,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
-  {min:121,max:151,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
-  {min:151,max:161,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
-  {min:161,max:162,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
+  {min:81, max:105,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
+  {min:105,max:115,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
+  {min:115,max:119,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
+  {min:119,max:120,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
 ];
 const MATHC_BADGES=[
   {icon:'🎯',name:'Първа победа!',  req:'Реши 1 задача',      check:d=>d>=1},
@@ -2509,9 +2486,9 @@ const MATHC_BADGES=[
   {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 състезания',    check:d=>d>=25},
   {icon:'🔥',name:'На пламъци!',    req:'Реши 50 състезания',     check:d=>d>=50},
   {icon:'💯',name:'Клуб 100',       req:'Реши 100 състезания',    check:d=>d>=100},
-  {icon:'🌟',name:'Почти там!',     req:'Реши 150 състезания',    check:d=>d>=150},
-  {icon:'🏆',name:'Недостижим',     req:'Реши 160 състезания',    check:d=>d>=160},
-  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 161!',   check:d=>d>=161}
+  {icon:'🌟',name:'Почти там!',     req:'Реши 110 състезания',    check:d=>d>=110},
+  {icon:'🏆',name:'Недостижим',     req:'Реши 118 състезания',    check:d=>d>=118},
+  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 119!',   check:d=>d>=119}
 ];
 function renderMathcMotivation(){
   const done=Object.values(mathcChecked).filter(Boolean).length;
