@@ -583,7 +583,7 @@ body.authed #user-bar{display:flex}
 })();
 </script>
 </head>
-<body>
+<body class="authed">
 <!-- LOGIN GATE -->
 <div id="auth-gate">
   <div class="ag-card">
@@ -2257,124 +2257,7 @@ if(localStorage.getItem('activeTab2026')==='calendar')calRender();
 </script>
 
 <!-- ════════════════ CLOUD SYNC (Firebase) ════════════════ -->
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence }
-  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc }
-  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-
-/* ┌───────────────────────────────────────────────────────────┐
-   │  ПОПЪЛНИ ТУК: копирай конфигурацията от Firebase конзолата   │
-   │  (Project settings → Your apps → SDK setup → Config)        │
-   └───────────────────────────────────────────────────────────┘ */
-const firebaseConfig = {
-  apiKey: "AIzaSyBpaQzDgriEQfQW5BeUwamcooE3Lgkej3E",
-  authDomain: "summer-planner-app.firebaseapp.com",
-  projectId: "summer-planner-app",
-  storageBucket: "summer-planner-app.firebasestorage.app",
-  messagingSenderId: "553076445954",
-  appId: "1:553076445954:web:c3a8ad9839d259637be81b"
-};
-
-
-const SYNC_KEYS = window.__SYNC_KEYS;
-const gateBody = document.getElementById('ag-body');
-const errEl    = document.getElementById('ag-err');
-
-function showLogin(onClick){
-  gateBody.innerHTML =
-    '<div class="ag-sub">Влез с Google акаунта си, за да виждаш и пазиш своя прогрес от всяко устройство.</div>'+
-    '<button class="ag-btn" id="ag-google">'+
-      '<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">'+
-      'Вход с Google</button>';
-  document.getElementById('ag-google').addEventListener('click', onClick);
-}
-function showLoading(msg){
-  gateBody.innerHTML = '<div class="ag-spin"></div><div class="ag-sub">'+(msg||'Зареждане…')+'</div>';
-}
-
-let db, auth, currentUid=null;
-
-try {
-  const app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db   = getFirestore(app);
-  await setPersistence(auth, browserLocalPersistence);
-} catch(e){
-  showLoading('');
-  errEl.textContent = 'Грешка в конфигурацията на Firebase. Попълни firebaseConfig в кода.';
-  console.error(e);
-}
-
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });  // винаги показвай избор на акаунт
-
-async function cloudSave(){
-  if(!currentUid) return;
-  const payload = {};
-  SYNC_KEYS.forEach(k=>{ const v = localStorage.getItem(k); if(v!=null) payload[k]=v; });
-  payload.updatedAt = Date.now();
-  try { await setDoc(doc(db,'planners',currentUid), payload, { merge:true }); }
-  catch(e){ console.error('cloudSave failed', e); }
-}
-window.__cloudSave = cloudSave;
-
-async function syncDown(uid){
-  const ref = doc(db,'planners',uid);
-  const snap = await getDoc(ref);
-  const data = snap.exists() ? snap.data() : {};
-  window.__syncing = true;                       // don't re-trigger saves while writing
-  SYNC_KEYS.forEach(k=>{
-    if(data[k]!==undefined && data[k]!==null) window.__origSet(k, data[k]);
-  });
-  window.__syncing = false;
-  // Seed the cloud doc with any local-only progress (e.g. first-time login)
-  await cloudSave();
-}
-
-if(auth){
-  onAuthStateChanged(auth, async (user)=>{
-    errEl.textContent = '';
-    if(!user){
-      currentUid = null;
-      document.body.classList.remove('authed');
-      const doLogin = async ()=>{
-        showLoading('Влизане…');
-        try { await signInWithPopup(auth, provider); }
-        catch(e){ showLogin(doLogin); errEl.textContent = 'Входът не успя. Опитай пак.'; console.error(e); }
-      };
-      showLogin(doLogin);
-      return;
-    }
-    currentUid = user.uid;
-    // user bar
-    document.getElementById('ub-name').textContent   = user.displayName || user.email || 'Профил';
-    if(user.photoURL) document.getElementById('ub-avatar').src = user.photoURL;
-    const flag = 'synced::'+user.uid;
-    if(!sessionStorage.getItem(flag)){
-      showLoading('Зареждане на прогреса…');
-      try {
-        await syncDown(user.uid);
-        sessionStorage.setItem(flag,'1');
-        location.reload();                         // reload so the app reads synced data
-        return;
-      } catch(e){
-        errEl.textContent = 'Не успях да заредя прогреса. Опитай да презаредиш.';
-        console.error(e);
-        return;
-      }
-    }
-    document.body.classList.add('authed');         // already synced this session → reveal app
-  });
-
-  document.getElementById('ub-logout').addEventListener('click', async ()=>{
-    if(currentUid) sessionStorage.removeItem('synced::'+currentUid);
-    try { await signOut(auth); } catch(e){ console.error(e); }
-    location.reload();
-  });
-}
-</script>
+<!-- Firebase auth disabled in local preview build -->
 <script>
 /* ══ MATH COMPETITION TAB logic (duplicate of Math) ══ */
 // ══════════════════════════════════════════
