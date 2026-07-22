@@ -372,6 +372,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math-competition .math-pb-fill{background:linear-gradient(90deg,#1a56db,#38b2ac);height:100%;border-radius:999px;transition:width .3s}
 #tab-math-competition .math-pb-lbl{font-size:.8rem;color:#4a5568;margin-top:6px}
 #tab-math-competition .math-calendar{padding:24px 32px}
+#tab-math-competition .type-block{margin-bottom:30px}
+#tab-math-competition .type-title{font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #e2e8f0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#tab-math-competition .type-title .comp-tag{font-size:.8rem;padding:3px 10px}
+#tab-math-competition .type-count{margin-left:auto;font-size:.82rem;font-weight:600;color:#718096}
 #tab-math-competition .month-block{margin-bottom:32px}
 #tab-math-competition .month-title{font-size:1.15rem;font-weight:700;color:#1a56db;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #bee3f8;display:flex;align-items:center;gap:8px}
 #tab-math-competition .month-title span{font-size:.8rem;color:#718096;font-weight:400}
@@ -787,32 +791,20 @@ body.authed #user-bar{display:flex}
     <div class="mot-badges" id="mathc-badges"></div>
   </div>
   <div class="math-controls">
-    <label>Месец:
-      <select id="mathc-month-filter">
+    <label>Вид:
+      <select id="mathc-type-filter">
         <option value="all">Всички</option>
-        <option value="jun">Юни (15.06+)</option>
-        <option value="jul">Юли</option>
-        <option value="aug">Август</option>
-        <option value="sep">Септември</option>
+        <option value="СМТ">СМТ – Софийски турнир</option>
+        <option value="САЛ">САЛ – Иван Салабашев</option>
+        <option value="ЧХХ">ЧХХ – Черноризец Храбър</option>
+        <option value="КМС">КМС – Коледно</option>
+        <option value="ЕК">ЕК – Европейско Кенгуру</option>
+        <option value="ВМС">ВМС – Великденско</option>
+        <option value="ХП">ХП – Хитър Петър</option>
       </select>
     </label>
     <label>Само незавършени: <input type="checkbox" id="mathc-show-undone"></label>
     <button onclick="mathcResetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:.82rem;cursor:pointer;">↺ Нулиране</button>
-  </div>
-  <div class="math-legend">
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (68 бр.)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #744210"></div>ХП – Хитър Петър</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ecfdf5;border:1px solid #065f46"></div>КМС – Коледно</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Зима</div>
-    <div style="width:100%;font-size:.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (51 бр.)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Пролет</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fff7ed;border:1px solid #7c2d12"></div>СМТ – Софийски турнир</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#e6fffa;border:1px solid #234e52"></div>ЕК – Европейско Кенгуру</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f0fdf4;border:1px solid #14532d"></div>ВМС – Великденско</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Полуфинал / Финал 3кл</div>
   </div>
   <div class="math-calendar" id="mathc-calendar"></div>
   <footer>Математика · Програма за лятото 2026</footer>
@@ -2490,60 +2482,48 @@ function mathcDayOptions(currentIdx){
 }
 
 function mathcRender(){
-  const monthFilter=document.getElementById('mathc-month-filter').value;
+  const typeFilter=document.getElementById('mathc-type-filter').value;
   const showUndone=document.getElementById('mathc-show-undone').checked;
-  const monthNames={5:'Май (30.05–02.06)',6:'Юни',7:'Юли',8:'Август',9:'Септември'};
-  const monthOrder=[5,6,7,8,9];
+  const TYPE_NAMES={'ЧХХ':'Черноризец Храбър','САЛ':'Иван Салабашев','ХП':'Хитър Петър','КМС':'Коледно','СМТ':'Софийски турнир','ЕК':'Европейско Кенгуру','ВМС':'Великденско'};
+  const yearOf=it=>parseInt(it.year||(it.file.match(/\d{4}/)||['0'])[0],10);
   const cal=document.getElementById('mathc-calendar');
   cal.innerHTML='';
-  for(const mo of monthOrder){
-    if(monthFilter!=='all'){const map={may:5,jun:6,jul:7,aug:8,sep:9};if(map[monthFilter]!==mo)continue;}
-    const days=MATHC_SCHED.map((d,i)=>({...d,idx:i})).filter(d=>d.mm===mo);
-    if(!days.length)continue;
-    let filtered=days;
-    if(showUndone)filtered=days.filter(d=>!mathcIsDayDone(d.idx));
-    if(!filtered.length)continue;
-    const block=document.createElement('div');block.className='month-block';
-    const totalInMonth=days.reduce((s,d)=>s+d.count,0);
-    block.innerHTML=`<div class="month-title">📅 ${monthNames[mo]} <span>(${days.length} дни, ${totalInMonth} бр.)</span></div>`;
+  // групиране по вид състезание
+  const groups={};
+  MATHC_SCHED.forEach(d=>d.items.forEach(it=>{(groups[it.type]=groups[it.type]||[]).push(it);}));
+  // всеки вид: от най-старото към най-новото; видовете подредени по най-ранна година
+  Object.values(groups).forEach(arr=>arr.sort((a,b)=>yearOf(a)-yearOf(b)));
+  const types=Object.keys(groups).sort((a,b)=>{
+    const ya=Math.min(...groups[a].map(yearOf)),yb=Math.min(...groups[b].map(yearOf));
+    return ya-yb||a.localeCompare(b);
+  });
+  for(const t of types){
+    if(typeFilter!=='all'&&typeFilter!==t)continue;
+    const all=groups[t];
+    const items=showUndone?all.filter(it=>!mathcChecked[mathcItemKey(it)]):all;
+    if(!items.length)continue;
+    const doneCount=all.filter(it=>mathcChecked[mathcItemKey(it)]).length;
+    const block=document.createElement('div');block.className='type-block';
+    block.innerHTML=`<div class="type-title"><span class="comp-tag type-${t}">${t}</span> ${TYPE_NAMES[t]||''} <span class="type-count">${doneCount} / ${all.length}</span></div>`;
     const grid=document.createElement('div');grid.className='day-grid';
-    for(const day of filtered){
-      const items=mathcEffectiveItems(day.idx);
-      if(!items.length)continue;
-      const dayName=MATHC_BG_DAYS[day.date.getDay()];
-      const done=mathcIsDayDone(day.idx);
-      const card=document.createElement('div');
-      card.className='day-card'+(done?' done':'');
-      let html=`<div class="day-header"><div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div><span class="day-badge badge-${Math.min(items.length,3)}">${items.length} бр.</span></div><ul class="comp-list">`;
-      for(let i=0;i<items.length;i++){
-        const item=items[i];
-        const key=mathcItemKey(item);
-        const isChecked=!!mathcChecked[key];
-        const year=item.year||(item.file.match(/\d{4}/)||[''])[0];
-        let label=item.type,cssType=item.type;
-        if(item.type==='МБГ'){
-          if(item.file.includes('Fall'))label='МБГ-Есен';
-          else if(item.file.includes('Winter'))label='МБГ-Зима';
-          else if(item.file.includes('Spring'))label='МБГ-Пролет';
-          else if(item.file.includes('Semifinal'))label='МБГ-П/фин';
-          else if(item.file.includes('Final'))label='МБГ-Фин';
-        }
-        if(item.type==='МБГ-Фин2'){label='МБГ-Фин2кл';cssType='МБГ-Фин2';}
-        let extraHtml='';
-        if(isChecked){
-          const res=mathcResults[key]||{};
-          const pi=mathcPctInfo(res.correct,res.wrong);
-          extraHtml=`<div class="comp-result" data-rkey="${key}">`
-            +`<span class="rf">✅ Верни:<input type="number" min="0" class="rf-correct" value="${res.correct!=null?res.correct:''}"></span>`
-            +`<span class="rf">❌ Грешни:<input type="number" min="0" class="rf-wrong" value="${res.wrong!=null?res.wrong:''}"></span>`
-            +`<span class="rf">📊 Успеваемост:<span class="rf-pct ${pi.cls}">${pi.text}</span></span>`
-            +`<span class="rf">✍️ Грешни №:<input type="text" class="rf-wrongnums" placeholder="напр. 3, 7, 12" value="${res.wrongNums?res.wrongNums.replace(/"/g,'&quot;'):''}"></span>`
-            +`</div>`;
-        }
-        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}</span>${extraHtml}</li>`;
+    for(const item of items){
+      const key=mathcItemKey(item);
+      const isChecked=!!mathcChecked[key];
+      const year=yearOf(item);
+      let extraHtml='';
+      if(isChecked){
+        const res=mathcResults[key]||{};
+        const pi=mathcPctInfo(res.correct,res.wrong);
+        extraHtml=`<div class="comp-result" data-rkey="${key}">`
+          +`<span class="rf">✅ Верни:<input type="number" min="0" class="rf-correct" value="${res.correct!=null?res.correct:''}"></span>`
+          +`<span class="rf">❌ Грешни:<input type="number" min="0" class="rf-wrong" value="${res.wrong!=null?res.wrong:''}"></span>`
+          +`<span class="rf">📊 Успеваемост:<span class="rf-pct ${pi.cls}">${pi.text}</span></span>`
+          +`<span class="rf">✍️ Грешни №:<input type="text" class="rf-wrongnums" placeholder="напр. 3, 7, 12" value="${res.wrongNums?res.wrongNums.replace(/"/g,'&quot;'):''}"></span>`
+          +`</div>`;
       }
-      html+='</ul>';
-      card.innerHTML=html;
+      const card=document.createElement('div');
+      card.className='day-card'+(isChecked?' done':'');
+      card.innerHTML=`<ul class="comp-list"><li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${t}">${t}</span><span class="comp-name${isChecked?' checked':''}">${year}</span>${extraHtml}</li></ul>`;
       grid.appendChild(card);
     }
     block.appendChild(grid);cal.appendChild(block);
@@ -2580,7 +2560,7 @@ function mathcRender(){
   mathcUpdateProgress();
 }
 mathcLoadState();
-document.getElementById('mathc-month-filter').addEventListener('change',mathcRender);
+document.getElementById('mathc-type-filter').addEventListener('change',mathcRender);
 document.getElementById('mathc-show-undone').addEventListener('change',mathcRender);
 mathcRender();
 
