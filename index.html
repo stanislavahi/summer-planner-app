@@ -420,6 +420,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math-competition .type-СМТ{background:#fff7ed;color:#7c2d12}
 #tab-math-competition .type-ВМС{background:#f0fdf4;color:#14532d}
 #tab-math-competition .type-МБГ-Фин2{background:#fef9c3;color:#713f12}
+#tab-math-competition .type-МБГ-Есен{background:#fef3c7;color:#92400e}
+#tab-math-competition .type-МБГ-Зима{background:#e0f2fe;color:#075985}
+#tab-math-competition .type-МБГ-Пролет{background:#dcfce7;color:#166534}
+#tab-math-competition .type-МБГ-Полуфинал{background:#ede9fe;color:#5b21b6}
+#tab-math-competition .type-МБГ-Финал{background:#fef9c3;color:#713f12}
 #tab-math-competition .math-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 32px 20px}
 #tab-math-competition .legend-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:#4a5568}
 #tab-math-competition .legend-dot{width:12px;height:12px;border-radius:3px}
@@ -773,18 +778,18 @@ body.authed #user-bar{display:flex}
 <section id="tab-math-competition" class="tab-section">
   <header>
     <h1>📐 Програма за математически състезания</h1>
-    <p>15 юни – 9 септември 2026 &nbsp;·&nbsp; 84 дни, 119 състезания</p>
+    <p>172 състезания по 12 вида</p>
     <a href="programa_lyato_2026.html" style="display:inline-block;margin-top:10px;padding:6px 14px;background:rgba(255,255,255,0.2);color:white;border-radius:20px;font-size:0.82rem;text-decoration:none;border:1px solid rgba(255,255,255,0.4)">Разширен изглед →</a>
   </header>
   <div class="math-stats">
-    <div class="math-stat"><div class="num">119</div><div class="lbl">Общо</div></div>
-    <div class="math-stat"><div class="num">84</div><div class="lbl">Дни</div></div>
+    <div class="math-stat"><div class="num">172</div><div class="lbl">Общо</div></div>
+    <div class="math-stat"><div class="num">12</div><div class="lbl">Вида</div></div>
     <div class="math-stat"><div class="num" id="mathc-done-count">0</div><div class="lbl">Решени</div></div>
-    <div class="math-stat"><div class="num" id="mathc-remain-count">119</div><div class="lbl">Остават</div></div>
+    <div class="math-stat"><div class="num" id="mathc-remain-count">172</div><div class="lbl">Остават</div></div>
   </div>
   <div class="math-progress-wrap">
     <div class="math-pb-bg"><div class="math-pb-fill" id="mathc-pb-fill" style="width:0%"></div></div>
-    <div class="math-pb-lbl" id="mathc-pb-lbl">0 / 119 решени (0%)</div>
+    <div class="math-pb-lbl" id="mathc-pb-lbl">0 / 172 решени (0%)</div>
   </div>
   <div class="mot-badges-wrap" id="mathc-badges-wrap">
     <div class="mot-badges-title">🏅 Постижения</div>
@@ -795,12 +800,17 @@ body.authed #user-bar{display:flex}
       <select id="mathc-type-filter">
         <option value="all">Всички</option>
         <option value="ХП">ХП – Хитър Петър</option>
+        <option value="МБГ-Есен">МБГ-Есен</option>
         <option value="ЧХХ">ЧХХ – Черноризец Храбър</option>
         <option value="СМТ">СМТ – Софийски турнир</option>
         <option value="САЛ">САЛ – Иван Салабашев</option>
         <option value="КМС">КМС – Коледно</option>
+        <option value="МБГ-Зима">МБГ-Зима</option>
         <option value="ЕК">ЕК – Европейско Кенгуру</option>
+        <option value="МБГ-Пролет">МБГ-Пролет</option>
         <option value="ВМС">ВМС – Великденско</option>
+        <option value="МБГ-Полуфинал">МБГ-Полуфинал</option>
+        <option value="МБГ-Финал">МБГ-Финал</option>
       </select>
     </label>
     <label>Само незавършени: <input type="checkbox" id="mathc-show-undone"></label>
@@ -2369,7 +2379,7 @@ if(auth){
 // MATH SECTION
 // ══════════════════════════════════════════
 const MATHC_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
-const MATHC_TOTAL=119;
+const MATHC_TOTAL=172;
 let mathcChecked={};
 let mathcResults={};
 let mathcMoves={};            // file -> targetDayIdx (reschedule overrides)
@@ -2431,45 +2441,24 @@ function mathcResetAll(){if(!confirm('Нулирай целия прогрес?'
 function mathcIsDayDone(di){const items=mathcEffectiveItems(di);return items.length>0&&items.every(it=>mathcChecked[mathcItemKey(it)]);}
 
 function mathcBuildSchedule(){
-  const typesPhase1=[
-    {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
-    {k:'САЛ',years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SAL_3 klas.pdf`},
-    {k:'ХП',years:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_HP_3 klas.pdf`},
-    {k:'КМС',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_KMS_3 klas.pdf`}
+  const range=(a,b)=>{const r=[];for(let y=a;y<=b;y++)r.push(y);return r;};
+  const mk=(type,fmt,years)=>years.map(y=>({type,file:fmt(y),year:String(y)}));
+  const items=[
+    ...mk('ЧХХ', y=>`${y}_CHH_3 klas.pdf`, range(2002,2020)),
+    ...mk('САЛ', y=>`${y}_SAL_3 klas.pdf`, range(2001,2020)),
+    ...mk('ХП',  y=>`${y}_HP_3 klas.pdf`,  range(2008,2020)),
+    ...mk('КМС', y=>`${y}_KMS_3 klas.pdf`, range(2005,2020)),
+    ...mk('СМТ', y=>`${y}_SMT_3 klas.pdf`, range(2000,2020)),
+    ...mk('ЕК',  y=>`${y}_EK_3 klas.pdf`,  range(2005,2020)),
+    ...mk('ВМС', y=>`${y}_VMS_3 klas.pdf`, range(2006,2019)),
+    // Математика без граници (МБГ)
+    ...mk('МБГ-Есен',      y=>`1_Fall_${y}.pdf`,      range(2013,2025)),
+    ...mk('МБГ-Зима',      y=>`2_Winter_${y}.pdf`,    range(2014,2025)),
+    ...mk('МБГ-Пролет',    y=>`3_Spring_${y}.pdf`,    [...range(2014,2023),2025]),
+    ...mk('МБГ-Полуфинал', y=>`4_Semifinal_${y}.pdf`, range(2019,2025)),
+    ...mk('МБГ-Финал',     y=>`5_Final_${y}.pdf`,     range(2014,2023))
   ];
-  const typesPhase2=[
-    {k:'СМТ',years:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SMT_3 klas.pdf`},
-    {k:'ЕК',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_EK_3 klas.pdf`},
-    {k:'ВМС',years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019],fmt:y=>`${y}_VMS_3 klas.pdf`}
-  ];
-  function interleave(types){
-    const pools=types.map(t=>({k:t.k,items:t.years.map(y=>t.raw?{type:t.k,file:t.fmt(y)}:{type:t.k,file:t.fmt(y)})}));
-    const result=[];let changed=true;
-    while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
-    return result;
-  }
-  const mainDays=[];
-  // фаза 1 + фаза 2 (без МБГ-Фин2кл)
-  const mainAll=[...interleave(typesPhase1),...interleave(typesPhase2)];
-  const skipSet=new Set(['2026-07-04','2026-07-17','2026-08-23']);
-  const startDate=new Date(2026,5,15); // 15 юни
-  let cur=new Date(startDate);
-  let idx=0;
-  while(idx<mainAll.length){
-    const mm=cur.getMonth()+1;
-    const dd=String(cur.getDate()).padStart(2,'0');
-    const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
-    if(!skipSet.has(key)){
-      const dow=cur.getDay(); // 0=Нед,1=Пон,2=Вт,3=Ср,4=Чет,5=Пет,6=Съб
-      const perDay=(dow===3||dow===6||dow===0)?2:1;
-      const n=Math.min(perDay,mainAll.length-idx);
-      const items=mainAll.slice(idx,idx+n);
-      mainDays.push({date:new Date(cur),dd,mm,items,count:n});
-      idx+=n;
-    }
-    cur.setDate(cur.getDate()+1);
-  }
-  return mainDays.sort((a,b)=>a.date-b.date);
+  return [{items}];
 }
 const MATHC_SCHED=mathcBuildSchedule();
 MATHC_SCHED.forEach((d,i)=>d.items.forEach(it=>{MATHC_BASE_IDX[it.file]=i;}));
@@ -2484,7 +2473,7 @@ function mathcDayOptions(currentIdx){
 function mathcRender(){
   const typeFilter=document.getElementById('mathc-type-filter').value;
   const showUndone=document.getElementById('mathc-show-undone').checked;
-  const TYPE_NAMES={'ЧХХ':'Черноризец Храбър','САЛ':'Иван Салабашев','ХП':'Хитър Петър','КМС':'Коледно','СМТ':'Софийски турнир','ЕК':'Европейско Кенгуру','ВМС':'Великденско'};
+  const TYPE_NAMES={'ЧХХ':'Черноризец Храбър','САЛ':'Иван Салабашев','ХП':'Хитър Петър','КМС':'Коледно','СМТ':'Софийски математически турнир','ЕК':'Европейско Кенгуру','ВМС':'Великденско','МБГ-Есен':'Математика без граници','МБГ-Зима':'Математика без граници','МБГ-Пролет':'Математика без граници','МБГ-Полуфинал':'Математика без граници','МБГ-Финал':'Математика без граници'};
   const yearOf=it=>parseInt(it.year||(it.file.match(/\d{4}/)||['0'])[0],10);
   const cal=document.getElementById('mathc-calendar');
   cal.innerHTML='';
@@ -2494,7 +2483,7 @@ function mathcRender(){
   // всеки вид: състезанията от най-старото към най-новото
   Object.values(groups).forEach(arr=>arr.sort((a,b)=>yearOf(a)-yearOf(b)));
   // ред на секциите по календара на учебната година
-  const TYPE_ORDER=['ХП','ЧХХ','СМТ','САЛ','КМС','ЕК','ВМС'];
+  const TYPE_ORDER=['ХП','МБГ-Есен','ЧХХ','СМТ','САЛ','КМС','МБГ-Зима','ЕК','МБГ-Пролет','ВМС','МБГ-Полуфинал','МБГ-Финал'];
   const types=Object.keys(groups).sort((a,b)=>{
     const ia=TYPE_ORDER.indexOf(a),ib=TYPE_ORDER.indexOf(b);
     return (ia<0?999:ia)-(ib<0?999:ib)||a.localeCompare(b);
@@ -2571,13 +2560,13 @@ mathcRender();
 // ══════════════════════════════════════════
 const MATHC_RANKS=[
   {min:0,  max:1,  emoji:'🌱',name:'Math Seedling',      msg:'Всеки шампион е започнал от нулата — ти вече си тръгнал!', grad:'#6366f1,#8b5cf6'},
-  {min:1,  max:16, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
-  {min:16, max:41, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
-  {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш състезанията една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
-  {min:81, max:105,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
-  {min:105,max:115,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
-  {min:115,max:119,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
-  {min:119,max:120,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
+  {min:1,  max:20, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
+  {min:20, max:50, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
+  {min:50, max:100, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш състезанията една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
+  {min:100,max:140,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
+  {min:140,max:160,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
+  {min:160,max:172,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
+  {min:172,max:173,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
 ];
 const MATHC_BADGES=[
   {icon:'🎯',name:'Първа победа!',  req:'Реши 1 задача',      check:d=>d>=1},
@@ -2585,9 +2574,9 @@ const MATHC_BADGES=[
   {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 състезания',    check:d=>d>=25},
   {icon:'🔥',name:'На пламъци!',    req:'Реши 50 състезания',     check:d=>d>=50},
   {icon:'💯',name:'Клуб 100',       req:'Реши 100 състезания',    check:d=>d>=100},
-  {icon:'🌟',name:'Почти там!',     req:'Реши 110 състезания',    check:d=>d>=110},
-  {icon:'🏆',name:'Недостижим',     req:'Реши 118 състезания',    check:d=>d>=118},
-  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 119!',   check:d=>d>=119}
+  {icon:'🌟',name:'Почти там!',     req:'Реши 150 състезания',    check:d=>d>=150},
+  {icon:'🏆',name:'Недостижим',     req:'Реши 170 състезания',    check:d=>d>=170},
+  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 172!',   check:d=>d>=172}
 ];
 function renderMathcMotivation(){
   const done=Object.values(mathcChecked).filter(Boolean).length;
