@@ -377,6 +377,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math-competition .type-title .comp-tag{font-size:.8rem;padding:3px 10px}
 #tab-math-competition .type-month{font-size:.85rem;font-weight:500;color:#718096}
 #tab-math-competition .type-count{margin-left:auto;font-size:.82rem;font-weight:600;color:#718096}
+#tab-math-competition .type-stats{display:flex;flex-wrap:wrap;gap:6px 8px;margin:-4px 0 14px}
+#tab-math-competition .type-stat{font-size:.74rem;color:#4a5568;background:#f7f9fc;border:1px solid #e2e8f0;border-radius:999px;padding:3px 10px}
+#tab-math-competition .type-stat b{color:#1a202c;font-weight:700}
+#tab-math-competition .ts-pct{color:#276749}
+#tab-math-competition .ts-pct.mid{color:#c05621}
+#tab-math-competition .ts-pct.low{color:#c53030}
+#tab-math-competition .ts-pct.none{color:#a0aec0}
 #tab-math-competition .month-block{margin-bottom:32px}
 #tab-math-competition .month-title{font-size:1.15rem;font-weight:700;color:#1a56db;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #bee3f8;display:flex;align-items:center;gap:8px}
 #tab-math-competition .month-title span{font-size:.8rem;color:#718096;font-weight:400}
@@ -2471,6 +2478,41 @@ function mathcDayOptions(currentIdx){
   }).join('');
 }
 
+function mathcCollectType(type){
+  const items=[];
+  MATHC_SCHED.forEach(d=>d.items.forEach(it=>{if(it.type===type)items.push(it);}));
+  return items;
+}
+function mathcTypeStatsHTML(type){
+  const all=mathcCollectType(type);
+  const total=all.length;
+  let done=0,totC=0,totW=0,pctSum=0,pctN=0,best=null,worst=null,perfect=0;
+  for(const it of all){
+    const key=mathcItemKey(it);
+    if(mathcChecked[key])done++;
+    const r=mathcResults[key];
+    if(r){
+      const c=parseInt(r.correct,10),w=parseInt(r.wrong,10);
+      const cv=isNaN(c)?0:c,wv=isNaN(w)?0:w,tt=cv+wv;
+      if(tt>0){const p=Math.round(cv/tt*100);pctSum+=p;pctN++;totC+=cv;totW+=wv;if(best===null||p>best)best=p;if(worst===null||p<worst)worst=p;if(p===100)perfect++;}
+    }
+  }
+  const donePct=total?Math.round(done/total*100):0;
+  const avg=pctN?Math.round(pctSum/pctN):null;
+  const cls=v=>v==null?'none':(v>=80?'':(v>=50?'mid':'low'));
+  return `<span class="type-stat">✅ решени: <b>${done}/${total}</b> (${donePct}%)</span>`
+    +`<span class="type-stat">📊 среден успех: <b class="ts-pct ${cls(avg)}">${avg!=null?avg+'%':'—'}</b></span>`
+    +`<span class="type-stat">🏆 най-добър: <b class="ts-pct ${cls(best)}">${best!=null?best+'%':'—'}</b></span>`
+    +`<span class="type-stat">📉 най-слаб: <b class="ts-pct ${cls(worst)}">${worst!=null?worst+'%':'—'}</b></span>`
+    +`<span class="type-stat">💯 перфектни: <b>${perfect}</b></span>`
+    +`<span class="type-stat">Σ верни/грешни: <b>${totC}</b> / <b>${totW}</b></span>`;
+}
+function mathcRefreshTypeStats(block){
+  if(!block)return;
+  const type=block.getAttribute('data-type');
+  const el=block.querySelector('.type-stats');
+  if(el)el.innerHTML=mathcTypeStatsHTML(type);
+}
 function mathcRender(){
   const typeFilter=document.getElementById('mathc-type-filter').value;
   const showUndone=document.getElementById('mathc-show-undone').checked;
@@ -2495,9 +2537,8 @@ function mathcRender(){
     const all=groups[t];
     const items=showUndone?all.filter(it=>!mathcChecked[mathcItemKey(it)]):all;
     if(!items.length)continue;
-    const doneCount=all.filter(it=>mathcChecked[mathcItemKey(it)]).length;
-    const block=document.createElement('div');block.className='type-block';
-    block.innerHTML=`<div class="type-title"><span class="comp-tag type-${t}">${t}</span> ${TYPE_NAMES[t]||''}${TYPE_MONTHS[t]?` <span class="type-month">(${TYPE_MONTHS[t]})</span>`:''} <span class="type-count">${doneCount} / ${all.length}</span></div>`;
+    const block=document.createElement('div');block.className='type-block';block.setAttribute('data-type',t);
+    block.innerHTML=`<div class="type-title"><span class="comp-tag type-${t}">${t}</span> ${TYPE_NAMES[t]||''}${TYPE_MONTHS[t]?` <span class="type-month">(${TYPE_MONTHS[t]})</span>`:''}</div><div class="type-stats">${mathcTypeStatsHTML(t)}</div>`;
     const grid=document.createElement('div');grid.className='day-grid';
     for(const item of items){
       const key=mathcItemKey(item);
@@ -2526,11 +2567,7 @@ function mathcRender(){
       const key=this.getAttribute('data-key');
       mathcChecked[key]=this.checked;
       mathcSaveState();
-      const label=this.closest('li').querySelector('.comp-name');
-      if(label)label.classList.toggle('checked',this.checked);
-      const card=this.closest('.day-card');
-      if(card){const allDone=Array.from(card.querySelectorAll('input[type=checkbox]')).every(c=>c.checked);card.classList.toggle('done',allDone);}
-      mathcUpdateProgress();
+      mathcRender();
     });
   });
   document.querySelectorAll('#mathc-calendar .comp-result').forEach(panel=>{
@@ -2545,6 +2582,7 @@ function mathcRender(){
       const pi=mathcPctInfo(cIn.value,wIn.value);
       pctEl.textContent=pi.text;
       pctEl.className='rf-pct '+pi.cls;
+      mathcRefreshTypeStats(panel.closest('.type-block'));
     }
     cIn.addEventListener('input',save);
     wIn.addEventListener('input',save);
