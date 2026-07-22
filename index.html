@@ -354,6 +354,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math .mot-rank-card{margin:14px 32px 6px}
 #tab-math .mot-badges-wrap{padding:8px 32px 16px}
 @media(max-width:600px){#tab-math .mot-rank-card{margin:14px 16px 6px}#tab-math .mot-badges-wrap{padding:8px 16px 16px}}
+/* ══ MATH COMPETITION TAB (duplicate of Math) ══ */
+#tab-math-competition{background:#f0f4f8;color:#1a202c;min-height:calc(100vh - 52px)}
+#tab-math-competition header{background:linear-gradient(135deg,#1a56db 0%,#0e3fa3 100%);color:white;padding:28px 32px 24px;box-shadow:0 4px 12px rgba(0,0,0,.15);text-align:center}
+#tab-math-competition header h1{justify-content:center}
+#tab-math-competition header h1{font-size:1.7rem;font-weight:700;margin-bottom:6px}
+#tab-math-competition header p{opacity:.85;font-size:.95rem}
+#tab-math-competition .math-stats{display:flex;gap:16px;padding:20px 32px;flex-wrap:wrap;justify-content:center;background:white;border-bottom:1px solid #e2e8f0}
+#tab-math-competition .math-stat{background:#f7f9fc;border-radius:10px;padding:12px 20px;text-align:center;border:1px solid #e2e8f0;min-width:120px}
+#tab-math-competition .math-stat .num{font-size:1.8rem;font-weight:800;color:#1a56db;line-height:1}
+#tab-math-competition .math-stat .lbl{font-size:.75rem;color:#718096;margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+#tab-math-competition .math-controls{padding:16px 32px;background:white;border-bottom:1px solid #e2e8f0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#tab-math-competition .math-controls label{font-size:.85rem;color:#4a5568;font-weight:500}
+#tab-math-competition .math-controls select,#tab-math-competition .math-controls input[type=text]{border:1px solid #cbd5e0;border-radius:6px;padding:6px 10px;font-size:.85rem;color:#2d3748;background:white}
+#tab-math-competition .math-progress-wrap{padding:16px 32px;background:white;border-bottom:2px solid #e2e8f0}
+#tab-math-competition .math-pb-bg{background:#e2e8f0;border-radius:999px;height:14px;overflow:hidden}
+#tab-math-competition .math-pb-fill{background:linear-gradient(90deg,#1a56db,#38b2ac);height:100%;border-radius:999px;transition:width .3s}
+#tab-math-competition .math-pb-lbl{font-size:.8rem;color:#4a5568;margin-top:6px}
+#tab-math-competition .math-calendar{padding:24px 32px}
+#tab-math-competition .month-block{margin-bottom:32px}
+#tab-math-competition .month-title{font-size:1.15rem;font-weight:700;color:#1a56db;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #bee3f8;display:flex;align-items:center;gap:8px}
+#tab-math-competition .month-title span{font-size:.8rem;color:#718096;font-weight:400}
+#tab-math-competition .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+#tab-math-competition .day-card{background:white;border-radius:10px;padding:12px 14px;border:1px solid #e2e8f0;transition:box-shadow .15s,transform .1s;cursor:pointer;position:relative}
+#tab-math-competition .day-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);transform:translateY(-1px)}
+#tab-math-competition .day-card.done{background:#f0fff4;border-color:#9ae6b4}
+#tab-math-competition .day-card.done .day-num{color:#276749}
+#tab-math-competition .day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#tab-math-competition .day-num{font-weight:700;font-size:.95rem;color:#1a56db}
+#tab-math-competition .day-name{font-size:.72rem;color:#a0aec0}
+#tab-math-competition .day-badge{font-size:.68rem;font-weight:700;border-radius:999px;padding:2px 8px}
+#tab-math-competition .badge-3{background:#fed7e2;color:#97266d}
+#tab-math-competition .badge-2{background:#e9d8fd;color:#553c9a}
+#tab-math-competition .badge-1{background:#e0f2fe;color:#0369a1}
+#tab-math-competition .comp-list{list-style:none}
+#tab-math-competition .comp-item{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:4px 0;font-size:.8rem;border-bottom:1px solid #f7f8fa}
+#tab-math-competition .comp-item:last-child{border-bottom:none}
+#tab-math-competition .comp-item input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:#1a56db}
+#tab-math-competition .comp-tag{font-size:.68rem;font-weight:700;border-radius:4px;padding:1px 5px;white-space:nowrap;min-width:36px;text-align:center}
+#tab-math-competition .comp-name{color:#4a5568}
+#tab-math-competition .comp-name.checked{text-decoration:line-through;color:#a0aec0}
+#tab-math-competition .comp-result{flex:0 0 100%;margin:4px 0 6px 23px;padding:8px 10px;background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+#tab-math-competition .comp-move{flex:0 0 100%;margin:2px 0 4px 23px;display:flex;align-items:center;gap:6px;font-size:.72rem;color:#718096}
+#tab-math-competition .comp-move-sel{font-size:.72rem;padding:2px 6px;border:1px solid #cbd5e0;border-radius:6px;background:#fff;color:#2d3748;cursor:pointer;max-width:150px}
+#tab-math-competition .comp-move-reset{font-size:.8rem;line-height:1;padding:2px 7px;border:1px solid #cbd5e0;border-radius:6px;background:#fff;color:#4a5568;cursor:pointer}
+#tab-math-competition .comp-move-reset:hover{background:#edf2f7}
+#tab-math-competition .comp-moved-flag{color:#dd6b20;font-weight:700}
+#tab-math-competition .comp-result .rf{display:flex;align-items:center;gap:5px;font-size:.72rem;color:#276749;font-weight:600}
+#tab-math-competition .comp-result input[type=number]{width:46px;padding:3px 5px;border:1px solid #9ae6b4;border-radius:5px;font-size:.74rem;text-align:center}
+#tab-math-competition .comp-result input.rf-wrongnums{width:120px;padding:3px 6px;border:1px solid #9ae6b4;border-radius:5px;font-size:.74rem}
+#tab-math-competition .comp-result .rf-pct{font-weight:800;color:#fff;background:#38a169;border-radius:6px;padding:2px 8px;font-size:.74rem;min-width:42px;text-align:center}
+#tab-math-competition .comp-result .rf-pct.low{background:#e53e3e}
+#tab-math-competition .comp-result .rf-pct.mid{background:#dd6b20}
+#tab-math-competition .comp-result .rf-pct.none{background:#a0aec0}
+#tab-math-competition .type-ЧХХ{background:#ebf8ff;color:#2b6cb0}
+#tab-math-competition .type-ЕК{background:#e6fffa;color:#234e52}
+#tab-math-competition .type-ХП{background:#fef3c7;color:#744210}
+#tab-math-competition .type-САЛ{background:#fce7f3;color:#831843}
+#tab-math-competition .type-КМС{background:#ecfdf5;color:#065f46}
+#tab-math-competition .type-МБГ{background:#ede9fe;color:#4c1d95}
+#tab-math-competition .type-СМТ{background:#fff7ed;color:#7c2d12}
+#tab-math-competition .type-ВМС{background:#f0fdf4;color:#14532d}
+#tab-math-competition .type-МБГ-Фин2{background:#fef9c3;color:#713f12}
+#tab-math-competition .math-legend{display:flex;flex-wrap:wrap;gap:8px;padding:0 32px 20px}
+#tab-math-competition .legend-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:#4a5568}
+#tab-math-competition .legend-dot{width:12px;height:12px;border-radius:3px}
+#tab-math-competition footer{text-align:center;padding:20px;color:#a0aec0;font-size:.8rem}
+@media(max-width:600px){
+  #tab-math-competition header,#tab-math-competition .math-stats,#tab-math-competition .math-controls,#tab-math-competition .math-calendar,#tab-math-competition .math-legend{padding-left:16px;padding-right:16px}
+  #tab-math-competition .day-grid{grid-template-columns:1fr}
+  #tab-math-competition .math-stats{gap:10px}
+  #tab-math-competition .math-stat{min-width:90px}
+}
+#tab-math-competition .mot-rank-card{margin:14px 32px 6px}
+#tab-math-competition .mot-badges-wrap{padding:8px 32px 16px}
+@media(max-width:600px){#tab-math-competition .mot-rank-card{margin:14px 16px 6px}#tab-math-competition .mot-badges-wrap{padding:8px 16px 16px}}
 </style>
 <style>
 /* ══ CALENDAR TAB ══ */
@@ -494,7 +569,7 @@ body.authed #user-bar{display:flex}
 <script>
 /* Early localStorage sync patch — installed before app scripts run */
 (function(){
-  var SYNC_KEYS=['summerPlan2026','summer_reading_2026','summer_writing_2026','math_prog_2026'];
+  var SYNC_KEYS=['summerPlan2026','summer_reading_2026','summer_writing_2026','math_prog_2026','mathc_prog_2026'];
   window.__SYNC_KEYS=SYNC_KEYS;
   var origSet=localStorage.setItem.bind(localStorage);
   window.__origSet=origSet;          // write without re-triggering cloud save
@@ -540,6 +615,9 @@ body.authed #user-bar{display:flex}
   </button>
   <button class="tab-btn" data-tab="math" onclick="showTab('math')">
     <span class="tab-icon">📐</span>Math
+  </button>
+  <button class="tab-btn" data-tab="math-competition" onclick="showTab('math-competition')">
+    <span class="tab-icon">🏆</span>Math Competition
   </button>
   <button class="tab-btn" data-tab="calendar" onclick="showTab('calendar')">
     <span class="tab-icon">📅</span>Calendar
@@ -687,6 +765,62 @@ body.authed #user-bar{display:flex}
   <footer>Математика · Програма за лятото 2026</footer>
 </section>
 
+<!-- ════════════════════ MATH COMPETITION TAB (duplicate) ════════════════════ -->
+<section id="tab-math-competition" class="tab-section">
+  <header>
+    <h1>📐 Програма за математически състезания</h1>
+    <p>30 май – 3 септември 2026 &nbsp;·&nbsp; 87 дни, 165 състезания</p>
+    <a href="programa_lyato_2026.html" style="display:inline-block;margin-top:10px;padding:6px 14px;background:rgba(255,255,255,0.2);color:white;border-radius:20px;font-size:0.82rem;text-decoration:none;border:1px solid rgba(255,255,255,0.4)">Разширен изглед →</a>
+  </header>
+  <div class="math-stats">
+    <div class="math-stat"><div class="num">161</div><div class="lbl">Общо</div></div>
+    <div class="math-stat"><div class="num">85</div><div class="lbl">Дни</div></div>
+    <div class="math-stat"><div class="num" id="mathc-done-count">0</div><div class="lbl">Решени</div></div>
+    <div class="math-stat"><div class="num" id="mathc-remain-count">161</div><div class="lbl">Остават</div></div>
+  </div>
+  <div class="math-progress-wrap">
+    <div class="math-pb-bg"><div class="math-pb-fill" id="mathc-pb-fill" style="width:0%"></div></div>
+    <div class="math-pb-lbl" id="mathc-pb-lbl">0 / 161 решени (0%)</div>
+  </div>
+  <div class="mot-badges-wrap" id="mathc-badges-wrap">
+    <div class="mot-badges-title">🏅 Постижения</div>
+    <div class="mot-badges" id="mathc-badges"></div>
+  </div>
+  <div class="math-controls">
+    <label>Месец:
+      <select id="mathc-month-filter">
+        <option value="all">Всички</option>
+        <option value="may">Май (30.05–02.06)</option>
+        <option value="jun">Юни (14.06+)</option>
+        <option value="jul">Юли</option>
+        <option value="aug">Август</option>
+        <option value="sep">Септември</option>
+      </select>
+    </label>
+    <label>Само незавършени: <input type="checkbox" id="mathc-show-undone"></label>
+    <button onclick="mathcResetAll()" style="padding:6px 14px;border:1px solid #fc8181;border-radius:6px;background:white;color:#c53030;font-size:.82rem;cursor:pointer;">↺ Нулиране</button>
+  </div>
+  <div class="math-legend">
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">⭐ 30 май – 2 юни (4 бр. — по 1 на ден)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл (юни) — 2014–2021, 2025</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#1a56db;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🍂 Септември – Януари (68 бр.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef9c3;border:1px solid #713f12"></div>МБГ-Финал 2кл 2022–2024</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Есен (окт.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ebf8ff;border:1px solid #2b6cb0"></div>ЧХХ – Черноризец Храбър</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fce7f3;border:1px solid #831843"></div>САЛ – Иван Салабашев</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fef3c7;border:1px solid #744210"></div>ХП – Хитър Петър</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ecfdf5;border:1px solid #065f46"></div>КМС – Коледно</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Зима</div>
+    <div style="width:100%;font-size:.75rem;font-weight:700;color:#38b2ac;text-transform:uppercase;letter-spacing:.06em;margin-top:8px;margin-bottom:4px;">🌸 Февруари – Юни (51 бр.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Пролет</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fff7ed;border:1px solid #7c2d12"></div>СМТ – Софийски турнир</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e6fffa;border:1px solid #234e52"></div>ЕК – Европейско Кенгуру</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f0fdf4;border:1px solid #14532d"></div>ВМС – Великденско</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ede9fe;border:1px solid #4c1d95"></div>МБГ-Полуфинал / Финал 3кл</div>
+  </div>
+  <div class="math-calendar" id="mathc-calendar"></div>
+  <footer>Математика · Програма за лятото 2026</footer>
+</section>
 <!-- ════════════════════ CALENDAR TAB ════════════════════ -->
 <section id="tab-calendar" class="tab-section">
   <div class="cl-stats-hero" id="cl-stats-hero">
@@ -2240,6 +2374,280 @@ if(auth){
     location.reload();
   });
 }
+</script>
+<script>
+/* ══ MATH COMPETITION TAB logic (duplicate of Math) ══ */
+// ══════════════════════════════════════════
+// MATH SECTION
+// ══════════════════════════════════════════
+const MATHC_BG_DAYS=['Нед','Пон','Вт','Ср','Чет','Пет','Съб'];
+const MATHC_TOTAL=165;
+let mathcChecked={};
+let mathcResults={};
+let mathcMoves={};            // file -> targetDayIdx (reschedule overrides)
+function mathcGetKey(di,ii){return `${di}_${ii}`;}            // legacy positional key
+function mathcItemKey(it){return it.file;}                    // stable per-competition key
+function mathcMigrateMap(map){
+  // convert any legacy "di_ii" keys to file-based keys
+  const out={};
+  for(const k in map){
+    const m=/^(\d+)_(\d+)$/.exec(k);
+    if(m){const day=MATHC_SCHED[+m[1]];if(day&&day.items[+m[2]])out[day.items[+m[2]].file]=map[k];}
+    else out[k]=map[k];
+  }
+  return out;
+}
+function mathcLoadState(){
+  try{const s=localStorage.getItem('mathc_prog_2026');if(s)mathcChecked=JSON.parse(s);}catch(e){}
+  try{const r=localStorage.getItem('mathc_results_2026');if(r)mathcResults=JSON.parse(r);}catch(e){}
+  try{const mv=localStorage.getItem('mathc_moves_2026');if(mv)mathcMoves=JSON.parse(mv);}catch(e){}
+  mathcChecked=mathcMigrateMap(mathcChecked);
+  mathcResults=mathcMigrateMap(mathcResults);
+  mathcSaveState();mathcSaveResults();
+}
+function mathcSaveState(){try{localStorage.setItem('mathc_prog_2026',JSON.stringify(mathcChecked));}catch(e){}}
+function mathcSaveResults(){try{localStorage.setItem('mathc_results_2026',JSON.stringify(mathcResults));}catch(e){}}
+function mathcSaveMoves(){try{localStorage.setItem('mathc_moves_2026',JSON.stringify(mathcMoves));}catch(e){}}
+// base (original) day index for each competition file
+const MATHC_BASE_IDX={};
+// effective list of competitions shown on a given day after applying moves
+function mathcEffectiveItems(di){
+  const items=MATHC_SCHED[di].items.filter(it=>mathcMoves[it.file]==null||mathcMoves[it.file]===di);
+  for(let d=0;d<MATHC_SCHED.length;d++){if(d===di)continue;for(const it of MATHC_SCHED[d].items){if(mathcMoves[it.file]===di)items.push(it);}}
+  return items;
+}
+// move a competition to another day (or back to its original day)
+function mathcMoveItem(file,targetIdx){
+  if(targetIdx===MATHC_BASE_IDX[file])delete mathcMoves[file];
+  else mathcMoves[file]=targetIdx;
+  mathcSaveMoves();mathcRender();mathcUpdateProgress();
+  if(typeof calRender==='function')calRender();
+}
+function mathcPctInfo(correct,wrong){
+  const c=parseInt(correct,10),w=parseInt(wrong,10);
+  const cv=isNaN(c)?0:c,wv=isNaN(w)?0:w,tot=cv+wv;
+  if(tot===0)return{text:'—',cls:'none'};
+  const pct=Math.round(cv/tot*100);
+  let cls='';if(pct>=80)cls='';else if(pct>=50)cls='mid';else cls='low';
+  return{text:pct+'%',cls};
+}
+function mathcUpdateProgress(){
+  const done=Object.values(mathcChecked).filter(Boolean).length;
+  const pct=Math.round(done/MATHC_TOTAL*100);
+  document.getElementById('mathc-done-count').textContent=done;
+  document.getElementById('mathc-remain-count').textContent=MATHC_TOTAL-done;
+  document.getElementById('mathc-pb-fill').style.width=pct+'%';
+  document.getElementById('mathc-pb-lbl').textContent=`${done} / ${MATHC_TOTAL} решени (${pct}%)`;
+}
+function mathcResetAll(){if(!confirm('Нулирай целия прогрес?'))return;mathcChecked={};mathcResults={};mathcMoves={};mathcSaveState();mathcSaveResults();mathcSaveMoves();mathcRender();}
+function mathcIsDayDone(di){const items=mathcEffectiveItems(di);return items.length>0&&items.every(it=>mathcChecked[mathcItemKey(it)]);}
+
+function mathcBuildSchedule(){
+  const mbgFin2Years=[2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+  const mbgFin2All=mbgFin2Years.map(y=>({type:'МБГ-Фин2',file:`5_Final_2klas_${y}.pdf`,year:String(y)}));
+  const preItems=mbgFin2All.slice(0,4);
+  const preStart=new Date(2026,4,30);
+  const preDays=[];
+  for(let i=0;i<4;i++){
+    const d=new Date(preStart);d.setDate(preStart.getDate()+i);
+    preDays.push({date:d,dd:String(d.getDate()).padStart(2,'0'),mm:d.getMonth()+1,items:[preItems[i]],count:1});
+  }
+  const remaining3=mbgFin2All.slice(4);
+  const typesPhase1=[
+    {k:'ЧХХ',years:[2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_CHH_3 klas.pdf`},
+    {k:'САЛ',years:[2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SAL_3 klas.pdf`},
+    {k:'ХП',years:[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_HP_3 klas.pdf`},
+    {k:'КМС',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_KMS_3 klas.pdf`}
+  ];
+  const typesPhase2=[
+    {k:'СМТ',years:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_SMT_3 klas.pdf`},
+    {k:'ЕК',years:[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020],fmt:y=>`${y}_EK_3 klas.pdf`},
+    {k:'ВМС',years:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019],fmt:y=>`${y}_VMS_3 klas.pdf`}
+  ];
+  function interleave(types){
+    const pools=types.map(t=>({k:t.k,items:t.years.map(y=>t.raw?{type:t.k,file:t.fmt(y)}:{type:t.k,file:t.fmt(y)})}));
+    const result=[];let changed=true;
+    while(changed){changed=false;for(const p of pools){if(p.items.length>0){result.push(p.items.shift());changed=true;}}}
+    return result;
+  }
+  // 14 юни: фиксирано МБГ-Фин2кл 2018 и 2019
+  const june14Items=remaining3.slice(0,2); // [2018, 2019]
+  const june14=new Date(2026,5,14);
+  // 18 юни: фиксирано МБГ-Фин2кл 2024 и 2025
+  const june18Items=remaining3.slice(6); // [2024, 2025]
+  const june18=new Date(2026,5,18);
+  const mainDays=[
+    {date:june14,dd:'14',mm:6,items:june14Items,count:2},
+    {date:june18,dd:'18',mm:6,items:june18Items,count:2}
+  ];
+  // от 15 юни: останалите (2020–2023) + фаза 1 + фаза 2
+  const mainAll=[...remaining3.slice(2,6),...interleave(typesPhase1),...interleave(typesPhase2)];
+  const skipSet=new Set(['2026-06-18','2026-07-04','2026-07-17','2026-08-23']);
+  const startDate=new Date(2026,5,15); // 15 юни
+  let cur=new Date(startDate);
+  let idx=0;
+  while(idx<mainAll.length){
+    const mm=cur.getMonth()+1;
+    const dd=String(cur.getDate()).padStart(2,'0');
+    const key=`${cur.getFullYear()}-${String(mm).padStart(2,'0')}-${dd}`;
+    if(!skipSet.has(key)){
+      const dow=cur.getDay(); // 0=Нед,1=Пон,2=Вт,3=Ср,4=Чет,5=Пет,6=Съб
+      const perDay=(dow===3||dow===6||dow===0)?2:1;
+      const n=Math.min(perDay,mainAll.length-idx);
+      const items=mainAll.slice(idx,idx+n);
+      mainDays.push({date:new Date(cur),dd,mm,items,count:n});
+      idx+=n;
+    }
+    cur.setDate(cur.getDate()+1);
+  }
+  return [...preDays,...mainDays].sort((a,b)=>a.date-b.date);
+}
+const MATHC_SCHED=mathcBuildSchedule();
+MATHC_SCHED.forEach((d,i)=>d.items.forEach(it=>{MATHC_BASE_IDX[it.file]=i;}));
+// options for the "move to another day" dropdown
+function mathcDayOptions(currentIdx){
+  return MATHC_SCHED.map((d,i)=>{
+    const dn=MATHC_BG_DAYS[d.date.getDay()];
+    return `<option value="${i}" ${i===currentIdx?'selected':''}>${d.dd}.${String(d.mm).padStart(2,'0')} (${dn})</option>`;
+  }).join('');
+}
+
+function mathcRender(){
+  const monthFilter=document.getElementById('mathc-month-filter').value;
+  const showUndone=document.getElementById('mathc-show-undone').checked;
+  const monthNames={5:'Май (30.05–02.06)',6:'Юни',7:'Юли',8:'Август',9:'Септември'};
+  const monthOrder=[5,6,7,8,9];
+  const cal=document.getElementById('mathc-calendar');
+  cal.innerHTML='';
+  for(const mo of monthOrder){
+    if(monthFilter!=='all'){const map={may:5,jun:6,jul:7,aug:8,sep:9};if(map[monthFilter]!==mo)continue;}
+    const days=MATHC_SCHED.map((d,i)=>({...d,idx:i})).filter(d=>d.mm===mo);
+    if(!days.length)continue;
+    let filtered=days;
+    if(showUndone)filtered=days.filter(d=>!mathcIsDayDone(d.idx));
+    if(!filtered.length)continue;
+    const block=document.createElement('div');block.className='month-block';
+    const totalInMonth=days.reduce((s,d)=>s+d.count,0);
+    block.innerHTML=`<div class="month-title">📅 ${monthNames[mo]} <span>(${days.length} дни, ${totalInMonth} бр.)</span></div>`;
+    const grid=document.createElement('div');grid.className='day-grid';
+    for(const day of filtered){
+      const items=mathcEffectiveItems(day.idx);
+      if(!items.length)continue;
+      const dayName=MATHC_BG_DAYS[day.date.getDay()];
+      const done=mathcIsDayDone(day.idx);
+      const card=document.createElement('div');
+      card.className='day-card'+(done?' done':'');
+      let html=`<div class="day-header"><div><span class="day-num">${day.dd}.${String(day.mm).padStart(2,'0')}</span> <span class="day-name">${dayName}</span></div><span class="day-badge badge-${Math.min(items.length,3)}">${items.length} бр.</span></div><ul class="comp-list">`;
+      for(let i=0;i<items.length;i++){
+        const item=items[i];
+        const key=mathcItemKey(item);
+        const isChecked=!!mathcChecked[key];
+        const year=item.year||(item.file.match(/\d{4}/)||[''])[0];
+        let label=item.type,cssType=item.type;
+        if(item.type==='МБГ'){
+          if(item.file.includes('Fall'))label='МБГ-Есен';
+          else if(item.file.includes('Winter'))label='МБГ-Зима';
+          else if(item.file.includes('Spring'))label='МБГ-Пролет';
+          else if(item.file.includes('Semifinal'))label='МБГ-П/фин';
+          else if(item.file.includes('Final'))label='МБГ-Фин';
+        }
+        if(item.type==='МБГ-Фин2'){label='МБГ-Фин2кл';cssType='МБГ-Фин2';}
+        let extraHtml='';
+        if(isChecked){
+          const res=mathcResults[key]||{};
+          const pi=mathcPctInfo(res.correct,res.wrong);
+          extraHtml=`<div class="comp-result" data-rkey="${key}">`
+            +`<span class="rf">✅ Верни:<input type="number" min="0" class="rf-correct" value="${res.correct!=null?res.correct:''}"></span>`
+            +`<span class="rf">❌ Грешни:<input type="number" min="0" class="rf-wrong" value="${res.wrong!=null?res.wrong:''}"></span>`
+            +`<span class="rf">📊 Успеваемост:<span class="rf-pct ${pi.cls}">${pi.text}</span></span>`
+            +`<span class="rf">✍️ Грешни №:<input type="text" class="rf-wrongnums" placeholder="напр. 3, 7, 12" value="${res.wrongNums?res.wrongNums.replace(/"/g,'&quot;'):''}"></span>`
+            +`</div>`;
+        }
+        html+=`<li class="comp-item"><input type="checkbox" data-key="${key}" ${isChecked?'checked':''}><span class="comp-tag type-${cssType}">${label}</span><span class="comp-name${isChecked?' checked':''}">${year}</span>${extraHtml}</li>`;
+      }
+      html+='</ul>';
+      card.innerHTML=html;
+      grid.appendChild(card);
+    }
+    block.appendChild(grid);cal.appendChild(block);
+  }
+  document.querySelectorAll('#mathc-calendar input[type=checkbox][data-key]').forEach(cb=>{
+    cb.addEventListener('change',function(){
+      const key=this.getAttribute('data-key');
+      mathcChecked[key]=this.checked;
+      mathcSaveState();
+      const label=this.closest('li').querySelector('.comp-name');
+      if(label)label.classList.toggle('checked',this.checked);
+      const card=this.closest('.day-card');
+      if(card){const allDone=Array.from(card.querySelectorAll('input[type=checkbox]')).every(c=>c.checked);card.classList.toggle('done',allDone);}
+      mathcUpdateProgress();
+    });
+  });
+  document.querySelectorAll('#mathc-calendar .comp-result').forEach(panel=>{
+    const key=panel.getAttribute('data-rkey');
+    const cIn=panel.querySelector('.rf-correct');
+    const wIn=panel.querySelector('.rf-wrong');
+    const nIn=panel.querySelector('.rf-wrongnums');
+    const pctEl=panel.querySelector('.rf-pct');
+    function save(){
+      mathcResults[key]={correct:cIn.value,wrong:wIn.value,wrongNums:nIn.value};
+      mathcSaveResults();
+      const pi=mathcPctInfo(cIn.value,wIn.value);
+      pctEl.textContent=pi.text;
+      pctEl.className='rf-pct '+pi.cls;
+    }
+    cIn.addEventListener('input',save);
+    wIn.addEventListener('input',save);
+    nIn.addEventListener('input',save);
+  });
+  mathcUpdateProgress();
+}
+mathcLoadState();
+document.getElementById('mathc-month-filter').addEventListener('change',mathcRender);
+document.getElementById('mathc-show-undone').addEventListener('change',mathcRender);
+mathcRender();
+
+// ══════════════════════════════════════════
+// MOTIVATION — MATH
+// ══════════════════════════════════════════
+const MATHC_RANKS=[
+  {min:0,  max:1,  emoji:'🌱',name:'Math Seedling',      msg:'Всеки шампион е започнал от нулата — ти вече си тръгнал!', grad:'#6366f1,#8b5cf6'},
+  {min:1,  max:16, emoji:'🔢',name:'Number Explorer',    msg:'Изследваш силата на числата — продължавай напред!',       grad:'#3b82f6,#6366f1'},
+  {min:16, max:41, emoji:'⚡',name:'Calculation Ninja',  msg:'Ниндзя скорост активирана! Нищо не те спира!',            grad:'#0ea5e9,#3b82f6'},
+  {min:41, max:81, emoji:'🔥',name:'Problem Crusher',    msg:'Смазваш състезанията една по една — на пълна мощност!',       grad:'#f97316,#ef4444'},
+  {min:81, max:121,emoji:'🌟',name:'Math Champion',      msg:'Ти си шампион! Само малко повече и ставаш легенда!',       grad:'#eab308,#f97316'},
+  {min:121,max:151,emoji:'🏆',name:'Math Legend',        msg:'Легендарен! Почти непобедим! Само още малко!',             grad:'#10b981,#059669'},
+  {min:151,max:161,emoji:'🚀',name:'Almost Unbeatable', msg:'РАКЕТА! Само още няколко и ставаш непобедим!',             grad:'#a855f7,#7c3aed'},
+  {min:161,max:162,emoji:'👑',name:'Math LEGEND',        msg:'🎉 НЕВЪЗМОЖНОТО СТАНА ВЪЗМОЖНО! ТИ СИ ЛЕГЕНДА! 🎉',       grad:'#f59e0b,#ef4444'}
+];
+const MATHC_BADGES=[
+  {icon:'🎯',name:'Първа победа!',  req:'Реши 1 задача',      check:d=>d>=1},
+  {icon:'💪',name:'Загрявка',       req:'Реши 10 състезания',     check:d=>d>=10},
+  {icon:'⚡',name:'Бърза светкавица',req:'Реши 25 състезания',    check:d=>d>=25},
+  {icon:'🔥',name:'На пламъци!',    req:'Реши 50 състезания',     check:d=>d>=50},
+  {icon:'💯',name:'Клуб 100',       req:'Реши 100 състезания',    check:d=>d>=100},
+  {icon:'🌟',name:'Почти там!',     req:'Реши 150 състезания',    check:d=>d>=150},
+  {icon:'🏆',name:'Недостижим',     req:'Реши 160 състезания',    check:d=>d>=160},
+  {icon:'👑',name:'Math LEGEND',    req:'Реши ВСИЧКИ 161!',   check:d=>d>=161}
+];
+function renderMathcMotivation(){
+  const done=Object.values(mathcChecked).filter(Boolean).length;
+  const rank=MATHC_RANKS.find(r=>done>=r.min&&done<r.max)||MATHC_RANKS[MATHC_RANKS.length-1];
+  const grid=document.getElementById('mathc-badges');
+  grid.innerHTML=MATHC_BADGES.map(b=>{
+    const u=b.check(done);
+    return `<div class="mot-bdg ${u?'unlocked':'locked'}">
+      <span class="mbi">${b.icon}</span>
+      <div class="mbn">${b.name}</div>
+      <div class="mbr">${u?'✓ Отключено!':b.req}</div>
+    </div>`;
+  }).join('');
+}
+
+
+const _origMathcUpdateProgress2=mathcUpdateProgress;
+mathcUpdateProgress=function(){_origMathcUpdateProgress2();renderMathcMotivation();};
+renderMathcMotivation();
 </script>
 </body>
 </html>
