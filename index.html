@@ -375,6 +375,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;m
 #tab-math-competition .type-block{margin-bottom:30px}
 #tab-math-competition .type-title{font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #e2e8f0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 #tab-math-competition .type-title .comp-tag{font-size:.8rem;padding:3px 10px}
+#tab-math-competition .type-month{font-size:.85rem;font-weight:500;color:#718096}
 #tab-math-competition .type-count{margin-left:auto;font-size:.82rem;font-weight:600;color:#718096}
 #tab-math-competition .month-block{margin-bottom:32px}
 #tab-math-competition .month-title{font-size:1.15rem;font-weight:700;color:#1a56db;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #bee3f8;display:flex;align-items:center;gap:8px}
@@ -2474,6 +2475,7 @@ function mathcRender(){
   const typeFilter=document.getElementById('mathc-type-filter').value;
   const showUndone=document.getElementById('mathc-show-undone').checked;
   const TYPE_NAMES={'ЧХХ':'Черноризец Храбър','САЛ':'Иван Салабашев','ХП':'Хитър Петър','КМС':'Коледно','СМТ':'Софийски математически турнир','ЕК':'Европейско Кенгуру','ВМС':'Великденско','МБГ-Есен':'Математика без граници','МБГ-Зима':'Математика без граници','МБГ-Пролет':'Математика без граници','МБГ-Полуфинал':'Математика без граници','МБГ-Финал':'Математика без граници'};
+  const TYPE_MONTHS={'ХП':'Октомври','МБГ-Есен':'Октомври','ЧХХ':'Ноември','СМТ':'Ноември','САЛ':'Декември','КМС':'Декември','МБГ-Зима':'Декември/Януари','ЕК':'Март','МБГ-Пролет':'Март','ВМС':'Април','МБГ-Полуфинал':'Май','МБГ-Финал':'Юли'};
   const yearOf=it=>parseInt(it.year||(it.file.match(/\d{4}/)||['0'])[0],10);
   const cal=document.getElementById('mathc-calendar');
   cal.innerHTML='';
@@ -2495,7 +2497,7 @@ function mathcRender(){
     if(!items.length)continue;
     const doneCount=all.filter(it=>mathcChecked[mathcItemKey(it)]).length;
     const block=document.createElement('div');block.className='type-block';
-    block.innerHTML=`<div class="type-title"><span class="comp-tag type-${t}">${t}</span> ${TYPE_NAMES[t]||''} <span class="type-count">${doneCount} / ${all.length}</span></div>`;
+    block.innerHTML=`<div class="type-title"><span class="comp-tag type-${t}">${t}</span> ${TYPE_NAMES[t]||''}${TYPE_MONTHS[t]?` <span class="type-month">(${TYPE_MONTHS[t]})</span>`:''} <span class="type-count">${doneCount} / ${all.length}</span></div>`;
     const grid=document.createElement('div');grid.className='day-grid';
     for(const item of items){
       const key=mathcItemKey(item);
